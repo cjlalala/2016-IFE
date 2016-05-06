@@ -124,18 +124,18 @@
    	 <h4>这里以后是一个侧栏，这是侧栏的标题</h4>
      <h4>侧栏注册窗口标题</h4>
    	 <form>
-   	      <span>请输入邮箱地址</span>
-   	      <input type="text"name="email"value="这是一个文本输入框"/><br/>
+   	      <label for="email">请输入邮箱地址</label>
+   	      <input type="text"name="email"value="这是一个文本输入框"id="email"/><br/>
    	      <span>邮箱地址请按要求格式输入</span><br/>
-   	      <span>请输入密码</span>
-   	      <input type="password"name="password"value="这是一个文本输入框"/>
-          <span>请重复输入密码</span>
-          <input type="password"name="password"value="这是一个文本输入框"/><br/>
+   	      <label for="pw1">请输入密码</label>
+   	      <input type="password"name="password"value="这是一个文本输入框"id="pw1"/>
+          <label for="pw2">请重复输入密码</label>
+          <input type="password"name="password"value="这是一个文本输入框"id="pw2"/><br/>
            
           <span>密码请为6-16位英文数字</span><br/>
           <span>性别</span>
-                	<lable><input type="radio"name="sex"value="man"checked="checked"/>man</lable>
-                	<lable><input type="radio"name="sex"value="women"/>woman</lable>
+                	<input type="radio"name="sex"value="man"checked="checked"id="man"/><label id="man">man</lable>
+                	<input type="radio"name="sex"value="women"id="woman"/><label id="woman">woman</lable>
                 	
           <span>城市</span>
             	<select name="city">
@@ -144,11 +144,11 @@
                 	<option>魔都</option>
             	</select> 
           <span>爱好</span>
-            	<lable><input type="checkbox"name="lol"/>LOL</lable>
-            	<lable><input type="checkbox"name="dota"/>DOTA</lable>
-            	<lable><input type="checkbox"name="cs"/>CS</lable>
-          <span>个人描述</span>
-            	<textarea name="message">这是一个多行输入框，输入您的个人描述</textarea>
+            	<input type="checkbox"name="lol"id="lol"/><label id="lol">LOL</lable>
+            	<input type="checkbox"name="dota"id="dota"/><label id="dota">DOTA</lable>
+            	<input type="checkbox"name="cs"id="cs"/><label id="cs">CS</lable>
+          <label for="text">个人描述</label>
+            	<textarea name="message"id="text">这是一个多行输入框，输入您的个人描述</textarea>
             	<input type="submit"name="submit"value="确认提交"/>
         </form>
     </section>
