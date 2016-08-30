@@ -27,6 +27,7 @@ var aqiData = [
   将空气质量指数大于60的城市显示到aqi-list的列表中
   */
 
+//使用了array.sort、document.createElement、document.createTextNode、element.appendChild等方法；
 var chinese=["一","二","三","四","五","六"];
 var newData=aqiData.sort(function(a,b){return b[1]-a[1];}); //用sort（）方法对原数据进行排序得到新的数组newData
 
@@ -38,7 +39,7 @@ for( var i=0;i<aqiData.length;i++){
    } 
 } 
 })();
-//使用了array.sort、document.createElement、document.createTextNode、element.appendChild等方法；
+
 </script>
 </body>
 </html>
