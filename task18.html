@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>task18</title>
+	<style>
+	#button{
+		display:inline-block;
+	}
+	ul{
+		list-style: none;
+	}
+	li{
+		background-color: red;
+		display:inline-block;
+		width:20px;
+		padding:10px;
+		margin-left:3px;
+		color:white;
+	}
+	</style>
+</head>
+
+<body>
+	<input id="input"type="text">
+	<div id="button">
+		<button id="leftin">左侧入</button>
+		<button id="rightin">右侧入</button>
+		<button id="leftout">左侧出</button>
+		<button id="rightout">右侧出</button>
+	</div>
+	<ul id="result">
+	</ul>
+</body>
+
+<script>
+	var $=function(id){
+	  return document.getElementById(id);
+	}
+	var number=[];
+	//将得到的用户输入数据输出显示到id为result的列表中
+	function show(){
+		var content=" ";
+		for(var i=0;i<number.length;i++){
+				content+="<li>"+number[i]+"</li>";
+        	}
+        result.innerHTML=content;
+	}
+	//给按钮的父元素添加事件委托，避免给每个按钮添加点击事件
+    $("button").addEventListener("click",function(e){  
+		var target=e.target;
+    	switch(target.id){
+    		case "leftin":{
+    			number.unshift($("input").value);
+        		show();
+        		break;
+    		}
+    		case "rightin":{
+    			number.push($("input").value);
+    			show();
+    			break;
+			}
+			case "leftout":{
+    			alert(number.shift(number[number.length-1]));
+   				show();
+   				break;
+			}
+			case "rightout":{
+				alert(number.pop(number[0]));
+        		show();
+        		break;
+			}
+    	}
+    })
+    //给输出的结果添加事件委托，使点击的元素被删除
+       $("result").addEventListener("click",function(e){
+        var target=e.target;
+        	target.parentNode.removeChild(target);   //删除输出表格中的元素 
+        	number.splice(target);        //删除数组number中的元素
+        return number;
+    })
+</script>
+</html>
