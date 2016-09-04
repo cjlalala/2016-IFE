@@ -20,9 +20,8 @@
 	}
 	</style>
 </head>
-
 <body>
-	<input id="input"type="text">
+	<input id="input" type="text">
 	<div id="button">
 		<button id="leftin">左侧入</button>
 		<button id="rightin">右侧入</button>
@@ -31,36 +30,33 @@
 	</div>
 	<ul id="result">
 	</ul>
-</body>
-
 <script>
 	var $=function(id){
 	  return document.getElementById(id);
 	}
 	var number=[];
-	//将得到的用户输入数据输出显示到id为result的列表中
-	function show(){
-		var content=" ";
-		for(var i=0;i<number.length;i++){
-				content+="<li>"+number[i]+"</li>";
-        	}
-        result.innerHTML=content;
-	}
 	//给按钮的父元素添加事件委托，避免给每个按钮添加点击事件
     $("button").addEventListener("click",function(e){  
-		var target=e.target;
-    	switch(target.id){
-    		case "leftin":{
-    			number.unshift($("input").value);
+		var target=e.target,
+			value=$("input").value;
+		switch(target.id){
+    		  case "leftin":{
+    			if(!/^\d+$/.test(value))alert("请输入有效的数字");
+    			else{
+    				number.unshift(value);
         		show();
+        		}
         		break;
-    		}
-    		case "rightin":{
-    			number.push($("input").value);
-    			show();
+    		  }
+    	       	  case "rightin":{
+    			if(!/^\d+$/.test(value)) alert("请输入有效的数字");
+    			else{
+    				number.push(value);
+    				show();
+    			}
     			break;
-			}
-			case "leftout":{
+	          }
+		  case "leftout":{
     			alert(number.shift(number[number.length-1]));
    				show();
    				break;
@@ -69,15 +65,26 @@
 				alert(number.pop(number[0]));
         		show();
         		break;
-			}
-    	}
-    })
+		  }
+    	        }
+       })
     //给输出的结果添加事件委托，使点击的元素被删除
        $("result").addEventListener("click",function(e){
         var target=e.target;
-        	target.parentNode.removeChild(target);   //删除输出表格中的元素 
-        	number.splice(target);        //删除数组number中的元素
+        if(target.nodeName!="LI") return;
+        var tar=parseInt(target.getAttribute("id")); //得到被点击元素的id属性，之前id绑定的是元素在数组中的序号
+        number.splice(tar,1); //删除被点击的元素，1代表只删除一个元素
+        show();
         return number;
-    })
+	})
+    //将得到的用户输入数据输出显示到id为result的列表中
+	function show(){
+		var content=" ";
+		for(var i=0;i<number.length;i++){
+				content+="<li id='"+i+"'>"+number[i]+"</li>";
+        	}
+		 result.innerHTML=content;
+	}
 </script>
+</body>
 </html>
