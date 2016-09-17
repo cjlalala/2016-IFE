@@ -2,17 +2,15 @@ var tree=document.getElementById("super"),
     list=[],
     a=undefined,
     timer=null,
-    check=document.getElementById("check");
-//先序遍历
-function preOrder(node){
+    check=document.getElementById("check"),
+    button=document.getElementById("button");
+//深度优先遍历
+function travel(node){
 	if(node!=null){
 		list.push(node);
-		var length=node.children.length;
-		if(length>0){
-			for(var i=0;i<length;i++){
-				if(node.children[i].nodeType==1){
-					preOrder(node.children[i]);
-				}
+		for(var i=0;i<node.children.length;i++){
+			if(node.children[i].nodeType==1){
+				travel(node.children[i]);
 			}
 		}
 	}
@@ -26,7 +24,7 @@ function show(a){
 		i++;
 		if (i < list.length) {
 			var content=list[i].firstChild.nodeValue.replace(/(^\s*)|(\s*$)/g, "") ;
-			if(input==content&&content){
+			if(input==content&&content&&a==1){
 				clearInterval(timer);
 				list[i].style.backgroundColor="red";
 				list[i-1].style.backgroundColor="#fff";
@@ -43,31 +41,18 @@ function show(a){
 		}
 	},500);
 }
-document.getElementById("button").addEventListener("click",function(){
+//深度优先遍历
+button.addEventListener("click",function(){
 	origin();
-	preOrder(tree);
+	travel(tree);
 	show(0);
 });
 //查询函数
-function test(node){
-	if(node!=null){
-		list.push(node);
-		var length=node.children.length;
-		if(length>0){
-			for(var i=0;i<length;i++){
-				if(node.children[i].nodeType==1){
-					preOrder(node.children[i]);
-				}
-			}
-		}
-	}
-}
-//查询函数
-check.onclick=function(){
+check.addEventListener("click",function(){
 	origin();
-	test(tree);
+	travel(tree);
 	show(1);
-}
+});
 //初始状态
 function origin(){
 	list=[];
