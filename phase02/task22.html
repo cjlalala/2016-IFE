@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>IFE JavaScript Task 22</title>
+    <style>
+		div{
+    		display: inline-block;
+    		padding:20px;
+    		margin:3px;
+    		border:1px solid black;
+    	}
+    	span{
+    		display: block;
+    	}
+    	#button{
+    		margin-top:20px;
+    	}
+    	button{
+    		margin:20px;
+    		width:100px;
+    	}
+    </style>
+  </head>
+<body>
+	<div id="tree">
+		<div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<span id="button">
+		<button id="pre">前序</button>
+		<button id="in">中序</button>
+		<button id="post">后序</button>
+	</span>
+
+<script>
+var tree=document.getElementById("tree"),
+    list=[],
+    timer=null;
+//先序遍历
+function preOrder(node){
+	if(node!=null){
+		list.push(node);
+		preOrder(node.firstElementChild);
+		preOrder(node.lastElementChild);
+	}
+}
+//中序遍历
+function inOrder(node){
+	if(node!=null){
+		inOrder(node.firstElementChild);
+		list.push(node);
+		inOrder(node.lastElementChild);
+	}
+}
+//后序遍历
+function postOrder(node){
+	if(node!=null){
+		postOrder(node.firstElementChild);
+		postOrder(node.lastElementChild);
+		list.push(node);
+	}
+}
+//依次改变数组list中的元素背景颜色
+function show(){
+	var i = 0;
+	list[i].style.backgroundColor='blue';
+	timer = setInterval(function () {
+		i++;
+		if (i < list.length) {
+			list[i-1].style.backgroundColor = '#fff';
+			list[i].style.backgroundColor = 'blue';
+		} else {
+			clearInterval(timer);
+			list[list.length-1].style.backgroundColor = '#fff';
+		}
+	},500)
+}
+//使用事件委托监听按钮点击事件
+var button=document.getElementById("button");
+	button.addEventListener("click",function(e){
+		switch(e.target.id){
+			case "pre":{
+				origin();
+				preOrder(tree);
+				show();
+				break;
+			}
+			case "in":{
+				origin();
+				inOrder(tree);
+				show();
+				break;
+			}
+			case "post":{
+				origin();
+				postOrder(tree);
+				show();
+				break;
+			}
+
+		}
+	})
+//复位原始状态,防止不同按钮点击事件之间的冲突
+function origin(){
+	list=[];
+	clearInterval(timer); 
+	var divs=document.getElementsByTagName("div");
+	for(var i=0;i<divs.length;i++){   //让所有元素的背景色均恢复至白色
+		divs[i].style.backgroundColor="white";
+	}
+}
+</script>
+</body>
+</html>
