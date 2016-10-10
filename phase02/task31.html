@@ -43,59 +43,26 @@
         display: none;
         margin-top: 60px;
     }
-    #beijinSele{
-        display: inline-block;
-
-    }
-    #shanghaiSele,#wuhanSele,#xianSele{
-        display: none;
-    }
 	</style>
   </head>
 <body>
 <form>
-	<label for="student" class="student">在校生</label><input id="student" name="people" type="radio">
+	<label for="student" >在校生</label><input id="student" name="people" type="radio">
     <label for="notstudent" class="notStudent">非在校生</label><input id="notstudent" name="people" type="radio">
 	<div id="inSchool">
         <label>学校</label>
         <select id="city">
-            <option id="beijin" class="opt">北京</option>
-            <option id="shanghai" class="opt">上海</option>
-            <option id="wuhan" class="opt">武汉</option>
-            <option id="xian" class="opt">西安</option>
+            <option id="bj" class="opt">北京</option>
+            <option id="sh" class="opt">上海</option>
+            <option id="wh" class="opt">武汉</option>
+            <option id="xa" class="opt">西安</option>
         </select>
-        <div id="beijinSele">
-            <select>
-                <option>北京大学</option>
-                <option>清华大学</option>
-                <option>中国人民大学</option>
-                <option>北京师范大学</option>
-            </select>
-        </div>
-        <div id="shanghaiSele">
-            <select>
-                <option>复旦大学</option>
-                <option>上海交通大学</option>
-                <option>同济大学</option>
-                <option>华东师范大学</option>
-            </select>
-        </div>
-        <div id="wuhanSele">
-            <select>
-                <option>武汉大学</option>
-                <option>华中科技大学</option>
-                <option>华中农业大学</option>
-                <option>武汉理工大学</option>
-            </select>
-        </div>
-        <div id="xianSele">
-            <select>
-                <option>西安交通大学</option>
-                <option>西北大学</option>
-                <option>西北工业大学</option>
-                <option>陕西师范大学</option>
-            </select>
-        </div>
+       	<select id="collage">
+            <option>北京大学</option>
+            <option>清华大学</option>
+            <option>中国人民大学</option>
+            <option>北京师范大学</option>
+        </select>
     </div>
     <div id="outSchool">
         就业单位<input type="text" class="employment">
@@ -103,6 +70,7 @@
 </form>
 
 <script type="text/javascript" >
+
 function $(id){
     return document.getElementById(id);
 }
@@ -116,18 +84,23 @@ $("notstudent").addEventListener("click",function(){
     $("inSchool").style.display="none";
     $("outSchool").style.display="block";
 });
-//城市选项改变时
-function change(){
-var options=document.getElementsByClassName('opt');
-for(var i=0;i<options.length;i++){
-    var id=options[i].getAttribute("id")+"Sele";
-    if(options[i].selected){      // 确定被选中的城市
-        $(id).style.display="inline-block";   // 设置对应数据
-    }
-    else $(id).style.display="none";
-  }   
+var data={
+	bj:["北京大学","清华大学","中国人民大学","北京师范大学"],
+	sh:["复旦大学","上海交通大学","同济大学","华东师范大学"],
+	wh:["武汉大学","华中科技大学","华中农业大学","武汉理工大学"],
+	xa:["西安交通大学","西北大学","西北工业大学","陕西师范大学"]
 }
-//城市选项变化触发事件
+//城市名改变时二级表单联动
+var options=document.getElementsByClassName('opt');
+function change(){
+    	var id=options[$("city").selectedIndex].getAttribute("id"),  
+    		content="";
+    	for(var j=0;j<data[id].length;j++){
+    		content+="<option>"+data[id][j]+"</option>";
+		} 
+		$("collage").innerHTML=content;    
+}
+//城市选项改变时触发事件
 $("city").addEventListener("change",change);
 </script>
 </body>
