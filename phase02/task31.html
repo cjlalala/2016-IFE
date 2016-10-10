@@ -43,7 +43,7 @@
         display: none;
         margin-top: 60px;
     }
-	</style>
+    </style>
   </head>
 <body>
 <form>
@@ -68,9 +68,7 @@
         <label for="employment">就业单位</label><input type="text" id="employment">
     </div>
 </form>
-
 <script type="text/javascript" >
-
 function $(id){
     return document.getElementById(id);
 }
@@ -94,11 +92,11 @@ var data={
 var options=document.getElementsByClassName('opt');
 function change(){
     	var id=options[$("city").selectedIndex].getAttribute("id"),  
-    		content="";
+    	    content="";
     	for(var j=0;j<data[id].length;j++){
-    		content+="<option>"+data[id][j]+"</option>";
-		} 
-		$("collage").innerHTML=content;    
+    	    content+="<option>"+data[id][j]+"</option>";
+	} 
+	    $("collage").innerHTML=content;    
 }
 //城市选项改变时触发事件
 $("city").addEventListener("change",change);
