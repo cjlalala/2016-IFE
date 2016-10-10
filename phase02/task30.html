@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>IFE JavaScript Task 30</title>
+    <style>
+    form{
+    	margin:auto;
+    	width:860px;
+    	font-size: 24px;
+    }
+    label{
+    	display: inline-block;
+    	width:100px;
+		text-align: right;
+    }
+    input{
+    	width:700px;
+    	height:40px;
+    	margin:20px;
+    	border-radius: 7px;
+    	border:2px solid #ccc;
+    }
+    input:focus{
+    	outline: none;
+    	border:2px solid #7dace9;
+    	border-radius: 7px;
+    	box-shadow: 0 2px 2px 2px #e1edfa;
+	}
+	.right{
+		outline: none;
+    	border:2px solid #81b950;
+    	border-radius: 7px;
+	}
+	.wrong{
+		outline: none;
+    	border:2px solid #bd0315;
+    	border-radius: 7px;
+	}
+	div{
+		margin-left:130px;
+		font-size: 20px;
+	}
+    button{
+    	float:right;
+    	border:1px solid #4e79b7;
+    	background-color:#4e79b7;
+    	width:120px;
+    	height:50px;
+    	margin-right:25px;
+    	font-size: 24px;
+    	color:white;
+    	border-radius: 7px;
+    }
+    button:focus{
+    	outline: none;
+    	border:1px solid #27569c;
+    	background-color:#27569c;
+	}
+	</style>
+  </head>
+<body>
+<form id="form">
+	<label for="name" id="nameLabel">名称</label>
+	<input id="name" type="text"/><br/>
+	<div id="result-name"></div>
+
+	<label for="pw1" id="pw1Label">密码</label>
+	<input id="pw1" type="password"/><br/>
+	<div id="result-pw1"></div>
+
+	<label for="pw2" id="pw2Label">确认密码</label>
+	<input id="pw2" type="password"/><br/>
+	<div id="result-pw2"></div>
+
+	<label for="email" id="emailLabel">邮箱</label>
+	<input id="email" type="text"/><br/>
+	<div id="result-email"></div>
+
+	<label for="phone" id="phoneLabel">手机</label>
+	<input id="phone" type="text"/><br/>
+	<div id="result-phone"></div>
+
+	<button id="submit">提交</button>
+</form>
+
+
+<script type="text/javascript" >
+function $(id){
+	return document.getElementById(id);
+}
+$("form").addEventListener("click",function(e){
+	var id=e.target.id;
+	switch(id){
+		case "nameLabel":case "name":{
+			$("result-name").innerHTML="必填，长度为4~16字符";
+			$("result-name").style.color="#a6a6a6";
+			$("name").onblur=function(){testName($('name').value);}
+			break;
+		}
+		case "pw1Label":case "pw1":{
+			$("result-pw1").innerHTML="必填，长度为8~16字符，只能为数字、大小写字母";
+			$("result-pw1").style.color="#a6a6a6";
+			$("pw1").onblur=function(){testPw1($('pw1').value);}
+			break;
+		}
+		case "pw2Label":case "pw2":{
+			$("result-pw2").innerHTML="再次输入相同密码";
+			$("result-pw2").style.color="#a6a6a6";
+			$("pw2").onblur=function(){testPw2($('pw1').value,$('pw2').value);}
+			break;
+		}
+		case "emailLabel":case "email":{
+			$("result-email").innerHTML="请输入有效邮箱地址";
+			$("result-email").style.color="#a6a6a6";
+			$("email").onblur=function(){testEmail($('email').value);}
+			break;
+		}
+		case "phoneLabel":case "phone":{
+			$("result-phone").innerHTML="请输入手机号";
+			$("result-phone").style.color="#a6a6a6";
+			$("phone").onblur=function(){testPhone($('phone').value);}
+			break;
+		}
+	}
+});
+//点击提交按钮
+$("submit").addEventListener("click",function(e){
+	if(testName($('name').value)||testPw1($('pw1').value)||
+	testPw2($('pw2').value)||testEmail($('email').value)||
+	testPhone($('phone').value)){
+		alert("提交成功!");
+	}
+	else alert("输入有误！");
+	e.preventDefault();
+	return false;
+});
+//名称验证
+function testName(name){
+	var length=checkLength(name);
+	if((/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(name))&&length>=4&&length<=16){
+		$("result-name").innerHTML="验证成功!";
+		$("result-name").style.color="#81b950";
+		$("name").className="right";
+	}
+	else{
+		$("result-name").innerHTML="名称错误！";
+		$("result-name").style.color=" #bd0315";
+		$("name").className="wrong";
+		return false;
+	}
+}
+//检验名称有多少个字符
+function checkLength(str){
+    var len =0,temp=0;
+    for(var j=0;j<str.length;j++){
+    temp = 1;
+    if(/^[\u2E80-\u9FFF]+$/.test(str[j])){
+        temp = 2;
+    }
+    len += temp;
+    }
+    return len;
+}  
+//密码1验证
+function testPw1(pw1){
+	if(/^[A-Za-z0-9]{8,16}$/.test(pw1)){
+		$("result-pw1").innerHTML="密码可用";
+		$("result-pw1").style.color="#81b950";
+		$("pw1").className="right";
+	}
+	else{
+		$("result-pw1").innerHTML="密码不可用";
+		$("result-pw1").style.color=" #bd0315";
+		$("pw1").className="wrong";
+		return false;
+	}
+}
+//密码2验证
+function testPw2(pw1,pw2){
+	if(pw2==pw1&&testPw1(pw1)){
+		$("result-pw2").innerHTML="密码输入一致";
+		$("result-pw2").style.color="#81b950";
+		$("pw2").className="right";
+	}
+	else{
+		$("result-pw2").innerHTML="密码输入不一致";
+		$("result-pw2").style.color=" #bd0315";
+		$("pw2").className="wrong";
+		return false;
+	}
+}
+//邮箱验证
+function testEmail(email){
+	if( /\w+([-+.´]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(email)){
+		$("result-email").innerHTML="邮箱格式正确";
+		$("result-email").style.color="#81b950";
+		$("email").className="right";
+	}
+	else{
+		$("result-email").innerHTML="邮箱格式错误";
+		$("result-email").style.color=" #bd0315";
+		$("email").className="wrong";
+		return false;
+	}
+}
+//手机号验证
+function testPhone(phone){
+	if(/^1[34578]\d{9}$/.test(phone)){
+		$("result-phone").innerHTML="手机格式正确";
+		$("result-phone").style.color="#81b950";
+		$("phone").className="right";
+	}
+	else{
+		$("result-phone").innerHTML="手机格式错误";
+		$("result-phone").style.color=" #bd0315";
+		$("phone").className="wrong";
+		return false;
+	}
+}
+</script>
+</body>
+</html>
