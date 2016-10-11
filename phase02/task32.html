@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>IFE JavaScript Task 32</title>
+    <style>
+   
+	</style>
+  </head>
+<body>
+<form id="factory">
+
+</form>
+<button id="submit">生成表单</button>
+
+<form id="show">
+</form>
+
+<script type="text/javascript" >
+function $(id){
+	return document.getElementById(id);
+}
+//创建表单工厂
+function form(label,type,rules,success,fail,id,func){
+	this.label=label;
+	this.type=type;
+	this.rules=rules;
+	this.success=success;
+	this.fail=fail;
+	this.id=id;
+	this.validator=func;
+}
+//验证输入是否合规
+var test={
+	name:function(){
+		var name=$('name').value,
+			length=checkLength(name);
+		if((/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(name))&&length>=4&&length<=16) return ture;
+		else return false;
+	},
+	pwone:function(){
+		var pw1=$("pw1").value;
+		if(/^[A-Za-z0-9]{8,16}$/.test(pw1)) return ture;
+		else return false;
+	},
+	pwtwo:function(){
+		var pw1=$("pw1").value,
+			pw2=$("pw2").value;
+		if(pw2==pw1&&/^[A-Za-z0-9]{8,16}$/.test(pw2))return ture;
+		else return false;
+	},
+	email:function(){
+		var email=$("email").value;
+		if( /\w+([-+.´]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(email))return ture;
+		else return false;
+	},
+	phone:function(){
+		var phone=$("phone").value;
+		if(/^1[34578]\d{9}$/.test(phone)) return ture;
+		else return false;
+	}
+}
+var nameForm=new form('名称','text','必填，长度为4~16字符','验证成功','名称错误','name',test.name),
+	pw1=new form('密码','password','必填，长度为8~16字符，只能为数字、大小写字母','密码可用','密码不可用','pw1',test.pwone),
+	pw2=new form('确认密码','password','再次输入相同密码','密码输入一致','密码输入不一致','pw2',test.pwtwo),
+	email=new form('邮箱','text','请输入有效邮箱地址','邮箱格式正确','邮箱格式错误','email',test.email),
+	phone=new form('手机号','text','请输入手机号','手机格式正确','手机格式错误','phone',test.phone),
+	makeForm=[nameForm,pw1,pw2,email,phone];
+//初始表单
+var checkName=new form('名称','checkbox','nameBox'),
+	checkPw1=new form('密码','checkbox','pw1Box'),
+	checkPw2=new form('确认密码','checkbox','pw2Box'),
+	checkEamil=new form('邮箱','checkbox','emailBox'),
+	checkPhone=new form('手机号','checkbox','phoneBox'),
+	nomal=[checkName,checkPw1,checkPw2,checkEamil,checkPhone];
+//生成初始表单
+//<label for='name'><input type='checkbox' id='name' name='name'>名称</label>
+window.onload=function(){
+	var content='';
+	for(var i=0;i<nomal.length;i++){
+		content+='<label for="'+nomal[i].rules+'"><input class="checkbox" type="'+nomal[i].type+'" id="'+nomal[i].rules+'"name="'+nomal[i].rules+'">'+nomal[i].label+'</label>';
+	}
+	$('factory').innerHTML=content;
+};
+//点击生成表单
+$("submit").addEventListener("click",function(e){
+	var result='',
+		checkBoxes=document.getElementsByClassName('checkbox');
+	for(var i=0;i<checkBoxes.length;i++){
+		if(checkBoxes[i].checked){
+			result+='<label for="'+makeForm[i].id+'">'+makeForm[i].label+'</label><input id="'+makeForm[i].id+'"type="'+makeForm[i].type+'"><br/><div>'+makeForm[i].rules+'</div>';
+		}
+	}
+	result+='<button id="test">验证</button>';
+	$("show").innerHTML=result;
+	e.preventDefault();
+	return false;
+});
+$('test').addEventListener("click",function(e){
+	
+});
+//检验名称有多少个字符
+function checkLength(str){
+    var len =0,temp=0;
+    for(var j=0;j<str.length;j++){
+    temp = 1;
+    if(/^[\u2E80-\u9FFF]+$/.test(str[j])){
+        temp = 2;
+    }
+    len += temp;
+    }
+    return len;
+}  
+</script>
+</body>
+</html>
