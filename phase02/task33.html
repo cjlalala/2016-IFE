@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>IFE JavaScript Task 33</title>
+    <style>
+    table{
+    	border-spacing: 0;
+    	border:2px solid black;
+    	margin:10px auto 30px auto;
+    }
+    td{
+    	border:1px solid rgba(128, 128, 128, 0.35);
+    	width:40px;
+    	height:40px;
+    	opacity: 0.9;
+    	box-sizing: border-box;
+    }
+    form{
+    	width:400px;
+    	margin:auto;
+    }
+    .selected{
+    	background-color:red;
+	}
+	.top{
+		border-top:10px solid blue;
+	}
+	.right{
+		border-right:10px solid blue;
+	}
+	.back{
+		border-bottom:10px solid blue;
+	}
+	.left{
+		border-left:10px solid blue;
+	}
+	button{
+		margin:10px;
+		width:73px;
+	}
+    </style>
+  </head>
+<body>
+<table id="table">
+</table>	 
+<form id="buttons">	
+	<button id="go">go</button>
+	<button id="left">left</button>
+	<button id="right">right</button>
+	<button id="back">back</button>
+</form>
+<script type="text/javascript">
+function $(id){
+	return document.getElementById(id);
+}
+var position={
+	x:6,
+	y:6,
+	direc:1 //上1， 右2，后3，左4
+};
+//点击不同按钮
+$('buttons').addEventListener("click",function(e){
+	e.preventDefault();
+	switch(e.target.id){
+		case'go':{
+			var x=position.x,
+				y=position.y,
+				direc=position.direc;
+			if(x==1&&direc==1||y==10&&direc==2||x==10&&direc==3||y==1&&direc==4) return;
+			else go(); 
+			break;
+		}
+		case'left':{
+			if(position.direc>1) position.direc-=1;
+			else position.direc=4;
+			direction();
+			break;
+		}
+		case'right':{
+			if(position.direc<4) position.direc+=1;
+			else position.direc=1;
+			direction();
+			break;
+		}
+		case'back':{
+			var direc=position.direc;
+			if(direc==1||direc==3) position.direc=4-direc;
+			else position.direc=6-direc;
+			direction();
+			break;
+		}
+	}
+});
+//点击go
+function go(){
+	var a=position.x*10+position.y,
+		IDa='td'+a;
+		$(IDa).className='';
+	if(position.direc==1){
+		position.x-=1;
+		var b=position.x*10+position.y,
+		    IDb='td'+b;
+		$(IDb).className='selected top';
+	} 
+	else if(position.direc==2){
+		position.y+=1;
+		var b=position.x*10+position.y,
+		    IDb='td'+b;
+		$(IDb).className='selected right';
+	}
+	else if(position.direc==3){ 
+		position.x+=1;
+		var b=position.x*10+position.y,
+		    IDb='td'+b;
+		$(IDb).className='selected back';
+	}
+	else if(position.direc==4){
+		position.y-=1;
+		var b=position.x*10+position.y,
+		    IDb='td'+b;
+		$(IDb).className='selected left';
+	}	
+} 
+//显示表明方向的蓝色边框
+function direction(c){
+	var c=position.x*10+position.y,
+		idc='td'+c,
+		IDc=$(idc);
+		IDc.className='';
+	if(position.direc==1){
+		IDc.className='selected top';
+	} 
+	if(position.direc==2){
+		IDc.className='selected right';
+	}
+	if(position.direc==3){ 
+		IDc.className='selected back';
+	}
+	if(position.direc==4){
+		IDc.className='selected left';
+	}
+}
+//生成棋盘
+function origin(){
+	var resultTr='';
+	for(var i=1;i<11;i++){
+		var resultTd='';
+		for(var j=1;j<11;j++){
+			var number=10*i+j;
+		    resultTd+="<td id='td"+number+"'></td>";
+		}
+		resultTr+='<tr>'+resultTd+'</tr>';
+	}
+	$('table').innerHTML=resultTr;
+	$("td66").className='selected top'; //定义格子6-6的初始样式
+};
+origin();
+</script>
+</body>
+</html>
