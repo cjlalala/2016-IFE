@@ -19,7 +19,7 @@
     }
     form{
     	display: inline-block;
-    	width:450px;
+    	width:300px;
     }
     .selected{
     	background-color:red;
@@ -57,7 +57,7 @@
 		color: white;
 	}
 	#input{
-		width: 400px;
+		width: 250px;
 		height: 192px;
 		padding-left:24px;
 		font-size: 20px;
@@ -67,6 +67,10 @@
 	}
 	.wrong{
 		background:red;
+	}
+	.information{
+		display: inline-block;
+		border:1px solid black;
 	}
     </style>
   </head>
@@ -81,6 +85,21 @@
 		<textarea id="input" onkeyup='keyUp();' onscroll="$('number').scrollTop=this.scrollTop;"></textarea>
 	</div>
 </form>
+<ul class="information">
+点击下面按钮后，正方形会做出相应动作
+<li>GO：向蓝色边所面向的方向前进一格</li>
+<li>TUN LEF：向左转（逆时针旋转90度）</li>
+<li>TUN RIG：向右转（顺时针旋转90度）</li>
+<li>TUN BAC：向右转（旋转180度）</li>
+<li>TRA LEF：向屏幕的左侧移动一格，方向不变</li>
+<li>TRA TOP：向屏幕的上面移动一格，方向不变</li>
+<li>TRA RIG：向屏幕的右侧移动一格，方向不变</li>
+<li>TRA BOT：向屏幕的下面移动一格，方向不变</li>
+<li>MOV LEF：方向转向屏幕左侧，并向屏幕的左侧移动一格</li>
+<li>MOV TOP：方向转向屏幕上面，向屏幕的上面移动一格</li>
+<li>MOV RIG：方向转向屏幕右侧，向屏幕的右侧移动一格</li>
+<li>MOV BOT：方向转向屏幕下面，向屏幕的下面移动一格</li>
+</ul>
 <script type="text/javascript">
 
 function $(id){
