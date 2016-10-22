@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 37</title>
+    <style>
+      #cover{
+        display: none;
+        width: 100%;
+        height:100%;
+        position:fixed;
+        top:0;
+        left:0;
+        opacity: 0.3;
+        background-color: black;
+      }
+      #information{
+        display: none;
+        width:500px;
+        height: 250px;
+        margin:auto; 
+        position:fixed; 
+        left: 0; top: 0; right: 0; bottom: 0;
+        border:2px solid black;
+        background-color: white;
+      }
+      .title{
+        background-color: gray;
+        color:white;
+        margin:0;
+        padding:10px;
+        border-bottom: 2px solid black;
+      }
+      .content{
+        padding: 10px;
+      }
+      #yes,#no{
+        float: right;
+        margin:95px 10px 0 0;
+        width:100px;
+        height:35px;
+        font-size: 18px;
+      }
+      #show{
+        position: absolute; 
+        left: 0; top: 0; right: 0; bottom: 0;
+        margin:auto;
+        width:100px;
+        height:35px;
+      }
+    </style>
+  </head>
+<body>
+<button id='show'>展现浮出层</button>
+<div id='cover'></div>
+<div id='information'>
+    <p class="title">这是一个浮出层</p>
+    <p class="content">这是一个浮出层</p>
+    <button id='no'>取消</button>
+    <button id='yes'>确定</button>
+</div>
+<script type='text/javascript'> 
+var show=document.getElementById('show');
+    cover=document.getElementById('cover');
+    infor=document.getElementById('information');
+    yes=document.getElementById('yes');
+    no=document.getElementById('no');
+    show.addEventListener('click',function(){
+        cover.style.display='block';
+        infor.style.display='block';
+    });
+    yes.addEventListener('click',function(){
+        alert('这是一个弹出层！');
+    });
+    no.addEventListener('click',function(){
+        cover.style.display='none';
+        infor.style.display='none';
+    });
+    cover.addEventListener('click',function(){
+        cover.style.display='none';
+        infor.style.display='none';
+    });
+</script>
+</body>
+
+</html>
