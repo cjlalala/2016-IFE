@@ -133,14 +133,7 @@ var checkName=new form('名称','checkbox','nameBox'),
 	checkEamil=new form('邮箱','checkbox','emailBox'),
 	checkPhone=new form('手机号','checkbox','phoneBox'),
 	nomal=[checkName,checkPw1,checkPw2,checkEamil,checkPhone];
-//生成初始表单
-window.onload=function(){
-	var content='';
-	for(var i=0;i<nomal.length;i++){
-		content+='<label for="'+nomal[i].rules+'"><input class="checkbox" type="'+nomal[i].type+'" id="'+nomal[i].rules+'"name="'+nomal[i].rules+'">'+nomal[i].label+'</label>';
-	}
-	$('factory').innerHTML=content;
-};
+
 //点击生成表单
 $("submit").addEventListener("click",function(e){
 	var result='',
@@ -187,7 +180,16 @@ function checkLength(str){
     len += temp;
     }
     return len;
-}  
+} 
+//生成初始表单
+function origin(){
+	var content='';
+	for(var i=0;i<nomal.length;i++){
+		content+='<label for="'+nomal[i].rules+'"><input class="checkbox" type="'+nomal[i].type+'" id="'+nomal[i].rules+'"name="'+nomal[i].rules+'">'+nomal[i].label+'</label>';
+	}
+	$('factory').innerHTML=content;
+}
+origin();
 </script>
 </body>
 </html>
