@@ -70,3 +70,7 @@ var aqiData = [
 　　 appendChild 和innerHTML的性能网上说法不一，有待测试！
 
  　  HTML DOM插入内容请看：[HTML DOM](http://www.cnblogs.com/cjlalala/p/5804349.html)
+
+##在线学习参考资料
+[JavaScript入门篇](http://www.imooc.com/learn/36)
+[MDN JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
