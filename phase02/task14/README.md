@@ -1,3 +1,4 @@
+遇到的问题：
 （1）sort()方法：
 
 　　sort() 方法用于对数组的元素进行排序，排序过程是在原数组上进行的，不生成副本。
@@ -8,10 +9,10 @@
 
 　　　　记 a 和 b 是两个将要被比较的元素，compareFunction(a,b)为比较函数的返回值
 
-若compareFunction(a,b)小于0，a前b后；
-若compareFunction(a,b)等于0， a 和 b 的位置不变;
-若compareFunction(a,b)大于0，b前a后。
-　　简化一下：比较函数中‘ return a-b; ’从小到大排序，‘ return b-a; ’从大到小排序。
+           若compareFunction(a,b)小于0，a前b后；
+           若compareFunction(a,b)等于0， a 和 b 的位置不变;
+           若compareFunction(a,b)大于0，b前a后。
+　　    简化一下：比较函数中‘ return a-b; ’从小到大排序，‘ return b-a; ’从大到小排序。
 
 （2）array.filter()  &  array.forEach()方法
 
