@@ -24,6 +24,6 @@
 
 ####（3）性能问题
 
-　　appendChild 和innerHTML的性能网上说法不一，有待测试！
+　　 appendChild 和innerHTML的性能网上说法不一，有待测试！
 
  　  HTML DOM插入内容请看：[HTML DOM](http://www.cnblogs.com/cjlalala/p/5804349.html)
