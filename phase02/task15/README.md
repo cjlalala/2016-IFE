@@ -89,8 +89,9 @@ init();
      ele.onclick=funcName 的意思就是在ele.onclick中保存了一个funcName方法的一个引用，类似于C语言中的函数指针。
      当click事件发生的时候，会调用funcName函数;
     （注：ele.onclick=function(){ funcName();}也可达到相同目的，适用于需要传递参数的情况）
-    如果函数加了()就是执行函数了，也就是当eleonclick=funcName()时，ele.onclick获得的就是函数的返回值，
-    即不论click事件发生与否，都会直接调用funcName函数。
+   
+     如果函数加了()就是执行函数了，也就是当eleonclick=funcName()时，ele.onclick获得的就是函数的返回值，
+     即不论click事件发生与否，都会直接调用funcName函数。
 ##在线学习参考资料
 [JavaScript入门篇](http://www.imooc.com/learn/36)<br>
 [MDN JavaScript](http://www.imooc.com/learn/36)
