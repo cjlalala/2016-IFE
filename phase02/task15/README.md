@@ -83,11 +83,11 @@ init();
 ```
 ##遇到的问题
 ####（1）截取字符串
-    为得到source列表中的城市名使用了substring()方法截取字符串（如“北京空气质量”）的前两个字，如果存在城市名不是两个字，那么这个方法就不行了，<br>因此可以用name[i].innerHTML.split("空气")[0]截取城市名  (split()方法把字符串分割为字符串数组)。
+    为得到source列表中的城市名使用了substring()方法截取字符串（如“北京空气质量”）的前两个字，如果存在城市名不是两个字，那么这个方法就不行了，因此可以用name[i].innerHTML.split("空气")[0]截取城市名  (split()方法把字符串分割为字符串数组)。
 ####（2）onclick调用函数
-    ele.onclick=funcName 的意思就是在ele.onclick中保存了一个funcName方法的一个引用，类似于C语言中的函数指针。当click事件发生的时候，会调<br>用funcName函数；<br>
-　 （注：ele.onclick=function(){ funcName();}也可达到相同目的，适用于需要传递参数的情况）<br>
-　　如果函数加了()就是执行函数了，也就是当eleonclick=funcName()时，ele.onclick获得的就是函数的返回值，即不论click事件发生与否，都会直接调<br>用funcName函数。
+    ele.onclick=funcName 的意思就是在ele.onclick中保存了一个funcName方法的一个引用，类似于C语言中的函数指针。当click事件发生的时候，会调用funcName函数;
+   （注：ele.onclick=function(){ funcName();}也可达到相同目的，适用于需要传递参数的情况）
+    如果函数加了()就是执行函数了，也就是当eleonclick=funcName()时，ele.onclick获得的就是函数的返回值，即不论click事件发生与否，都会直接调用funcName函数。
 ##在线学习参考资料
 [JavaScript入门篇](http://www.imooc.com/learn/36)<br>
 [MDN JavaScript](http://www.imooc.com/learn/36)
