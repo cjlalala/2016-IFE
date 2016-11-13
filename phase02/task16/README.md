@@ -20,7 +20,6 @@
     <script src="task.js"></script>
   </head>
 <body>
-
   <div>
     <label>城市名称：<input id="aqi-city-input" type="text"></label><br>
     <label>空气质量指数：<input id="aqi-value-input" type="text"></label><br>
@@ -39,7 +38,6 @@
     </tr>
    -->
   </table>
-
 </body>
 </html>
 ```
