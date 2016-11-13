@@ -51,10 +51,10 @@ function trim(str){
  * 然后渲染aqi-list列表，增加新增的数据
  */
 function addAqiData() {
-	var  city_blank=document.getElementById('aqi-city-input').value,
-	     num_blank=document.getElementById('aqi-value-input').value,
-	     city=trim(city_blank),
-	     num=trim(num_blank);
+	var  cityInput=document.getElementById('aqi-city-input').value,
+	     numInput=document.getElementById('aqi-value-input').value,
+	     city=trim(cityInput),
+	     num=trim(numInput);
 	if(city.length==0||num.length==0){
 		alert("城市名和空气质量指数均不能为空");
 	}
@@ -95,11 +95,9 @@ function delBtnHandle(t) {
 }
 function init() {
   // 在这下面给add-btn绑定一个点击事件，点击时触发addBtnHandle函数
-  var add=document.getElementById("add-btn");
-	  add.onclick=addBtnHandle;	
+      document.getElementById("add-btn").addEventListener("click",addBtnHandle);	
   // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
-  var table=document.getElementById("aqi-table");
-      table.addEventListener("click",delBtnHandle);
+      document.getElementById("aqi-table").addEventListener("click",delBtnHandle);
 }
 init();
 </script>
