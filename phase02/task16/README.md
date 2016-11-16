@@ -91,7 +91,7 @@ init();
 ```
 ##遇到的问题及解答
 ####（1）报错：Cannot call method ' addEventListener ' of null
-    开始一直报错，后来发现是由于之前一直把js文件在<head>标签中引用，导致getElementById的时候Dom对象还未出现。
+   开始一直报错，后来发现是由于之前一直把js文件在<head>标签中引用，导致getElementById的时候Dom对象还未出现。
 ####（2）delete 注意：
 　　可以删除对象属性；<br>
 　　删除数组元素时，原来数组长度/索引不变，删除的元素变为undefined；<br>
