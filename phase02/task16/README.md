@@ -93,8 +93,8 @@ init();
 ####（1）报错：Cannot call method ' addEventListener ' of null
       开始一直报错，后来发现是由于之前一直把js文件在<head>标签中引用，导致getElementById的时候Dom对象还未出现。
 ####（2）delete 注意：
-　　可以删除对象属性；<br>
-　　删除数组元素时，原来数组长度/索引不变，删除的元素变为undefined；<br>
-　　不可以删除变量和函数；<br>
-　　但Eval代码块中的变量和函数可以被删除（Firebug console中执行的代码会被当成是 Eval code来进行解析）。<br>
+    可以删除对象属性；<br>
+    删除数组元素时，原来数组长度/索引不变，删除的元素变为undefined；<br>
+    不可以删除变量和函数；<br>
+    但Eval代码块中的变量和函数可以被删除（Firebug console中执行的代码会被当成是 Eval code来进行解析）。<br>
 详见：[深入理解Delete（JavaScript）](http://www.cnblogs.com/enein/archive/2012/08/23/2651312.html)
