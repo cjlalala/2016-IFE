@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Task 38-UI组件之排序表格</title>
+    <style>
+    table{
+      border-collapse:collapse;
+    } 
+    th,td{
+      width: 100px;
+      height: 50px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+    th{
+      background-color:black;
+      color:white;
+    }
+    .up{
+      position: absolute;
+      top:25px;
+      margin-left: 8px;
+      width: 0;
+      height: 0;
+      border-bottom: 8px solid white;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+    }
+    .down{
+      position: absolute;
+      top:40px;
+      margin-left:8px;
+      width: 0;
+      height: 0;
+      border-top: 8px solid white;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+    }
+    </style>
+  </head>
+<body>
+<table id='table'>
+</table>
+<script type='text/javascript'> 
+var data=[
+    ['小红',85,93,78],
+    ['小花',94,68,87],
+    ['小紫',87,56,44],
+    ['小绿',98,99,89],
+    ['小橙',91,79,86],
+    ['小青',90,45,99],
+    ['小蓝',89,70,60],
+    ['小不',64,76,82],
+    ['小知',92,89,69],
+    ['小道',64,82,90]
+];
+var table=document.getElementById('table');
+table.addEventListener('click',function(event){
+      event = event || window.event;
+      var id = event.target.id || event.srcElement.id;
+      var num=id.slice(-1);
+      if(id.length=3) up(data,num);
+      else down(data,num);
+      show();
+    });
+//从小到大排序
+function up(array,num){
+  array.sort(function(a,b){
+    return a[num]-b[num];
+  });
+}
+//从大到小排序
+function down(array,num){
+  array.sort(function(a,b){
+    return b[num]-a[num];
+  });
+}
+function show(){
+  var content="<tr><th>姓名</th><th>语文<span id='up1' class='up'></span><span id='down1' class='down'></span></th><th>数学<span id='up2' class='up'></span><span id='down2' class='down'></span></th><th>英语<span id='up3' class='up'></span><span id='down3' class='down'></span></th><th>总分<span id='up4' class='up'></span><span id='down4' class='down'></span></th></tr>";
+  for(var i=0;i<10;i++){
+    var contentTd='<td>'+data[i][0]+'</td>',
+        contentTr='',
+        sum=0;
+    for(var j=1;j<4;j++){
+      sum+=data[i][j];
+      contentTd+='<td>'+data[i][j]+'</td>';
+    }
+    data[i].push(sum);
+    contentTr+='<tr>'+contentTd+'<td>'+sum+'</td>'+'</tr>';
+    content+=contentTr;
+  }
+  table.innerHTML=content;
+}
+show();
+</script>
+</body>
+</html>
