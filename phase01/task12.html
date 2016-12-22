@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Task 12-CSS 3的新特性</title>
+    <style>
+    /*表格和输入框*/
+     .table{
+      border-collapse: collapse;
+      text-align: left;
+      margin:30px 0;
+      width: 350px;
+     }
+     th,td{
+      height:25px;
+      border: 2px solid white;
+     }
+     th{
+      background-color: black;
+      color: white;
+     }
+     tr:nth-child(odd){
+      background-color: #ccc;
+     }
+     tr:nth-child(2),tr:nth-child(3),tr:nth-child(4){
+      color:#FF6666;
+     }
+     .input{
+      margin-left:100px;
+      width:100px;
+      transition:width .5s;
+     }
+     .input:focus{
+        width: 200px;
+     }
+    /*轮播图*/
+    .carousel{
+      position: relative;
+      width:300px;
+      height: 150px;
+      margin-top:20px;
+      overflow: hidden;
+    }
+    .pics{
+      position:absolute;
+      left: 0;
+      width:900px;
+      height:150px;
+      animation: carousel linear 12s infinite;
+    }
+    @keyframes carousel{
+      0%{ left: 0; }
+      28%{ left: 0; }
+      35%{ left: -300px; }
+      63%{ left: -300px; }
+      70%{ left: -600px; }
+      98%{ left: -600px; }
+      100%{ left: 0; }
+    }
+    .pic{
+      position:absolute;
+      display: inline-block;
+      width:300px;
+      height:150px;
+    }
+    #one{
+      background-color:#FFCCCC;
+      left: 0;
+    }
+    #two{
+      background-color:#FF9999;
+      left: 300px;
+    }
+    #three{
+      background-color:#FF6666;
+      left:600px;
+    }
+    .tag{
+      display: inline-block;
+      width:30px;
+      height: 30px;
+      margin:0;
+      position: relative;
+      top:-30px;
+      left: 194px;
+      background-color: rgba(0,0,0,0.5);
+      color:white;
+      line-height: 30px;
+      text-align: center;
+    }
+    .tag1:target + .pics{
+      left: 0;
+      animation: .1s 1;
+    }
+    .tag2:target + .pics{
+      left:-300px; 
+      animation: .1s 1;  
+    }
+    .tag3:target + .pics{
+      left: -600px;
+      animation: .1s 1;      
+    }
+    </style>
+  </head>
+<body>
+  <table class='table'>
+    <tr>
+      <th>排名</th>
+      <th>网站</th>
+      <th>热度</th>
+    </tr>
+    <tr>
+      <td>1.</td>
+      <td>百度前端技术学院</td>
+      <td>13000</td>
+    </tr>
+    <tr>
+      <td>2.</td>
+      <td>百度前端技术学院</td>
+      <td>11000</td>
+    </tr>
+    <tr>
+      <td>3.</td>
+      <td>百度前端技术学院</td>
+      <td>10000</td>
+    </tr>
+    <tr>
+      <td>4.</td>
+      <td>百度前端技术学院</td>
+      <td>9000</td>
+    </tr>
+    <tr>
+      <td>5.</td>
+      <td>百度前端技术学院</td>
+      <td>8000</td>
+    </tr>
+    <tr>
+      <td>6.</td>
+      <td>百度前端技术学院</td>
+      <td>7000</td>
+    </tr>
+    <tr>
+      <td>7.</td>
+      <td>百度前端技术学院</td>
+      <td>7000</td>
+    </tr>
+    <tr>
+      <td>8.</td>
+      <td>百度前端技术学院</td>
+      <td>6000</td>
+    </tr>
+    <tr>
+      <td>9.</td>
+      <td>百度前端技术学院</td>
+      <td>5000</td>
+    </tr>
+    <tr>
+      <td>10.</td>
+      <td>百度前端技术学院</td>
+      <td>4000</td>
+    </tr>
+  </table>
+  <input type='text' class='input'>
+  <div class='carousel'>
+    <div class='pics'>
+      <div class='pic' id='one'></div>
+      <div class='pic' id='two'></div>
+      <div class='pic' id='three'></div>
+    </div>
+  </div>
+  <div>
+    <a href='#one' class='tag1 tag'>1</a>
+    <a href='#two' class='tag2 tag'>2</a>
+    <a href='#three' class='tag3 tag'>3</a>
+  </div>
+</body>
+</html>
