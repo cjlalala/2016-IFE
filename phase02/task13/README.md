@@ -1,4 +1,5 @@
 #任务十三：零基础JavaScript编码（一）
+[查看](http://ife.baidu.com/2016/task/detail?taskId=13)
 ##任务目的
 * JavaScript初体验
 * 初步明白JavaScript的简单基本语法，如变量、函数
