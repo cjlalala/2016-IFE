@@ -29,12 +29,21 @@ var aqiData = [
 
 //使用了array.sort、document.createElement、document.createTextNode、element.appendChild等方法；
 var chinese=["一","二","三","四","五","六"];
-var newData=aqiData.sort(function(a,b){return b[1]-a[1];}); //用sort（）方法对原数据进行排序得到新的数组newData
-
+//使用冒泡法对数据进行排序
+var max;
+for(m=0;m<=5;m++){
+  for(i=1;i<=5-m;i++){
+    if(aqiData[m][1]<aqiData[m+i][1]){
+       max=aqiData[m+i];
+       aqiData[m+i]=aqiData[m];
+       aqiData[m]=max;
+     }
+   }
+}
 for( var i=0;i<aqiData.length;i++){
-   if(newData[i][1]>60){              //筛选出空气质量指数大于60的数据
+   if(aqiData[i][1]>60){              //筛选出空气质量指数大于60的数据
       var li=document.createElement("li");             //创建新元素节点li
-      li.appendChild(document.createTextNode("第"+chinese[i]+"名："+newData[i][0]+","+newData[i][1]));  //将文本节点追加至元素节点上
+      li.appendChild(document.createTextNode("第"+chinese[i]+"名："+aqiData[i][0]+","+aqiData[i][1]));  //将文本节点追加至元素节点上
       document.getElementById("aqi-list").appendChild(li);             //将新元素添加到aqi-list列表中
    } 
 } 
