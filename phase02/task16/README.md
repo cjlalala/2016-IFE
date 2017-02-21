@@ -1,10 +1,12 @@
-##任务目的
-在上一任务基础上继续JavaScript的体验<br>
-深入学习JavaScript的事件机制及DOM操作<br>
-学习事件代理机制<br>
-学习简单的表单验证功能<br>
-学习外部加载JavaScript文件<br>
-##任务描述
+##任务十六：零基础JavaScript编码（四）
+[查看](http://ife.baidu.com/2016/task/detail?taskId=16)
+###任务目的
+* 在上一任务基础上继续JavaScript的体验
+* 深入学习JavaScript的事件机制及DOM操作
+* 学习事件代理机制
+* 学习简单的表单验证功能
+* 学习外部加载JavaScript文件
+###任务描述
 参考以下示例代码，用户输入城市名称和空气质量指数后，点击“确认添加”按钮后，就会将用户的输入在进行验证后，添加到下面的表格中，新增一行进行显示<br>
 用户输入的城市名必须为中英文字符，空气质量指数必须为整数<br>
 用户输入的城市名字和空气质量指数需要进行前后去空格及空字符处理（trim）<br>
@@ -89,7 +91,7 @@ function init() {
 }
 init();
 ```
-##遇到的问题及解答
+###遇到的问题及解答
 ####（1）报错：Cannot call method ' addEventListener ' of null
     开始一直报错，后来发现是由于之前一直把js文件在<head>标签中引用，导致getElementById的时候Dom对象还未出现。
 ####（2）delete 注意：
