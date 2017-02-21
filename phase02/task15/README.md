@@ -1,3 +1,5 @@
+#任务十五：零基础JavaScript编码（三）
+[查看](http://ife.baidu.com/2016/task/detail?taskId=15)
 ##任务目的
 在上一任务基础上继续JavaScript的体验<br>
 接触一下JavaScript中的高级选择器<br>
