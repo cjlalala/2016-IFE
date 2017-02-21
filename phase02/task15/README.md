@@ -1,11 +1,11 @@
-#任务十五：零基础JavaScript编码（三）
+##任务十五：零基础JavaScript编码（三）
 [查看](http://ife.baidu.com/2016/task/detail?taskId=15)
-##任务目的
+###任务目的
 在上一任务基础上继续JavaScript的体验<br>
 接触一下JavaScript中的高级选择器<br>
 学习JavaScript中的数组对象遍历、读写、排序等操作<br>
 学习简单的字符串处理操作<br>
-##任务描述
+###任务描述
 参考以下示例代码，读取页面上已有的source列表，从中提取出城市以及对应的空气质量<br>
 将数据按照某种顺序排序后，在resort列表中按照顺序显示出来
 ```html
@@ -83,7 +83,7 @@ init();
 </body>
 </html>
 ```
-##遇到的问题
+###遇到的问题
 ####（1）截取字符串
     为得到source列表中的城市名使用了substring()方法截取字符串（如“北京空气质量”）的前两个字，如果存在城市名不是两个字，
     那么这个方法就不行了，因此可以用name[i].innerHTML.split("空气")[0]截取城市名(split()方法把字符串分割为字符串数组)。
@@ -94,6 +94,6 @@ init();
    
      如果函数加了()就是执行函数了，也就是当eleonclick=funcName()时，ele.onclick获得的就是函数的返回值，
      即不论click事件发生与否，都会直接调用funcName函数。
-##在线学习参考资料
+###在线学习参考资料
 [JavaScript入门篇](http://www.imooc.com/learn/36)<br>
 [MDN JavaScript](http://www.imooc.com/learn/36)
