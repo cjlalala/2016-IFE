@@ -1,12 +1,12 @@
-# 任务十四：零基础JavaScript编码（二）
+##任务十四：零基础JavaScript编码（二）
 [查看](http://ife.baidu.com/2016/task/detail?taskId=13)
-##任务目的
+###任务目的
 在上一任务基础上继续JavaScript的体验<br>
 学习JavaScript中的if判断语法，for循环语法<br>
 学习JavaScript中的数组对象<br>
 学习如何读取、处理数据，并动态创建、修改DOM中的内容
 
-##任务描述
+###任务描述
 参考以下示例代码，页面加载后，将提供的空气质量数据数组，按照某种逻辑（比如空气质量大于60）进行过滤筛选，最后将符合条件的数据按照一定的格式要求显示在网页上
 ```html
 <!DOCTYPE html>
@@ -43,7 +43,7 @@ var aqiData = [
 </body>
 </html>
 ```
-##遇到的问题：
+###遇到的问题：
 ####（1）sort()方法：
 
 　　sort() 方法用于对数组的元素进行排序，排序过程是在原数组上进行的，不生成副本。
@@ -73,6 +73,6 @@ var aqiData = [
 
  　  HTML DOM插入内容请看：[HTML DOM](http://www.cnblogs.com/cjlalala/p/5804349.html)
 
-##在线学习参考资料
+###在线学习参考资料
 [JavaScript入门篇](http://www.imooc.com/learn/36)<br>
 [MDN JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
