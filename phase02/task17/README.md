@@ -1,8 +1,9 @@
 ##任务十七：零基础JavaScript编码（五）
 [查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task17/task17.html)
 
-###具体思路
+###* 具体思路
 ![](https://github.com/cjlalala/2016-IFE/blob/master/phase02/task17/task17.png)
+
 ###任务目的
 * 在上一任务基础上继续JavaScript的体验
 * 接触更加复杂的表单对象
