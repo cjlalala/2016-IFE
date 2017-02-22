@@ -1,5 +1,5 @@
 ##任务十四：零基础JavaScript编码（二）
-[查看](http://ife.baidu.com/2016/task/detail?taskId=13)
+[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task14/task14-1.html)
 ###任务目的
 在上一任务基础上继续JavaScript的体验<br>
 学习JavaScript中的if判断语法，for循环语法<br>
