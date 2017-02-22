@@ -17,7 +17,8 @@
     周：以自然周（周一到周日）为粒度，统计一周7天的平均数为这一周的空气质量数值，如果数据中缺少一个自然周的几天，则按剩余天进行计算
     月：以自然月为粒度，统一一个月所有天的平均数为这一个月的空气质量数值
     用户可以通过select切换城市
-    通过在"aqi-chart-wrap"里添加DOM，来模拟一个柱状图图表，横轴是时间，纵轴是空气质量指数，参考图（点击打开）。天、周、月的数据只根据用户的选择显示一种。
+    通过在"aqi-chart-wrap"里添加DOM，来模拟一个柱状图图表，横轴是时间，纵轴是空气质量指数，参考图（点击打开）。
+    天、周、月的数据只根据用户的选择显示一种。
     天：每天的数据是一个很细的矩形
     周：每周的数据是一个矩形
     月：每周的数据是一个很粗的矩形
@@ -34,7 +35,7 @@
 　　A、将pageState.nowSelectCity 最初默认值设置为“北京”，这样页面打开时就会呈现北京市的柱状图，之后选择其他的城市，onchange事件就会发生。<br>
 　　B、在北京前面加一个option，选项名可以为“城市名”，之后用户无论选择什么城市，都会触发事件渲染图表；<br>
 　　支持onchange事件的 HTML 标签：<br>
-　　```html<input type="text">, <select>, <textarea>```
+　　```html<input type="text">, <select>, <textarea>```<br>
 　　支持onchange事件的 JavaScript 对象：<br>
  　　select, text, textarea，fileUpload（FileUpload 控件显示一个文本框控件和一个浏览按钮，使用户可以选择客户端上的文件并将它上载到 Web 服务器。）
    
@@ -44,5 +45,5 @@
 　　“月”要以自然月为粒度做法和上面类似，利用getMonth()方法，该方法返回值是 0（一月） 到 11（十二月） 之间的一个整数。<br>
   
 ###在线学习参考资料
-[JavaScript入门篇](http://www.imooc.com/learn/36)
+[JavaScript入门篇](http://www.imooc.com/learn/36)<br>
 [MDN JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
