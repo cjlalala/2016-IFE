@@ -1,5 +1,5 @@
 ##任务十九：基础JavaScript练习（二）
-[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task19/task19.html)
+[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task19/task19.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=19)
 ###任务目的
 * 学习与实践JavaScript的基本语法、语言特性
