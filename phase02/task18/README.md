@@ -1,5 +1,5 @@
 ##任务十八：基础JavaScript练习（一）
-[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/new/master/phase02/task18.html)
+[查看DEMO](https://github.com/cjlalala/2016-IFE/blob/master/phase02/task18/task18.html)
 ###任务目的
 * 学习与实践JavaScript的基本语法、语言特性
 * 初步了解JavaScript的事件是什么
