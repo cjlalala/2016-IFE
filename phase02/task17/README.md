@@ -1,6 +1,6 @@
 ##任务十七：零基础JavaScript编码（五）
-[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task17/task17.html)
-
+[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task17/task17.html)<br>
+[查看题目](http://ife.baidu.com/2016/task/detail?taskId=17)
 ###* 具体思路
 ![](https://github.com/cjlalala/2016-IFE/blob/master/phase02/task17/task17.png)
 
@@ -17,7 +17,7 @@
     周：以自然周（周一到周日）为粒度，统计一周的平均数为这一周的空气质量数值，如果数据中缺少一个周的几天，则按剩余天进行计算
     月：以自然月为粒度，统一一个月所有天的平均数为这一个月的空气质量数值
     用户可以通过select切换城市
-    通过在"aqi-chart-wrap"里添加DOM，来模拟一个柱状图图表，横轴是时间，纵轴是空气质量指数，参考图（点击打开）。
+    通过在"aqi-chart-wrap"里添加DOM，来模拟一个柱状图图表，横轴是时间，纵轴是空气质量指数，[参考图（点击打开）](http://7xrp04.com1.z0.glb.clouddn.com/task_2_17_1.jpg)。
     天、周、月的数据只根据用户的选择显示一种。
     天：每天的数据是一个很细的矩形
     周：每周的数据是一个矩形
