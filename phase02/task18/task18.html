@@ -50,11 +50,11 @@
 	</div>
 
 
-<script>
-	var $=function(id){
-	  return document.getElementById(id);
-	}
-	var number=[];
+<script> 
+    var $=function(id){
+	return document.getElementById(id);
+    }
+    var number=[];
 	//给按钮的父元素添加事件委托，避免给每个按钮添加点击事件
     $("buttons").addEventListener("click",function(e){  
             var target=e.target,
@@ -75,19 +75,19 @@
     			     show();
     			}
     			break;
-			}
+		}
 		case "leftout":{
     			alert(number.shift(number[number.length-1]));
    			show();
    			break;
-			}
+		}
 		case "rightout":{
 			alert(number.pop(number[0]));
         		show();
         		break;
-			}
-    	}
-    })
+		}
+    	    }
+    });
     //给输出的结果添加事件委托，使点击的元素被删除
        $("result").addEventListener("click",function(e){
               var target=e.target;
