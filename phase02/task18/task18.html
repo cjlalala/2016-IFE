@@ -98,7 +98,7 @@
        $("result").addEventListener("click",function(e){
               var target=e.target;
               if(target.nodeName!="LI") return;
-              var tar=parseInt(target.getAttribute("id")); //得到被点击元素的id属性，之前id绑定的是元素在数组中的序号
+              var tar=parseInt(target.getAttribute("index")); //得到被点击元素的id属性，之前id绑定的是元素在数组中的序号
               number.splice(tar,1); //删除被点击的元素，1代表只删除一个元素
               show();
               return number;
@@ -107,7 +107,7 @@
 	function show(){
 	     var content=" ";
 	     for(var i=0;i<number.length;i++){
-		 content+="<li id='"+i+"'>"+number[i]+"</li>";
+		 content+="<li index='"+i+"'>"+number[i]+"</li>";
              }
              result.innerHTML=content;
 	}
