@@ -1,5 +1,6 @@
 ##任务十六：零基础JavaScript编码（四）
-[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task16/task16.html)
+[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task16/task16.html)<br>
+[查看题目](http://ife.baidu.com/2016/task/detail?taskId=16)
 ###任务目的
 * 在上一任务基础上继续JavaScript的体验
 * 深入学习JavaScript的事件机制及DOM操作
