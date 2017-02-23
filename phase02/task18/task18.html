@@ -57,32 +57,32 @@
 	var number=[];
 	//给按钮的父元素添加事件委托，避免给每个按钮添加点击事件
     $("buttons").addEventListener("click",function(e){  
-		var target=e.target,
-			value=$("input").value;
-		switch(target.id){
+            var target=e.target,
+	    value=$("input").value;
+            switch(target.id){
     		case "leftin":{
     			if(!/^\d+$/.test(value))alert("请输入有效的数字");
     			else{
-    				number.unshift(value);
-        		show();
+    			     number.unshift(value);
+        		     show();
         		}
         		break;
     		}
     		case "rightin":{
     			if(!/^\d+$/.test(value)) alert("请输入有效的数字");
     			else{
-    				number.push(value);
-    				show();
+    			     number.push(value);
+    			     show();
     			}
     			break;
 			}
-			case "leftout":{
+		case "leftout":{
     			alert(number.shift(number[number.length-1]));
-   				show();
-   				break;
+   			show();
+   			break;
 			}
-			case "rightout":{
-				alert(number.pop(number[0]));
+		case "rightout":{
+			alert(number.pop(number[0]));
         		show();
         		break;
 			}
@@ -90,20 +90,20 @@
     })
     //给输出的结果添加事件委托，使点击的元素被删除
        $("result").addEventListener("click",function(e){
-        var target=e.target;
-        if(target.nodeName!="LI") return;
-        var tar=parseInt(target.getAttribute("id")); //得到被点击元素的id属性，之前id绑定的是元素在数组中的序号
-        number.splice(tar,1); //删除被点击的元素，1代表只删除一个元素
-        show();
-        return number;
-	})
+              var target=e.target;
+              if(target.nodeName!="LI") return;
+              var tar=parseInt(target.getAttribute("id")); //得到被点击元素的id属性，之前id绑定的是元素在数组中的序号
+              number.splice(tar,1); //删除被点击的元素，1代表只删除一个元素
+              show();
+              return number;
+	});
     //将得到的用户输入数据输出显示到id为result的列表中
 	function show(){
-		var content=" ";
-		for(var i=0;i<number.length;i++){
-				content+="<li id='"+i+"'>"+number[i]+"</li>";
-        	}
-        result.innerHTML=content;
+	     var content=" ";
+	     for(var i=0;i<number.length;i++){
+		 content+="<li id='"+i+"'>"+number[i]+"</li>";
+             }
+             result.innerHTML=content;
 	}
 </script>
 </body>
