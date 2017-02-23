@@ -1,6 +1,6 @@
 ##任务十九：基础JavaScript练习（二）
 [查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task19/task19.html)
-
+[查看题目](http://ife.baidu.com/2016/task/detail?taskId=19)
 ###任务目的
 * 学习与实践JavaScript的基本语法、语言特性
 * 练习使用JavaScript实现简单的排序算法
@@ -9,7 +9,7 @@
 * 基于任务18
 * 限制输入的数字在10-100
 * 队列元素数量最多限制为60个，当超过60个时，添加元素时alert出提示
-* 队列展现方式变化如图，直接用高度表示数字大小
+* 队列展现方式变化[如图](http://7xrp04.com1.z0.glb.clouddn.com/task_2_19_1.jpg)，直接用高度表示数字大小
 * 实现一个简单的排序功能，如冒泡排序（不限制具体算法），用可视化的方法表达出来，参考见下方参考资料
 
 ###遇到的问题
