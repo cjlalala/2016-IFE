@@ -28,4 +28,6 @@
 
 ###在线学习参考资料
 [JavaScript入门篇](http://www.imooc.com/learn/36)<br>
-[MDN JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
+[MDN JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)<br>
+[归并排序算法可视化](http://v.youku.com/v_show/id_XNTM1NTQxMDMy.html)<br>
+[15种排序算法可视化展示](http://v.youku.com/v_show/id_XNjIwNTEzMTA0.html?from=y1.2-1-176.3.3-2.1-1-1-2-0)
