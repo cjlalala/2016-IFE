@@ -77,14 +77,20 @@
     			break;
 		}
 		case "leftout":{
-    			alert(number.shift(number[number.length-1]));
-   			show();
-   			break;
+			if(number.length==0) alert("队列中已没有数字");
+			else{
+			      alert(number.shift(number[number.length-1]));
+   			      show();
+			}
+         		break;
 		}
 		case "rightout":{
-			alert(number.pop(number[0]));
-        		show();
-        		break;
+			if(number.length==0) alert("队列中已没有数字");
+			else{
+			     alert(number.pop(number[0]));
+        		     show();
+			}
+                	break;
 		}
     	    }
     });
