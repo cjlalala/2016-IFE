@@ -1,12 +1,13 @@
 ##任务十八：基础JavaScript练习（一）
-[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task18/task18.html)
+[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task18/task18.html)<br>
+[查看题目](http://ife.baidu.com/2016/task/detail?taskId=18)
 ###任务目的
 * 学习与实践JavaScript的基本语法、语言特性
 * 初步了解JavaScript的事件是什么
 * 初步了解JavaScript中的DOM是什么
 
 ###任务描述
-* 如图，模拟一个队列，队列的每个元素是一个数字，初始队列为空
+* [如图](http://7xrp04.com1.z0.glb.clouddn.com/task_2_18_1.jpg)，模拟一个队列，队列的每个元素是一个数字，初始队列为空
 * 有一个input输入框，以及4个操作按钮
 * 点击"左侧入"，将input中输入的数字从左侧插入队列中；
 * 点击"右侧入"，将input中输入的数字从右侧插入队列中；
