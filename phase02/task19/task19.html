@@ -57,93 +57,93 @@
     $("buttons").addEventListener("click",function(e){  
 		var target=e.target,
 		    input=$("input").value;
-    	switch(target.id){
+    	   switch(target.id){
     		case "leftin":{
     			if(input>100||input<10||isNaN(input))  alert("请输入10-100之间的数");
-				  if(number.length<60) {
-					    number.unshift(input); //控制最多只能输入60个数据
-    				  show();
+		        if(number.length<60) {
+		              number.unshift(input); //控制最多只能输入60个数据
+    			      show();
 	    		}
     			else alert("最多只能输入60个数据！");	
-          break;
+                        break;
     		}
     		case "rightin":{
     			 if(input>100||input<10||isNaN(input)) alert("请输入10-100之间的数");
     			 if(number.length<60){
     				 number.push(input);
     				 show(); 
-				   }
+		         }
     			 else alert("最多只能输入60个数据！");
-        	 break;
-			   }
-			 case "leftout":{
-				  if(number.length==0) alert("队列中没有数字 !");
-				  else{
-    			    alert(number.shift(number[number.length-1]));
-        		  show();
-        	}
-          break;
-			 }
-			 case "rightout":{
-				  if(number.length==0) alert("队列中没有数字 !");
-				  else{
-    			    alert(number.pop(number[0]));
-        		  show();
-        	}
-          break;
-			  }
-    	}
+        	         break;
+                 }
+		case "leftout":{
+			  if(number.length==0) alert("队列中没有数字 !");
+			  else{
+    			      alert(number.shift(number[number.length-1]));
+        		      show();
+        	          }
+                          break;
+		}
+		 case "rightout":{
+			  if(number.length==0) alert("队列中没有数字 !");
+			  else{
+    			      alert(number.pop(number[0]));
+        		      show();
+        	          }
+                          break;
+		}
+    	   }
     });
     //给输出的结果添加事件委托，使点击的元素被删除
     $("result").addEventListener("click",function(e){
-        if(e.target.nodeName!="LI") return;		//看点击的是不是li标签
-        var tar=parseInt(e.target.getAttribute("id"))
-        number.splice(tar,1);     //删除数组number中的元素
-       	show();
-		    return number;
-	  });
+          if(e.target.nodeName!="LI") return;		//看点击的是不是li标签
+          var tar=parseInt(e.target.getAttribute("id"))
+          number.splice(tar,1);     //删除数组number中的元素
+       	  show();
+	  return number;
+    });
     //生成一组随机数
     $("random").onclick=function(){
     	  number=[];
-       	for(var i=0;i<60;i++){
-	    		number[i]=parseInt(Math.random()*90+10);
-	    	}
+       	  for(var i=0;i<60;i++){
+	       number[i]=parseInt(Math.random()*90+10);
+	  }
 	       show();
-	      return number;
-	   }
-	//将数据用柱状图的形式呈现在页面上
-	function show(){
-		var content=" ";
-		for(var i=0;i<number.length;i++){
-				content+="<li id='"+i+"'style='height:"+number[i]*5+"px;'>"+number[i]+"</li>";
+	       return number;
     }
-    $("result").innerHTML=content;
-	}
+	//将数据用柱状图的形式呈现在页面上
+    function show(){
+	var content=" ";
+	for(var i=0;i<number.length;i++){
+	      content+="<li id='"+i+"'style='height:"+number[i]*5+"px;'>"+number[i]+"</li>";
+        }
+        $("result").innerHTML=content;
+     }
 	//数据排序的过程
-	$("sortdata").onclick=function(){
-		var max=0,i=0,j=1;
-		time=setInterval(run,5);
-		function run(){
-			if(i<number.length){
-				if(j<number.length){
-					if(number[i]>number[j]){
-						max=number[i];
-						number[i]=number[j];
-						number[j]=max;
-						show();
-					}
-				 j++;
-				}
-				else{
-				   i++;
-					 j=i+1;
-				}
-			}
-			else{
-				clearInterval(time);
-				return;
-			}
-		}	
+      $("sortdata").onclick=function(){
+            var max=0,i=0,j=1;
+	    time=setInterval(run,5);
+	    function run(){
+		if(i<number.length){
+		  if(j<number.length){
+		     if(number[i]>number[j]){
+			  max=number[i];
+			  number[i]=number[j];
+			  number[j]=max;
+			  show();
+		      }
+		     j++;
+		  }
+		  else{
+			 i++;
+			 j=i+1;
+		  }
+		}
+		else{
+		      clearInterval(time);
+		      return;
+		}
+	    }	
 	}
 </script>
 </body>
