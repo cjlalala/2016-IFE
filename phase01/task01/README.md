@@ -1,5 +1,5 @@
 ##任务一：零基础HTML编码
-[查看DEMO]（https://rawgit.com/cjlalala/2016-IFE/new/master/phase01/task01/task01.html ）<br>
+[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/new/master/phase01/task01/task01.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=1)
 
 ###任务目的
