@@ -1,6 +1,6 @@
 ##任务五：零基础HTML及CSS编码（二）
-[查看DEMO]()<br>
-[查看题目]()
+[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase01/task05/task05.html)<br>
+[查看题目](http://ife.baidu.com/2016/task/detail?taskId=5)
 
 ###任务目的
 * 针对设计稿样式进行合理的HTML架构，包括以下但不限于：
