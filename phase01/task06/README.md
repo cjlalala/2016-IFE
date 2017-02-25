@@ -1,5 +1,5 @@
 ##任务六：通过HTML及CSS模拟报纸排版
-[查看DEMO](https://github.com/cjlalala/2016-IFE/blob/master/phase01/task06/task06.html)<br>
+[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase01/task06/task06.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=6)
 
 ###任务目的
