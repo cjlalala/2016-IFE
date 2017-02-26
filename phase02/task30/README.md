@@ -14,3 +14,11 @@
 * 校验结果正确时，表单边框显示绿色，并在下方显示验证通过的描述文字
 * 校验结果错误时，表单边框显示红色，并在下方显示验证错误的描述文字
 * 点击提交按钮时，对页面中所有输入进行校验，校验结果显示方式同上。若所有表单校验通过，弹窗显示“提交成功”，否则显示“提交失败”
+
+###在线学习参考资料
+* [Web相关名词通俗解释](https://www.zhihu.com/question/22689579)
+* [MDN HTML入门](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Introduction)
+* [慕课HTML+CSS基础教程视频](http://www.imooc.com/learn/9)
+* [JavaScript 表单验证](http://www.w3school.com.cn/js/js_form_validation.asp)
+* [HTML表单指南](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Forms)
+
