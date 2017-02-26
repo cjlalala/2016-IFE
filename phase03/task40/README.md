@@ -9,7 +9,7 @@
 
 ###任务描述
 * 如下示例图中所示的各种日历组件，参考并实现一个日历选择组件
-* ![](https://github.com/cjlalala/2016-IFE/edit/master/phase03/task40/task40.jpg)
+* ![](https://github.com/cjlalala/2016-IFE/blob/master/phase03/task40/task40.jpg)
 * 组件默认一直呈显示状态
 * 通过某种方式选择年、月，选择了年月后，日期列表做相应切换
 * 通过单击某个具体的日期进行日期选择
