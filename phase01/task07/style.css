@@ -12,6 +12,7 @@ a{
 }
 nav{
   width: 1200px;
+  height: 70px;
   margin: 0 auto;
 }
 nav img{
@@ -19,7 +20,7 @@ nav img{
   float:left;
   width:104px;
   height:31px;
-  margin: 10px 0 9px 50px;
+  margin: 20px 0 19px 50px;
 }
 nav ul{
   width:600px;
@@ -28,16 +29,16 @@ nav ul{
 nav ul li{
   float:left;
   width:70px;
-  height: 47px;
-  line-height: 47px;
+  height: 67px;
+  line-height: 67px;
   margin-right: 30px;
   list-style: none;
   text-align: center;
 }
-.selected{
+nav ul li:hover,.selected{
   border-bottom:3px solid #e74f4d;
 }
-.red a{
+nav ul li:hover a,.red a{
   color:#e74f4d;
 }
 .login a:before{
@@ -46,17 +47,20 @@ nav ul li{
   vertical-align: middle;
 }
 .section1{
-  height: 1030px;
+  height: 974px;
+  clear: both;
 }
 .section1 .bg{
   width:100%;
   height: 710px;
+  float: left;
   margin: 0 auto;
 }
 .section1 .information{
   position: absolute;
   top:260px;
   left: 12%;
+  height: 0;
   color:white;
 }
 .section1 h1{
@@ -76,6 +80,11 @@ nav ul li{
   color: white;
   background-color: #e74f4d;
   border-style: none;
+}
+.section1 .about{
+  height: 254px;
+  width: 100%;
+  clear: both;
 }
 .about1,.about2,.about3,.about4{
   float: left;
@@ -158,16 +167,26 @@ nav ul li{
   font-size: 18px;
 }
 .form1 select{
+  border: 1px solid  #fff;
   appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
   background:url('img/down.jpg') no-repeat scroll right center transparent;
-  padding-right: 14px;
+   padding-right: 14px;
 }
-.form1 select:active{
-  border:1px solid #be4e48;
+.form1 select::-ms-expand{
+  display: none;
 }
 
-
-
+.form1 option{
+  background-color:#e3e3e4;
+  font-size: 14px;
+  height:27px;
+  color:#5f6061;
+}
+.form1 option:checked{
+  background-color: #be4e48;
+}
 .section23{
   width: 100%;
   height: 600px;
@@ -210,6 +229,7 @@ nav ul li{
 }
 .section3 .top img{
   width: 67%;
+  float: left;
 }
 .section3 .topCont{
   float: right;
@@ -248,36 +268,39 @@ nav ul li{
 
 .section3 .bottom{
   width: 100%;
-  height: 500px;
+  min-height: 500px;
+  clear: both;
 }
 .bottom1{
   position: relative;
   float: left;
   width:33%;
+  color:white;
+}
+.bottom2{
+  position: relative;
+  float: left;
+  width:34%;
+}
+.bottom3{
+  float: right;
+  width: 33%;
 }
 .bottom1 img{
   float: left;
   width: 100%;
 }
-.bottom1 .bottom1Cont{
-  position: absolute;
-  width: 100%;
-  color:white;
-  text-align: center;
-  margin-top: 200px;
-}
-.bottom2{
+.bottom2 img{
   float: left;
-  width:34%;
-  height:535px;
+  width: 100%;
 }
+.bottom1 .bottom1Cont,
 .bottom2 .bottom2Cont{ 
+  position: absolute;
+  top:0;
+  width: 100%;
   margin-top: 200px;
   text-align: center; 
-}
-.bottom3{
-  float: right;
-  width: 33%;
 }
 .bottom1 .bottom1Cont p,.bottom2 .bottom2Cont p{
   font-size: 20px;
@@ -302,12 +325,14 @@ nav ul li{
 
 .section4{
   width: 1000px;
-  height: 650px;
+  height:650px;
+  padding-top:100px;
   margin: 0 auto;
+  clear: both;
 }
 .section4 .title{
   text-align: center;
-  margin-top:130px;
+  
 }
 .section4 .title h2{
   font-size: 22px;
@@ -371,7 +396,7 @@ textarea{
 
 footer{
   width: 100%;
-  height: 423px;
+  height: 403px;
   padding-top:100px;
   background-color: #32363e;
   color: white;
@@ -400,7 +425,7 @@ footer .footerCont .btn5{
   border: none;
 }
 footer .footerCont img{
-  margin: 0 15px 100px;
+  margin: 0 15px 80px;
 }
 .footerBot{
   width: 100%;
