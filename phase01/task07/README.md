@@ -16,16 +16,16 @@
   ```css
   select {
       border: solid 1px #f00;
-      //很关键：将默认的select选择框样式清除
+      /*很关键：将默认的select选择框样式清除*/
       appearance:none;
       -moz-appearance:none;
       -webkit-appearance:none;
-      //在选择框的最右侧中间显示小箭头图片
+      /*在选择框的最右侧中间显示小箭头图片*/
       background: url('pic.jpg') no-repeat scroll right center transparent;
-      //为下拉小箭头留出一点位置，避免被文字覆盖
+      /*为下拉小箭头留出一点位置，避免被文字覆盖*/
       padding-right: 14px; 
   }
-   //清除ie的默认选择框样式清除，隐藏下拉箭头
+   /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
   select::-ms-expand { 
       display: none;
   }
@@ -35,7 +35,7 @@
 * 4.只用CSS实现点击不同元素展现不同内容：<br>
   用input的单选框(radio) + a 标签来获取点击的元素并设置样式（具体：[css3实现网页平滑过渡效果](http://www.imooc.com/learn/252)。<br>
   主要注意几个选择器：<br>
-  * ```css :checked```选择被选中的元素 
-  * ```css input + a ``` 选择input后面紧跟的兄弟元素a
-  * ```css input ~ a ``` 选择input后面所有的兄弟元素a
-  * ```css [title] ``` 选择有title属性的元素
+  * ```css :checked``` 选择被选中的元素 
+  * ```css input + a ```  选择input后面紧跟的兄弟元素a
+  * ```css input ~ a ```  选择input后面所有的兄弟元素a
+  * ```css [title] ```  选择有title属性的元素
