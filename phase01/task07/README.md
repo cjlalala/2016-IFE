@@ -37,9 +37,9 @@
   4. 只用CSS实现点击不同元素展现不同内容：<br>
     用input的单选框(radio) + a 标签来获取点击的元素并设置样式(具体：[css3实现网页平滑过渡效果](http://www.imooc.com/learn/252))。<br>
   主要注意几个选择器：<br>
-  * ``` :checked``` 选择被选中的元素 
-  * ``` input + a ```  选择input后面紧跟的兄弟元素a
-  * ``` input ~ a ```  选择input后面所有的兄弟元素a
-  * ``` [title] ```  选择有title属性的元素
+  (1)``` :checked``` 选择被选中的元素 <br>
+  (2)``` input + a ```  选择input后面紧跟的兄弟元素a<br>
+  (3)``` input ~ a ```  选择input后面所有的兄弟元素a<br>
+  (4)``` [title] ```  选择有title属性的元素<br>
   
   5. 最后那部分的input和button无论怎么设置中间都会有一个间距，是因为代码换行了，将html代码中input和button放在一行即可。
