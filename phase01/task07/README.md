@@ -23,13 +23,11 @@
       -webkit-appearance:none;
       /*在选择框的最右侧中间显示小箭头图片*/
       background: url('pic.jpg') no-repeat scroll right center transparent;
-      /*为下拉小箭头留出一点位置，避免被文字覆盖*/
-      padding-right: 14px; 
-  }
+   }
    /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
-  select::-ms-expand { 
+   select::-ms-expand { 
       display: none;
-  }
+    }
   ```
   本题运用input+ul列表来模拟select下拉列表，只做了一个样式，内部具体功能仍需要js来完善；<br>
   
