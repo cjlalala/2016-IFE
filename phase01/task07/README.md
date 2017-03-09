@@ -13,7 +13,7 @@
 ###遇到的问题
 * 1.input 标签默认点击会出现蓝色边框，如果想去掉，需要设置outline：none;
 * 2.如何去掉select的默认样式(右侧小箭头)：
-  ```css
+  ``` css
   select {
       border: solid 1px #f00;
       /*很关键：将默认的select选择框样式清除*/
@@ -29,13 +29,13 @@
   select::-ms-expand { 
       display: none;
   }
-```
+  ```
   本题运用input+ul列表来模拟select下拉列表，只做了一个样式，内部具体功能仍需要js来完善；<br>
 * 3.清除浮动：两个竖直排列的 div 已经设置了```css{margin：0;}``` 但是中间仍然有边距，主要是由于下面 div 浮动，而上面 div 没有浮动，造成了<br>这个边距，只需要将上边 div 也浮动，之后下面 div 清除浮动即可，具体原理仍然不清楚，但是对于浮动元素后的元素清除浮动绝对很有必要！<br>
 * 4.只用CSS实现点击不同元素展现不同内容：<br>
   用input的单选框(radio) + a 标签来获取点击的元素并设置样式（具体：[css3实现网页平滑过渡效果](http://www.imooc.com/learn/252)。<br>
   主要注意几个选择器：<br>
-  * ```css :checked``` 选择被选中的元素 
-  * ```css input + a ```  选择input后面紧跟的兄弟元素a
-  * ```css input ~ a ```  选择input后面所有的兄弟元素a
-  * ```css [title] ```  选择有title属性的元素
+  * ``` :checked``` 选择被选中的元素 
+  * ``` input + a ```  选择input后面紧跟的兄弟元素a
+  * ``` input ~ a ```  选择input后面所有的兄弟元素a
+  * ``` [title] ```  选择有title属性的元素
