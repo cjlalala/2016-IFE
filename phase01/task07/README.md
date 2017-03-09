@@ -1,5 +1,5 @@
 ##任务七：实现常见的技术产品官网的页面架构及样式布局
-[查看DEMO]()<br>
+[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase01/task07/task07.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=7)
 
 ###任务目的
