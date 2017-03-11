@@ -13,7 +13,7 @@
     	span{
     		display: block;
     	}
-    	#button{
+    	#buttons{
     		margin-top:20px;
     	}
     	button{
@@ -45,7 +45,7 @@
 			</div>
 		</div>
 	</div>
-	<span id="button">
+	<span id="buttons">
 		<button id="pre">前序</button>
 		<button id="in">中序</button>
 		<button id="post">后序</button>
@@ -55,79 +55,80 @@
 var tree=document.getElementById("tree"),
     list=[],
     timer=null;
-//先序遍历
-function preOrder(node){
-	if(node!=null){
-		list.push(node);
-		preOrder(node.firstElementChild);
-		preOrder(node.lastElementChild);
-	}
-}
-//中序遍历
-function inOrder(node){
-	if(node!=null){
-		inOrder(node.firstElementChild);
-		list.push(node);
-		inOrder(node.lastElementChild);
-	}
-}
-//后序遍历
-function postOrder(node){
-	if(node!=null){
-		postOrder(node.firstElementChild);
-		postOrder(node.lastElementChild);
-		list.push(node);
-	}
-}
-//依次改变数组list中的元素背景颜色
-function show(){
-	var i = 0;
-	list[i].style.backgroundColor='blue';
-	timer = setInterval(function () {
-		i++;
-		if (i < list.length) {
-			list[i-1].style.backgroundColor = '#fff';
-			list[i].style.backgroundColor = 'blue';
-		} else {
-			clearInterval(timer);
-			list[list.length-1].style.backgroundColor = '#fff';
+
+var Traversal={
+	origin:function(){  //复位原始状态,防止不同按钮点击事件之间的冲突
+		list=[];
+		clearInterval(timer); 
+		var divs=document.getElementsByTagName("div");
+		for(var i=0;i<divs.length;i++){   //让所有元素的背景色均恢复至白色
+			divs[i].style.backgroundColor="white";
 		}
-	},500)
+	},
+	preOrder:function(node){   //先序遍历
+		if(node!=null){
+			list.push(node);
+			this.preOrder(node.firstElementChild);
+			this.preOrder(node.lastElementChild);
+	  	}
+	},
+	inOrder:function(node){//中序遍历
+		if(node!=null){
+			this.inOrder(node.firstElementChild);
+			list.push(node);
+			this.inOrder(node.lastElementChild);
+	  	}
+        },
+        postOrder:function(node){  //后序遍历
+		if(node!=null){
+			this.postOrder(node.firstElementChild);
+			this.postOrder(node.lastElementChild);
+			list.push(node);
+	  	}
+        },
+        show:function(){  //依次改变数组list中的元素背景颜色
+		var i = 0;
+		list[i].style.backgroundColor='blue';
+		timer = setInterval(function () {
+			i++;
+			if (i < list.length) {
+				list[i-1].style.backgroundColor = '#fff';
+				list[i].style.backgroundColor = 'blue';
+			} 
+			else {
+				clearInterval(timer);
+				list[list.length-1].style.backgroundColor = '#fff';
+			}
+		},500);
+	}
 }
+
 //使用事件委托监听按钮点击事件
-var button=document.getElementById("button");
-	button.addEventListener("click",function(e){
-		switch(e.target.id){
+var buttons=document.getElementById("buttons");
+	buttons.addEventListener("click",function(e){
+		var target=e.target||e.srcElement;
+		switch(target.id){
 			case "pre":{
-				origin();
-				preOrder(tree);
-				show();
+				Traversal.origin();
+				Traversal.preOrder(tree);
+				Traversal.show();
 				break;
 			}
 			case "in":{
-				origin();
-				inOrder(tree);
-				show();
+				Traversal.origin();
+				Traversal.inOrder(tree);
+				Traversal.show();
 				break;
 			}
 			case "post":{
-				origin();
-				postOrder(tree);
-				show();
+				Traversal.origin();
+				Traversal.postOrder(tree);
+				Traversal.show();
 				break;
 			}
 
 		}
-	})
-//复位原始状态,防止不同按钮点击事件之间的冲突
-function origin(){
-	list=[];
-	clearInterval(timer); 
-	var divs=document.getElementsByTagName("div");
-	for(var i=0;i<divs.length;i++){   //让所有元素的背景色均恢复至白色
-		divs[i].style.backgroundColor="white";
-	}
-}
+	});
 </script>
 </body>
 </html>
