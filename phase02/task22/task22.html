@@ -105,8 +105,9 @@ var Traversal={
 
 //使用事件委托监听按钮点击事件
 var buttons=document.getElementById("buttons");
-	buttons.addEventListener("click",function(e){
-		var target=e.target||e.srcElement;
+	buttons.addEventListener("click",function(event){
+		var event=event||window.event;
+		var target=event.target||event.srcElement;
 		switch(target.id){
 			case "pre":{
 				Traversal.origin();
