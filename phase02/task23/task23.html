@@ -170,9 +170,9 @@ var treeFun={
 				}
 			} 
 			else {
-				clearInterval(timer);	
+				clearInterval(timer);
+				if(checked!=list.length-1)list[list.length-1].style.backgroundColor='white';
 				if(checked==-1){
-					list[list.length-1].style.backgroundColor='white';
 					alert("未找到输入的值！");
 				} 
 			}
