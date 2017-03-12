@@ -6,28 +6,36 @@
     <style>
 		div{
     		display: inline-block;
-    		border:1px solid black;
     		box-sizing: border-box;
+    	}
+    	.one,.two,.three,.four,.five{
+    		padding:8px 3px;
     	}
     	.one{
     		height:140px;
-    		padding:10px;
+    		line-height: 140px;
+    		border:2px solid #FFCCCC;
     	}
     	.two{
     		height:120px;
-    		padding:10px;
+    		line-height: 120px;
+    		border:2px solid #FF9966;
     	}
     	.three{
     		height:100px;
-    		padding:10px;
+    		line-height: 100px;
+    		border: 2px solid #CCCCFF;
 		}
     	.four{
     		height:80px;
-    		padding:10px;
+    		line-height: 80px;
+    		border:2px solid #CCFF66;
 		}
 		.five{
-			width:60px;
+			width:50px;
 			height:60px;
+			line-height: 60px;
+			border:2px solid #336699;
 		}
 		button{
 			margin:50px;
@@ -37,13 +45,13 @@
     </style>
   </head>
 <body>
-	<div id="super" class="one">
-	Super
+	<div id="treeNode" class="one">
+	super
 		<div  class="two">
-		Car
+			Car
 			<div class="three">
 			Apple
-				<div class="four">Poor</div>
+				<div class="four">Fish</div>
 				<div class="four">Pig</div>
 				<div class="four">Cola</div>
 				<div class="four">Soccer</div>
@@ -57,7 +65,7 @@
 			</div>
 		</div>
 		<div  class="two">
-		Note
+			Note
 			<div class="three">
 			Human
 				<div  class="four">Code</div>
@@ -73,12 +81,116 @@
 				<div class="four">Glass</div>
 			</div>
 		</div>
-		<div  class="two">Fish</div>
+		<div  class="two">fish</div>
 	</div>
-	<button id="button">遍历</button>
-	<input type="text" id="input">
-	<button id="check">查询</button>
+	<section>
+		<button id="traversal">遍历</button>
+		<input type="text" id="input">
+		<button id="check">查询</button>
+		<p>1.查询不分大小写；<br>
+		2.可以查询出所有内容一致的节点(如:fish)。</p>
+	</section>
 
-<script type="text/javascript" src="task23.js"></script>
+<script>
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+	if(dom.addEventListener){
+		dom.addEventListener(type,fn,false);
+	}
+	else if(dom.attachEvent){
+		dom.attachEvent('on'+type,fn);
+	}
+	else dom['on'+type]=fn;
+}
+var treeNode=document.getElementById("treeNode"),
+    list=[],
+    timer=null,
+    checked=-1; //保存查询出节点的index
+
+var treeFun={
+	origin:function(){	//初始状态
+		list=[];
+		clearInterval(timer);
+		var divs=document.getElementsByTagName("div");
+		for(var i=0;i<divs.length;i++){
+			divs[i].style.backgroundColor="#fff";
+		}
+	},
+	travel:function(node){  //深度优先遍历
+		if(node!=null){
+			list.push(node);
+			for(var i=0;i<node.children.length;i++){
+				if(node.children[i].nodeType==1){
+					this.travel(node.children[i]);
+				}
+			}	
+		}
+	},
+	traverShow:function(){   //点击遍历
+		i = 0;
+		list[i].style.backgroundColor='blue';
+		timer = setInterval(function () {
+			i++;
+			if (i <list.length) {
+				list[i-1].style.backgroundColor = '#fff';
+				list[i].style.backgroundColor = 'blue';
+			} 
+			else {
+				clearInterval(timer);
+				list[list.length-1].style.backgroundColor = '#fff';
+			}
+		},500);
+	},
+	checkShow:function(){	//点击查询
+		var input=document.getElementById('input').value.toUpperCase();
+		if(!input){
+			alert('输入内容有误，请重新输入！');
+			return;
+		} 
+		i = 0;
+		list[i].style.backgroundColor='blue';
+		timer = setInterval(function () {
+			i++;
+			if (i <list.length) {
+				var content=list[i].firstChild.nodeValue.replace(/(^\s*)|(\s*$)/g, "").toUpperCase();
+				if(input==content&&i!=checked+1){
+					list[i-1].style.backgroundColor='white';
+					list[i].style.backgroundColor='red';
+					checked=i;
+				}
+				else if(input==content&&i==checked+1){
+					list[i].style.backgroundColor='red';
+				}
+				else if(input!=content&&i==checked+1){
+					list[i].style.backgroundColor='blue';
+				}
+				else{
+					list[i-1].style.backgroundColor='white';
+			    	list[i].style.backgroundColor='blue';
+				}
+			} 
+			else {
+				clearInterval(timer);	
+				if(checked==-1){
+					list[list.length-1].style.backgroundColor='white';
+					alert("未找到输入的值！");
+				} 
+			}
+		},500);
+	}
+}
+//点击遍历(深度优先遍历)
+addEvent(document.getElementById("traversal"),"click",function(){
+	treeFun.origin();
+	treeFun.travel(treeNode);
+	treeFun.traverShow();
+});
+//查询函数
+addEvent(document.getElementById("check"),"click",function(){
+	treeFun.origin();
+	treeFun.travel(treeNode);
+	treeFun.checkShow();
+});
+</script>
 </body>
 </html>
