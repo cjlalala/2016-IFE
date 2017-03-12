@@ -6,90 +6,215 @@
     <style>
 		div{
     		display: inline-block;
-    		border:1px solid black;
-    		box-sizing: border-box;
+    		min-width: 50px;
+    		margin:0 3px;
+    		padding: 8px 3px;
+    		border:2px solid;
+    		box-sizing: border-box;	
     	}
     	.one{
-    		height:140px;
-    		padding:10px;
+    		line-height: 140px;
+    		border-color: #FFCCCC;
     	}
     	.two{
-    		height:120px;
-    		padding:10px;
+    		line-height: 120px;
+    		border-color: #FF9966;
     	}
     	.three{
-    		height:100px;
-    		padding:10px;
+    		line-height: 100px;
+    		border-color: #CCCCFF;
 		}
     	.four{
-    		height:80px;
-    		padding:10px;
+    		line-height: 80px;
+    		border-color: #CCFF66;
 		}
 		.five{
-			width:60px;
-			height:60px;
+			line-height: 60px;
+			border-color: #336699;
 		}
 		button{
 			margin:50px;
 			height:30px;
 			width:50px;
 		}
-		.newDiv{
-			width:50px;
-			height:50px;
-			margin:5px;
-
-		}
     </style>
   </head>
 <body>
 	<section id="content">
-	<div id="super" class="one">
-	Super
-		<div  class="two">
-		Car
-			<div class="three">
-			Apple
-				<div class="four">Poor</div>
-				<div class="four">Pig</div>
-				<div class="four">Cola</div>
-				<div class="four">Soccer</div>
-			</div>
-			<div class="three">
-			Phone
-			</div>
-			<div class="three">
-				<div class="four">Book</div>
-				<div class="four">School</div>
-			</div>
-		</div>
-		<div  class="two">
-		Note
-			<div class="three">
-			Human
-				<div  class="four">Code</div>
-				<div  class="four">Operate</div>
-				<div  class="four">Mon</div>
-			</div>
-			<div  class="three">
-			Progrom
-				<div class="four">
-				Bement
-					<div class="five">Cat</div>
+		<div id="super" class="one">
+		Super
+			<div  class="two">
+			Car
+				<div class="three">
+				Apple
+					<div class="four">Poor</div>
+					<div class="four">Pig</div>
+					<div class="four">Cola</div>
+					<div class="four">Soccer</div>
 				</div>
-				<div class="four">Glass</div>
+				<div class="three">
+				Phone
+				</div>
+				<div class="three">
+					<div class="four">Book</div>
+					<div class="four">School</div>
+				</div>
 			</div>
+			<div  class="two">
+			Note
+				<div class="three">
+				Human
+					<div  class="four">Code</div>
+					<div  class="four">Operate</div>
+					<div  class="four">Mon</div>
+				</div>
+				<div  class="three">
+				Progrom
+					<div class="four">
+					Bement
+						<div class="five">Cat</div>
+					</div>
+					<div class="four">Glass</div>
+				</div>
+			</div>
+			<div  class="two">Fish</div>
 		</div>
-		<div  class="two">Fish</div>
-	</div>
 	</section>
-	<button id="button">遍历</button>
-	<input type="text" id="checkContent">
-	<button id="check">查询</button>
-	<button id="delete">删除</button>
-	<input id="insertContent" type="text">
-	<button id="insert">插入</button>
+	<section>
+		<button id="traversal">遍历</button>
+		<input type="text" id="checkContent">
+		<button id="check">查询</button>
+		<button id="delete">删除</button>
+		<input id="insertContent" type="text">
+		<button id="insert">插入</button>
+	</seciton>
 
-<script type="text/javascript" src="task24.js"></script>
+<script>
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+	if(dom.addEventListener){
+		dom.addEventListener(type,fn,false);
+	}
+	else if(dom.attachEvent){
+		dom.attachEvent('on'+type,fn);
+	}
+	else dom['on'+type]=fn;
+}
+
+var tree=document.getElementById("super"),
+    list=[],
+    timer=null,
+    checked=-1,
+    check=document.getElementById("check"),
+    traver=document.getElementById("traversal");
+
+var treeFun={
+	origin:function(){	//初始状态
+		list=[];
+		clearInterval(timer);
+		var divs=document.getElementsByTagName("div");
+		for(var i=0;i<divs.length;i++){
+			divs[i].style.backgroundColor="#fff";
+		}
+	},
+	travel:function(node){  //深度优先遍历
+		if(node!=null){
+			list.push(node);
+			for(var i=0;i<node.children.length;i++){
+				if(node.children[i].nodeType==1){
+					this.travel(node.children[i]);
+				}
+			}	
+		}
+	},
+	traverShow:function(){   //点击遍历
+		i = 0;
+		list[i].style.backgroundColor='blue';
+		timer = setInterval(function () {
+			i++;
+			if (i <list.length) {
+				list[i-1].style.backgroundColor = '#fff';
+				list[i].style.backgroundColor = 'blue';
+			} 
+			else {
+				clearInterval(timer);
+				list[list.length-1].style.backgroundColor = '#fff';
+			}
+		},500);
+	},
+	checkShow:function(){	//点击查询
+		var input=document.getElementById('checkContent').value.toUpperCase();
+		if(!input){
+			alert('输入内容有误，请重新输入！');
+			return;
+		} 
+		i = 0;
+		list[i].style.backgroundColor='blue';
+		timer = setInterval(function () {
+			i++;
+			if (i <list.length) {
+				var content=list[i].firstChild.nodeValue.replace(/(^\s*)|(\s*$)/g, "").toUpperCase();
+				if(input==content&&i!=checked+1){
+					list[i-1].style.backgroundColor='white';
+					list[i].style.backgroundColor='red';
+					checked=i;
+				}
+				else if(input==content&&i==checked+1){
+					list[i].style.backgroundColor='red';
+				}
+				else if(input!=content&&i==checked+1){
+					list[i].style.backgroundColor='blue';
+				}
+				else{
+					list[i-1].style.backgroundColor='white';
+			    	list[i].style.backgroundColor='blue';
+				}
+			} 
+			else {
+				clearInterval(timer);
+				if(checked!=list.length-1) list[list.length-1].style.backgroundColor='white';
+				if(checked==-1) alert("未找到输入的值！");
+			}
+		},500);
+	}
+}
+
+//遍历(深度优先遍历)
+addEvent(traver,"click",function(){
+	treeFun.origin();
+	treeFun.travel(tree);
+	treeFun.traverShow();
+});
+//查询函数
+addEvent(check,"click",function(){
+	treeFun.origin();
+	treeFun.travel(tree);
+	treeFun.checkShow();
+});
+//选中元素
+addEvent(document.getElementById("content"),"click",function(event){
+	var event=event||window.event,
+	    target=event.target||event.srcElement;
+	treeFun.origin();  //复原
+	if(target.nodeName!="DIV") return;
+	target.style.backgroundColor="#caf";  //选中元素背景变化
+	//点击元素被删除
+	document.getElementById("delete").onclick=function(){
+		target.parentNode.removeChild(target);
+		treeFun.origin();
+	};
+	//插入节点
+	document.getElementById("insert").onclick=function(){
+		var inCont=document.getElementById("insertContent").value;
+		if(inCont==''){
+			alert('请输入要插入的节点内容!');
+			return;
+		}
+		var content=target.innerHTML;
+		var lineHeight=target.childNodes[0]==undefined?target.clientHeight:target.childNodes[0].clientHeight;
+		target.innerHTML=content+"<div style='line-height:"+lineHeight+"px;'>"+inCont+"</div>";
+	};
+});
+</script>
 </body>
 </html>
