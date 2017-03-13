@@ -42,6 +42,7 @@
     		font-size:20px;
     		color:#FF9966;
     	}
+  /*#CC0033 #336699;*/
 		p{
 			display: inline-block;
 			margin:2px 12px 0 0;
@@ -78,9 +79,11 @@
 		.newAdd .add,.newAdd .delete{
 			margin: 0 6px;
 		}
+
 	</style>
-</head>
+  </head>
 <body>	 	
+
 <section id='container'>
 	<div id='tree'>
 	<div class='one' id='tree'>
@@ -197,7 +200,9 @@
 	<button id='search'>搜索</button>
 </section>
 
+
 <script type="text/javascript">
+
 //事件绑定函数，兼容浏览器
 function addEvent(dom,type,fn){
 	if(dom.addEventListener){
@@ -241,6 +246,9 @@ var treeFun={
 			var element_p=list[i].getElementsByTagName('P')[0];
 			var content=element_p.childNodes[0].nodeValue.replace(/(^\s*)|(\s*$)/g, "").toUpperCase();
 			if(input==content){
+				for(var j=0;j<=i;j++){
+					list[j].style.display='block';
+				}
 				var silibings=list[i].parentNode.childNodes;
 				for(var x=0;x<silibings.length;x++){
 					if(silibings[x].tagName=='DIV'){
