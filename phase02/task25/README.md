@@ -1,5 +1,5 @@
 ##任务二十五：JavaScript和树（四）
-[查看DEMO]()<br>
+[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task25/task25.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=25)
 
 ###任务目的
