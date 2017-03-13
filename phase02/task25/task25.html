@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Task 25-JavaScript和树（四）</title>
+    <style>
+    	*{
+    		margin: 0;
+    		padding: 0;
+    	}
+    	.inputBtn{
+    		width: 800px;
+    		float: left;
+    	}
+    	input{
+    		height: 28px;
+    		width: 200px;
+    		margin: 50px 10px 0 100px;
+    		float: left;
+    	}
+    	.information{
+    		margin: 20px 0 0 100px;
+    		float: left;
+    	}
+    	button{
+    		float: left;
+    		width:100px;
+    		height: 30px;
+    		font-size: 20px;
+    		background-color: #6898c2;
+    		border: none;
+    		margin: 50px 10px 0 0;
+    	}
+    	#container{
+    		float: left;
+    	}
+    	div{
+    		padding:8px 3px;
+    		margin-left: 40px;
+    		margin-right: 10px;
+    		font-weight: 700;
+    		font-size:20px;
+    		color:#FF9966;
+    	}
+		p{
+			display: inline-block;
+			margin:2px 12px 0 0;
+		}
+		div span{
+			width: 0;
+			height: 0;
+			display: inline-block;
+			cursor: pointer;
+		}
+		.right-arrow{
+			border-top:7px solid transparent;
+			border-bottom:7px solid transparent;
+			border-left: 14px solid #6898c2;
+		}
+		.bottom-arrow{
+			border-top:14px solid #6898c2;
+			border-right:7px solid transparent;
+			border-left: 7px solid transparent;
+		}
+		.add,.delete{
+			width: 15px;
+			font-size: 20px;
+			vertical-align: center;
+			color: black;
+			opacity: 0;
+		}
+		p:hover span{
+			opacity: 1;
+		}
+		.newAdd p{
+			margin: 0 10px;
+		}
+		.newAdd .add,.newAdd .delete{
+			margin: 0 6px;
+		}
+	</style>
+</head>
+<body>	 	
+<section id='container'>
+	<div id='tree'>
+	<div class='one' id='tree'>
+		<span class='bottom-arrow'></span>
+		<p>111
+			<span class='add'>＋</span>
+			<span class='delete'>×</span>
+		</p>
+			<div class='two'>
+				<span class='bottom-arrow'></span>
+				<p>111_1
+					<span class='add'>＋</span>
+					<span class='delete'>×</span>
+				</p>
+					<div class='three'>
+						<span class='right-arrow'></span>
+						<p>111_1_1
+							<span class='add'>＋</span>
+							<span class='delete'>×</span>
+						</p>
+					</div>
+					<div class='three'>
+						<span class='right-arrow'></span>
+						<p>111_1_2
+							<span class='add'>＋</span>
+							<span class='delete'>×</span>
+						</p>
+					</div>
+			</div>
+			<div class='two'>
+				<span class='right-arrow'></span>
+				<p>111_2
+					<span class='add'>＋</span>
+					<span class='delete'>×</span>
+				</p>
+			</div>
+			<div class='two'>
+				<span class='bottom-arrow'></span>
+				<p>111_3
+					<span class='add'>＋</span>
+					<span class='delete'>×</span>
+				</p>
+					<div class='three'>
+						<span class='right-arrow'></span>
+						<p>111_3_1
+							<span class='add'>＋</span>
+							<span class='delete'>×</span>
+						</p>
+					</div>
+					<div class='three'>
+						<span class='right-arrow'></span>
+						<p>111_3_2
+							<span class='add'>＋</span>
+							<span class='delete'>×</span>
+						</p>
+					</div>
+					<div class='three'>
+						<span class='right-arrow'></span>
+						<p>111_3_3
+							<span class='add'>＋</span>
+							<span class='delete'>×</span>
+						</p>
+					</div>
+					<div class='three'>
+						<span class='right-arrow'></span>
+						<p>111_3_4
+							<span class='add'>＋</span>
+							<span class='delete'>×</span>
+						</p>
+					</div>
+			</div>
+	</div>
+	<div class='one'>
+		<span class='bottom-arrow'></span>
+		<p>222
+			<span class='add'>＋</span>
+			<span class='delete'>×</span>
+		</p>
+			<div class='two'>
+				<span class='right-arrow'></span>
+				<p>222_1
+					<span class='add'>＋</span>
+					<span class='delete'>×</span>
+				</p>
+			</div>
+			<div class='two'>
+				<span class='bottom-arrow'></span>
+				<p>222_2
+					<span class='add'>＋</span>
+					<span class='delete'>×</span>
+				</p>
+					<div class='three'>
+						<span class='right-arrow'></span>
+						<p>222_2_1
+							<span class='add'>＋</span>
+							<span class='delete'>×</span>
+						</p>
+					</div>
+					<div class='three'>
+						<span class='right-arrow'></span>
+						<p>222_2_2
+							<span class='add'>＋</span>
+							<span class='delete'>×</span>
+						</p>
+					</div>
+			</div>
+	</div>
+	</div>
+</section>
+<section class='inputBtn'>
+	<input type='text' id='addCont' placeholder='请输入要插入的节点内容'><br>
+	<p class='information'>请先输入节点内容，然后在左边找到要插入的位置，点击'+'</p><br>
+	<input type='text' id='searchCont'>
+	<button id='search'>搜索</button>
+</section>
+
+<script type="text/javascript">
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+	if(dom.addEventListener){
+		dom.addEventListener(type,fn,false);
+	}
+	else if(dom.attachEvent){
+		dom.attachEvent('on'+type,fn);
+	}
+	else dom['on'+type]=fn;
+}
+function $(id){
+	 return document.getElementById(id);
+}
+var list=[];
+var treeFun={
+	travel:function(node){   //深度优先遍历
+		if(node!=null){
+			list.push(node);
+			for(var i=0;i<node.children.length;i++){
+				if(node.children[i].tagName=='DIV'){
+					this.travel(node.children[i]);
+				}
+			}	
+		}
+	},
+	origin:function(){   //初始状态
+		list=[];
+		this.travel($('tree'));
+		for(var i=0;i<list.length;i++){
+			list[i].getElementsByTagName('P')[0].style.backgroundColor="white";
+		}
+	},
+	search:function(){	//搜索节点内容
+		var checked=0;
+		var input=$('searchCont').value.toUpperCase();
+		if(!input){
+			alert('输入内容有误，请重新输入！');
+			return;
+		} 
+		for(var i=0;i<list.length;i++){
+			var element_p=list[i].getElementsByTagName('P')[0];
+			var content=element_p.childNodes[0].nodeValue.replace(/(^\s*)|(\s*$)/g, "").toUpperCase();
+			if(input==content){
+				var silibings=list[i].parentNode.childNodes;
+				for(var x=0;x<silibings.length;x++){
+					if(silibings[x].tagName=='DIV'){
+						silibings[x].style.display='block';
+					} 
+				}
+				element_p.style.backgroundColor='#FFFF66';
+				checked=1;
+			}
+		}
+		if(checked==0) alert('未找到该节点！');
+	}
+}
+//节点删除与添加 / 节点展开与折叠
+addEvent($('container'),'click',function(event){
+	var event=event||event.srcElement,
+		target=event.target||event.srcElement;
+	if(target.nodeName!='SPAN') return;
+	var classAtt=target.getAttribute('class');
+	switch(classAtt){
+		case 'delete':{		//点击每个节点后的X
+			target.parentNode.parentNode.parentNode.removeChild(target.parentNode.parentNode);
+			treeFun.origin();
+			break;
+		}
+		case 'add':{  		//点击每个节点后的+
+			var value=$('addCont').value;
+			if(!value){
+				alert('请 先 输 入 节 点 内 容！');
+				return;
+			}
+			var content=target.parentNode.parentNode.innerHTML;
+			target.parentNode.parentNode.innerHTML=content+"<div class='newAdd'><span class='right-arrow'></span><p>"+value+"<span class='add'>＋</span><span class='delete'>×</span></p></div>";
+			break;
+		}
+		case 'right-arrow':{	//点击展开
+			target.className='bottom-arrow';
+			var childs=target.parentNode.childNodes;
+			for(var i=0;i<childs.length;i++){
+				if(childs[i].tagName=='DIV') childs[i].style.display='block';
+			}
+			break;
+		}
+		case 'bottom-arrow':{	//点击折叠
+			target.className='right-arrow';
+			var childs=target.parentNode.childNodes;
+			for(var i=0;i<childs.length;i++){
+				if(childs[i].tagName=='DIV') childs[i].style.display='none';	
+			}
+			break;
+		}
+	}		
+});
+//点击搜索
+addEvent($('search'),'click',function(){
+	treeFun.origin();
+	treeFun.search();
+	
+});
+</script>
+</body>
+</html>
