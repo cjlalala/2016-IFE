@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Task 29-表单（一）单个表单项的检验</title>
+    <title>Task 29-表单(1) 单个表单项的检验</title>
     <style>
     form{
     	margin:auto;
@@ -21,7 +21,6 @@
     	border:1px solid rgba(181, 187, 216, 0.9);
     	border-radius: 7px;
     	outline:none;
-
     }
     button{
     	border:1px solid rgba(34, 71, 255, 0.35);
@@ -42,28 +41,30 @@
   </head>
 <body>
 <form>
-	<label for="input">名称</label>
-	<input id="input" type="text"/>
+	<label for="input">名称</label><input id="input" type="text"/>
 	<button id="test">验证</button>
 </form>
 <div id="result">必填，长度为4~16个字符</div>
 
 <script type="text/javascript" >
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+    if(dom.addEventListener){
+        dom.addEventListener(type,fn,false);
+    }
+    else if(dom.attachEvent){
+        dom.attachEvent('on'+type,fn);
+    }
+    else dom['on'+type]=fn;
+}
 var input=document.getElementById('input'),
 	test=document.getElementById('test'),
 	result=document.getElementById("result");
-//初始状态
-function origin(){
-	result.innerHTML="";
-	result.style.color="red";
-	input.style.border="2px solid red";
-}
-//点击验证按钮
-test.addEventListener("click",function(e){
-	origin();
+addEvent(test,"click",function(event){
+    var event=event||event.srcElement;
 	var length=checkLength(input.value);
 	if(length<4||length>16){
-		result.innerHTML="字符长度为4~16个，一个汉字算两个字符！";
+		result.innerHTML="输入的字符应为4-16个，一个汉字算两个字符！";
 		result.style.color="red";
 		input.style.border="2px solid red";
 	}
@@ -76,21 +77,15 @@ test.addEventListener("click",function(e){
 		result.innerHTML="验证成功!";
 		result.style.color="rgba(12, 234, 81, 0.62)";
 		input.style.border="2px solid rgba(12, 234, 81, 0.62)";
-
 	}
-	if(input.value==""){
-		result.innerHTML="名称不能为空!";
-		result.style.color="red";
-		input.style.border="2px solid red";
-	}
-	e.preventDefault();
+	event.preventDefault();
 	return false;
 });
-//检验输入的值有多少个字符
+//检验有多少个字符
 function checkLength(str){
     var len =0,temp=0;
     for(var j=0;j<str.length;j++){
-    temp = 1;
+        temp = 1;
         if(/^[\u2E80-\u9FFF]+$/.test(str[j])){
             temp = 2;
         }
