@@ -1,12 +1,12 @@
-##任务三十：表单（二）多个表单项的动态校验
+##  任务三十：表单（二）多个表单项的动态校验
 [查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task30/task30.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=30)
 
-###任务目的
+###  任务目的
 * 加强对JavaScript的掌握
 * 熟悉常用表单处理逻辑
 
-###任务描述
+###  任务描述
 * 如[示例图](http://7xrp04.com1.z0.glb.clouddn.com/task_2_30_1.jpg)中所示，基于上一个任务（任务29），在页面中添加多个表单
 * 要求:
 * 表单获得焦点时，下方显示表单填写规则
@@ -15,7 +15,7 @@
 * 校验结果错误时，表单边框显示红色，并在下方显示验证错误的描述文字
 * 点击提交按钮时，对页面中所有输入进行校验，校验结果显示方式同上。若所有表单校验通过，弹窗显示“提交成功”，否则显示“提交失败”
 
-###在线学习参考资料
+###  在线学习参考资料
 * [Web相关名词通俗解释](https://www.zhihu.com/question/22689579)
 * [MDN HTML入门](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Introduction)
 * [慕课HTML+CSS基础教程视频](http://www.imooc.com/learn/9)
