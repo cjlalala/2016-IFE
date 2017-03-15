@@ -57,42 +57,49 @@ function addEvent(dom,type,fn){
     }
     else dom['on'+type]=fn;
 }
+
 var input=document.getElementById('input'),
 	test=document.getElementById('test'),
 	result=document.getElementById("result");
+var nameTest={
+    checkCont:function(){   //检验输入内容
+        var length=this.checkLength(input.value);
+        if(length<4||length>16){
+            result.innerHTML="输入的字符应为4-16个，一个汉字算两个字符！";
+            result.style.color="red";
+            input.style.border="2px solid red";
+        }
+        if(!/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(input.value)){
+            result.innerHTML="只能输入中文,字母和数字哦！";
+            result.style.color="rgba(12, 234, 81, 0.62)";
+            input.style.border="2px solid rgba(12, 234, 81, 0.62)";
+        }
+        if((/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(input.value))&&length>=4&&length<=16){
+            result.innerHTML="验证成功!";
+            result.style.color="rgba(12, 234, 81, 0.62)";
+            input.style.border="2px solid rgba(12, 234, 81, 0.62)";
+        }
+    },
+    checkLength:function(str){  //检验有多少个字符
+        var len =0,temp=0;
+        for(var j=0;j<str.length;j++){
+            temp = 1;
+            if(/^[\u2E80-\u9FFF]+$/.test(str[j])){
+                temp = 2;
+            }
+            len += temp;
+        }
+        return len;
+    }
+};
+
 addEvent(test,"click",function(event){
     var event=event||event.srcElement;
-	var length=checkLength(input.value);
-	if(length<4||length>16){
-		result.innerHTML="输入的字符应为4-16个，一个汉字算两个字符！";
-		result.style.color="red";
-		input.style.border="2px solid red";
-	}
-	if(!/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(input.value)){
-		result.innerHTML="只能输入中文,字母和数字哦！";
-		result.style.color="rgba(12, 234, 81, 0.62)";
-		input.style.border="2px solid rgba(12, 234, 81, 0.62)";
-	}
-	if((/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(input.value))&&length>=4&&length<=16){
-		result.innerHTML="验证成功!";
-		result.style.color="rgba(12, 234, 81, 0.62)";
-		input.style.border="2px solid rgba(12, 234, 81, 0.62)";
-	}
+	nameTest.checkCont();
 	event.preventDefault();
 	return false;
 });
-//检验有多少个字符
-function checkLength(str){
-    var len =0,temp=0;
-    for(var j=0;j<str.length;j++){
-        temp = 1;
-        if(/^[\u2E80-\u9FFF]+$/.test(str[j])){
-            temp = 2;
-        }
-        len += temp;
-    }
-    return len;
-}  
+  
 </script>
 </body>
 </html>
