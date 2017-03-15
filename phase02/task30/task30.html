@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Task 30-表单（二）多个表单项的动态校验</title>
+    <title>Task 30-表单(2)多个表单项的动态校验</title>
     <style>
     form{
     	margin:auto;
@@ -62,7 +62,7 @@
 <body>
 <form id="form">
 	<label for="name" id="nameLabel">名称</label>
-	<input id="name" type="text"/><br/>
+	<input id="name" type="text"><br/>
 	<div id="result-name"></div>
 
 	<label for="pw1" id="pw1Label">密码</label>
@@ -89,135 +89,142 @@
 function $(id){
 	return document.getElementById(id);
 }
-$("form").addEventListener("click",function(e){
-	var id=e.target.id;
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+    if(dom.addEventListener){
+        dom.addEventListener(type,fn,false);
+    }
+    else if(dom.attachEvent){
+        dom.attachEvent('on'+type,fn);
+    }
+    else dom['on'+type]=fn;
+}
+var Check={
+	Name:function(name){	//名称检验
+		var length=this.checkLength(name);
+		if((/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(name))&&length>=4&&length<=16){
+			this.testRight($("result-name"),"验证成功!",$("name"));
+			return true;
+		}
+		else{
+			this.testWrong($("result-name"),"名称错误！",$("name"));
+			return false;
+		}
+	},
+	Pw1:function(pw1){	//密码1验证
+		if(/^[A-Za-z0-9]{8,16}$/.test(pw1)){
+			this.testRight($("result-pw1"),"密码可用",$("pw1"));
+			return true;
+		}
+		else{
+			this.testWrong($("result-pw1"),"密码不可用",$("pw1"));
+			return false;
+		}
+	},
+	Pw2:function(pw1,pw2){	//密码2验证
+		if(pw2==pw1&&/^[A-Za-z0-9]{8,16}$/.test(pw2)){
+			this.testRight($("result-pw2"),"密码输入一致",$('pw2'));
+			return true;
+		}
+		else{
+			this.Pw1(pw1);
+			this.testWrong($("result-pw2"),"密码输入不一致",$("pw2"));
+			return false;
+		}
+	},
+	Email:function(email){	//邮箱验证
+		if( /\w+([-+.´]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(email)){
+			this.testRight($("result-email"),"邮箱格式正确",$("email"));
+			return true;
+		}
+		else{
+			this.testWrong($("result-email"),"邮箱格式错误",$("email"));
+			return false;
+		}
+	},
+	Phone:function(phone){	//手机号验证
+		if(/^1[34578]\d{9}$/.test(phone)){
+			this.testRight($("result-phone"),"手机格式正确",$("phone"));
+			return true;
+		}
+		else{
+			this.testWrong($("result-phone"),"手机格式错误",$("phone"));
+			return false;
+		}
+	},
+	testRight:function(pointDom,content,inputDom){	//验证正确
+   		pointDom.innerHTML=content;
+		pointDom.style.color="#81b950";
+		inputDom.className="right";
+   	},
+   	testWrong:function(pointDom,content,inputDom){	//验证错误
+   		pointDom.innerHTML=content;
+		pointDom.style.color=" #bd0315";
+		inputDom.className="wrong";
+   	},
+   	clickPoint:function(dom,content){	//点击出现提示
+   		dom.innerHTML=content;
+		dom.style.color="#a6a6a6";
+   	},
+	checkLength:function(str){	//检验名称有多少个字符
+		var len =0,temp=0;
+    	for(var j=0;j<str.length;j++){
+    		temp = 1;
+    		if(/^[\u2E80-\u9FFF]+$/.test(str[j])){
+       			temp = 2;
+    		}
+    		len += temp;
+    	}
+    	return len;
+   	}
+};
+addEvent($("form"),"click",function(event){
+	var e=event||window.event;
+	var id=e.target.id||e.srcElement.id;
 	switch(id){
 		case "nameLabel":case "name":{
-			$("result-name").innerHTML="必填，长度为4~16字符";
-			$("result-name").style.color="#a6a6a6";
-			$("name").onblur=function(){testName($('name').value);}
+			Check.clickPoint($("result-name"),"必填，长度为4~16字符");
+			$("name").onblur=function(){Check.Name($('name').value);}
 			break;
 		}
 		case "pw1Label":case "pw1":{
-			$("result-pw1").innerHTML="必填，长度为8~16字符，只能为数字、大小写字母";
-			$("result-pw1").style.color="#a6a6a6";
-			$("pw1").onblur=function(){testPw1($('pw1').value);}
+			Check.clickPoint($("result-pw1"),"必填，长度为8~16字符，只能为数字、大小写字母");
+			$("pw1").onblur=function(){Check.Pw1($('pw1').value);}
 			break;
 		}
 		case "pw2Label":case "pw2":{
-			$("result-pw2").innerHTML="再次输入相同密码";
-			$("result-pw2").style.color="#a6a6a6";
-			$("pw2").onblur=function(){testPw2($('pw1').value,$('pw2').value);}
+			Check.clickPoint($("result-pw2"),"再次输入相同密码");
+			$("pw2").onblur=function(){
+				Check.Pw2($('pw1').value,$('pw2').value);
+			}
 			break;
 		}
 		case "emailLabel":case "email":{
-			$("result-email").innerHTML="请输入有效邮箱地址";
-			$("result-email").style.color="#a6a6a6";
-			$("email").onblur=function(){testEmail($('email').value);}
+			Check.clickPoint($("result-email"),"请输入有效邮箱地址");
+			$("email").onblur=function(){Check.Email($('email').value);}
 			break;
 		}
 		case "phoneLabel":case "phone":{
-			$("result-phone").innerHTML="请输入手机号";
-			$("result-phone").style.color="#a6a6a6";
-			$("phone").onblur=function(){testPhone($('phone').value);}
+			Check.clickPoint($("result-phone"),"请输入手机号");
+			$("phone").onblur=function(){Check.Phone($('phone').value);}
 			break;
 		}
 	}
 });
 //点击提交按钮
-$("submit").addEventListener("click",function(e){
-	if(testName($('name').value)||testPw1($('pw1').value)||
-	testPw2($('pw2').value)||testEmail($('email').value)||
-	testPhone($('phone').value)){
-		alert("提交成功!");
+addEvent($("submit"),"click",function(event){
+	var event=event||window.event;
+	if(Check.Name($('name').value)&&
+		Check.Pw1($('pw1').value)&&
+		Check.Pw2($('pw1').value,$('pw2').value)&&
+		Check.Email($('email').value)&&
+		Check.Phone($('phone').value)){
+	   alert("提交成功!");
 	}
 	else alert("输入有误！");
-	e.preventDefault();
+	event.preventDefault();
 	return false;
 });
-//名称验证
-function testName(name){
-	var length=checkLength(name);
-	if((/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(name))&&length>=4&&length<=16){
-		$("result-name").innerHTML="验证成功!";
-		$("result-name").style.color="#81b950";
-		$("name").className="right";
-	}
-	else{
-		$("result-name").innerHTML="名称错误！";
-		$("result-name").style.color=" #bd0315";
-		$("name").className="wrong";
-		return false;
-	}
-}
-//检验名称有多少个字符
-function checkLength(str){
-    var len =0,temp=0;
-    for(var j=0;j<str.length;j++){
-    temp = 1;
-    if(/^[\u2E80-\u9FFF]+$/.test(str[j])){
-        temp = 2;
-    }
-    len += temp;
-    }
-    return len;
-}  
-//密码1验证
-function testPw1(pw1){
-	if(/^[A-Za-z0-9]{8,16}$/.test(pw1)){
-		$("result-pw1").innerHTML="密码可用";
-		$("result-pw1").style.color="#81b950";
-		$("pw1").className="right";
-	}
-	else{
-		$("result-pw1").innerHTML="密码不可用";
-		$("result-pw1").style.color=" #bd0315";
-		$("pw1").className="wrong";
-		return false;
-	}
-}
-//密码2验证
-function testPw2(pw1,pw2){
-	if(pw2==pw1&&testPw1(pw1)){
-		$("result-pw2").innerHTML="密码输入一致";
-		$("result-pw2").style.color="#81b950";
-		$("pw2").className="right";
-	}
-	else{
-		$("result-pw2").innerHTML="密码输入不一致";
-		$("result-pw2").style.color=" #bd0315";
-		$("pw2").className="wrong";
-		return false;
-	}
-}
-//邮箱验证
-function testEmail(email){
-	if( /\w+([-+.´]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(email)){
-		$("result-email").innerHTML="邮箱格式正确";
-		$("result-email").style.color="#81b950";
-		$("email").className="right";
-	}
-	else{
-		$("result-email").innerHTML="邮箱格式错误";
-		$("result-email").style.color=" #bd0315";
-		$("email").className="wrong";
-		return false;
-	}
-}
-//手机号验证
-function testPhone(phone){
-	if(/^1[34578]\d{9}$/.test(phone)){
-		$("result-phone").innerHTML="手机格式正确";
-		$("result-phone").style.color="#81b950";
-		$("phone").className="right";
-	}
-	else{
-		$("result-phone").innerHTML="手机格式错误";
-		$("result-phone").style.color=" #bd0315";
-		$("phone").className="wrong";
-		return false;
-	}
-}
 </script>
 </body>
 </html>
