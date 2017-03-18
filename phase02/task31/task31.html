@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Task 31-表单（三）联动</title>
+    <title>Task 31-表单(3)联动</title>
     <style>
     form{
         margin:auto;
@@ -11,7 +11,7 @@
         margin-top: 100px;
         text-align:center;
     }
-    .notStudent{
+   	.notStudent{
         margin-left: 60px;
     }
     select{
@@ -43,7 +43,7 @@
         display: none;
         margin-top: 60px;
     }
-    </style>
+	</style>
   </head>
 <body>
 <form>
@@ -52,10 +52,10 @@
 	<div id="inSchool">
         <label>学校</label>
         <select id="city">
-            <option id="bj" class="opt">北京</option>
-            <option id="sh" class="opt">上海</option>
-            <option id="wh" class="opt">武汉</option>
-            <option id="xa" class="opt">西安</option>
+            <option id="bj">北京</option>
+            <option id="sh">上海</option>
+            <option id="wh">武汉</option>
+            <option id="xa">西安</option>
         </select>
        	<select id="collage">
             <option>北京大学</option>
@@ -72,13 +72,23 @@
 function $(id){
     return document.getElementById(id);
 }
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+    if(dom.addEventListener){
+        dom.addEventListener(type,fn,false);
+    }
+    else if(dom.attachEvent){
+        dom.attachEvent('on'+type,fn);
+    }
+    else dom['on'+type]=fn;
+}
 //选中在校生
-$("student").addEventListener("click",function(){
+addEvent($("student"),"click",function(){
     $("outSchool").style.display="none";
     $("inSchool").style.display="block";
 });
 //选中非在校生
-$("notstudent").addEventListener("click",function(){
+addEvent($("notstudent"),"click",function(){
     $("inSchool").style.display="none";
     $("outSchool").style.display="block";
 });
@@ -88,18 +98,19 @@ var data={
 	wh:["武汉大学","华中科技大学","华中农业大学","武汉理工大学"],
 	xa:["西安交通大学","西北大学","西北工业大学","陕西师范大学"]
 }
-//城市名改变时二级表单联动
-var options=document.getElementsByClassName('opt');
+//二级表单联动(一次循环)
 function change(){
-    	var id=options[$("city").selectedIndex].getAttribute("id"),  
-    	    content="";
+        var options=$('city').getElementsByTagName('option');//得到城市名数组
+		//得到被选中城市名的id  
+    	var id=options[$("city").selectedIndex].getAttribute("id"),
+    		content="";
     	for(var j=0;j<data[id].length;j++){
-    	    content+="<option>"+data[id][j]+"</option>";
-	} 
-	    $("collage").innerHTML=content;    
+    		content+="<option>"+data[id][j]+"</option>";
+		} 
+		$("collage").innerHTML=content;    
 }
 //城市选项改变时触发事件
-$("city").addEventListener("change",change);
+addEvent($("city"),"change",change);
 </script>
 </body>
 </html>
