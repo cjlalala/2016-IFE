@@ -5,89 +5,89 @@
     <title>Task 30-表单(2)多个表单项的动态校验</title>
     <style>
     form{
-    	margin:auto;
-    	width:860px;
-    	font-size: 24px;
+        margin:auto;
+        width:860px;
+        font-size: 24px;
     }
     label{
-    	display: inline-block;
-    	width:100px;
-		text-align: right;
+        display: inline-block;
+        width:100px;
+        text-align: right;
     }
     input{
-    	width:700px;
-    	height:40px;
-    	margin:20px;
-    	border-radius: 7px;
-    	border:2px solid #ccc;
+        width:700px;
+        height:40px;
+        margin:20px;
+        border-radius: 7px;
+        border:2px solid #ccc;
     }
     input:focus{
-    	outline: none;
-    	border:2px solid #7dace9;
-    	border-radius: 7px;
-    	box-shadow: 0 2px 2px 2px #e1edfa;
-	}
-	.right{
-		outline: none;
-    	border:2px solid #81b950;
-    	border-radius: 7px;
-	}
-	.wrong{
-		outline: none;
-    	border:2px solid #bd0315;
-    	border-radius: 7px;
-	}
-	div{
-		margin-left:130px;
-		font-size: 20px;
-	}
+        outline: none;
+        border:2px solid #7dace9;
+        border-radius: 7px;
+        box-shadow: 0 2px 2px 2px #e1edfa;
+    }
+    .right{
+        outline: none;
+        border:2px solid #81b950;
+        border-radius: 7px;
+    }
+    .wrong{
+        outline: none;
+        border:2px solid #bd0315;
+        border-radius: 7px;
+    }
+    div{
+        margin-left:130px;
+        font-size: 20px;
+    }
     button{
-    	float:right;
-    	border:1px solid #4e79b7;
-    	background-color:#4e79b7;
-    	width:120px;
-    	height:50px;
-    	margin-right:25px;
-    	font-size: 24px;
-    	color:white;
-    	border-radius: 7px;
+        float:right;
+        border:1px solid #4e79b7;
+        background-color:#4e79b7;
+        width:120px;
+        height:50px;
+        margin-right:25px;
+        font-size: 24px;
+        color:white;
+        border-radius: 7px;
     }
     button:focus{
-    	outline: none;
-    	border:1px solid #27569c;
-    	background-color:#27569c;
-	}
-	</style>
+        outline: none;
+        border:1px solid #27569c;
+        background-color:#27569c;
+    }
+    </style>
   </head>
 <body>
 <form id="form">
-	<label for="name" id="nameLabel">名称</label>
-	<input id="name" type="text"><br/>
-	<div id="result-name"></div>
+    <label for="name" id="nameLabel">名称</label>
+    <input id="name" type="text"><br/>
+    <div id="result-name"></div>
 
-	<label for="pw1" id="pw1Label">密码</label>
-	<input id="pw1" type="password"/><br/>
-	<div id="result-pw1"></div>
+    <label for="pw1" id="pw1Label">密码</label>
+    <input id="pw1" type="password"/><br/>
+    <div id="result-pw1"></div>
 
-	<label for="pw2" id="pw2Label">确认密码</label>
-	<input id="pw2" type="password"/><br/>
-	<div id="result-pw2"></div>
+    <label for="pw2" id="pw2Label">确认密码</label>
+    <input id="pw2" type="password"/><br/>
+    <div id="result-pw2"></div>
 
-	<label for="email" id="emailLabel">邮箱</label>
-	<input id="email" type="text"/><br/>
-	<div id="result-email"></div>
+    <label for="email" id="emailLabel">邮箱</label>
+    <input id="email" type="text"/><br/>
+    <div id="result-email"></div>
 
-	<label for="phone" id="phoneLabel">手机</label>
-	<input id="phone" type="text"/><br/>
-	<div id="result-phone"></div>
+    <label for="phone" id="phoneLabel">手机</label>
+    <input id="phone" type="text"/><br/>
+    <div id="result-phone"></div>
 
-	<button id="submit">提交</button>
+    <button id="submit">提交</button>
 </form>
 
 
 <script type="text/javascript" >
 function $(id){
-	return document.getElementById(id);
+    return document.getElementById(id);
 }
 //事件绑定函数，兼容浏览器
 function addEvent(dom,type,fn){
@@ -100,131 +100,132 @@ function addEvent(dom,type,fn){
     else dom['on'+type]=fn;
 }
 var Check={
-	Name:function(name){	//名称检验
-		var length=this.checkLength(name);
-		if((/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(name))&&length>=4&&length<=16){
-			this.testRight($("result-name"),"验证成功!",$("name"));
-			return true;
-		}
-		else{
-			this.testWrong($("result-name"),"名称错误！",$("name"));
-			return false;
-		}
-	},
-	Pw1:function(pw1){	//密码1验证
-		if(/^[A-Za-z0-9]{8,16}$/.test(pw1)){
-			this.testRight($("result-pw1"),"密码可用",$("pw1"));
-			return true;
-		}
-		else{
-			this.testWrong($("result-pw1"),"密码不可用",$("pw1"));
-			return false;
-		}
-	},
-	Pw2:function(pw1,pw2){	//密码2验证
-		if(pw2==pw1&&/^[A-Za-z0-9]{8,16}$/.test(pw2)){
-			this.testRight($("result-pw2"),"密码输入一致",$('pw2'));
-			return true;
-		}
-		else{
-			this.Pw1(pw1);
-			this.testWrong($("result-pw2"),"密码输入不一致",$("pw2"));
-			return false;
-		}
-	},
-	Email:function(email){	//邮箱验证
-		if( /\w+([-+.´]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(email)){
-			this.testRight($("result-email"),"邮箱格式正确",$("email"));
-			return true;
-		}
-		else{
-			this.testWrong($("result-email"),"邮箱格式错误",$("email"));
-			return false;
-		}
-	},
-	Phone:function(phone){	//手机号验证
-		if(/^1[34578]\d{9}$/.test(phone)){
-			this.testRight($("result-phone"),"手机格式正确",$("phone"));
-			return true;
-		}
-		else{
-			this.testWrong($("result-phone"),"手机格式错误",$("phone"));
-			return false;
-		}
-	},
-	testRight:function(pointDom,content,inputDom){	//验证正确
-   		pointDom.innerHTML=content;
-		pointDom.style.color="#81b950";
-		inputDom.className="right";
-   	},
-   	testWrong:function(pointDom,content,inputDom){	//验证错误
-   		pointDom.innerHTML=content;
-		pointDom.style.color=" #bd0315";
-		inputDom.className="wrong";
-   	},
-   	clickPoint:function(dom,content){	//点击出现提示
-   		dom.innerHTML=content;
-		dom.style.color="#a6a6a6";
-   	},
-	checkLength:function(str){	//检验名称有多少个字符
-		var len =0,temp=0;
-    	for(var j=0;j<str.length;j++){
-    		temp = 1;
-    		if(/^[\u2E80-\u9FFF]+$/.test(str[j])){
-       			temp = 2;
-    		}
-    		len += temp;
-    	}
-    	return len;
-   	}
+    Name:function(){    //名称检验
+        var name=$('name').value;
+        var length=this.checkLength(name);
+        if((/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(name))&&length>=4&&length<=16){
+            this.testRight($("result-name"),"验证成功!",$("name"));
+            return true;
+        }
+        else{
+            this.testWrong($("result-name"),"名称错误！",$("name"));
+            return false;
+        }
+    },
+    Pw1:function(){  //密码1验证
+        var pw1=$('pw1').value;
+        if(/^[A-Za-z0-9]{8,16}$/.test(pw1)){
+            this.testRight($("result-pw1"),"密码可用",$("pw1"));
+            return true;
+        }
+        else{
+            this.testWrong($("result-pw1"),"密码不可用",$("pw1"));
+            return false;
+        }
+    },
+    Pw2:function(){  //密码2验证
+        var pw1=$('pw1').value,
+            pw2=$('pw2').value;
+        if(pw2==pw1&&/^[A-Za-z0-9]{8,16}$/.test(pw2)){
+            this.testRight($("result-pw2"),"密码输入一致",$('pw2'));
+            return true;
+        }
+        else{
+            this.Pw1();
+            this.testWrong($("result-pw2"),"密码输入不一致",$("pw2"));
+            return false;
+        }
+    },
+    Email:function(){  //邮箱验证*/
+        var email=$('email').value;
+        if( /\w+([-+.´]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(email)){
+            this.testRight($("result-email"),"邮箱格式正确",$("email"));
+            return true;
+        }
+        else{
+            this.testWrong($("result-email"),"邮箱格式错误",$("email"));
+            return false;
+        }
+    },
+    Phone:function(){  //手机号验证
+        var phone=$('phone').value;
+        if(/^1[34578]\d{9}$/.test(phone)){
+            this.testRight($("result-phone"),"手机格式正确",$("phone"));
+            return true;
+        }
+        else{
+            this.testWrong($("result-phone"),"手机格式错误",$("phone"));
+            return false;
+        }
+    },
+    clickRules:function(dom,content){   //点击出现提示
+        dom.innerHTML=content;
+        dom.style.color="#a6a6a6";
+    },
+    testRight:function(pointDom,content,inputDom){  //验证正确
+        pointDom.innerHTML=content;
+        pointDom.style.color="#81b950";
+        inputDom.className="right";
+    },
+    testWrong:function(pointDom,content,inputDom){  //验证错误
+        pointDom.innerHTML=content;
+        pointDom.style.color=" #bd0315";
+        inputDom.className="wrong";
+    },
+    checkLength:function(str){  //检验名称有多少个字符
+        var len =0,temp=0;
+        for(var j=0;j<str.length;j++){
+            temp = 1;
+            if(/^[\u2E80-\u9FFF]+$/.test(str[j])){
+                temp = 2;
+            }
+            len += temp;
+        }
+        return len;
+    }
 };
 addEvent($("form"),"click",function(event){
-	var e=event||window.event;
-	var id=e.target.id||e.srcElement.id;
-	switch(id){
-		case "nameLabel":case "name":{
-			Check.clickPoint($("result-name"),"必填，长度为4~16字符");
-			$("name").onblur=function(){Check.Name($('name').value);}
-			break;
-		}
-		case "pw1Label":case "pw1":{
-			Check.clickPoint($("result-pw1"),"必填，长度为8~16字符，只能为数字、大小写字母");
-			$("pw1").onblur=function(){Check.Pw1($('pw1').value);}
-			break;
-		}
-		case "pw2Label":case "pw2":{
-			Check.clickPoint($("result-pw2"),"再次输入相同密码");
-			$("pw2").onblur=function(){
-				Check.Pw2($('pw1').value,$('pw2').value);
-			}
-			break;
-		}
-		case "emailLabel":case "email":{
-			Check.clickPoint($("result-email"),"请输入有效邮箱地址");
-			$("email").onblur=function(){Check.Email($('email').value);}
-			break;
-		}
-		case "phoneLabel":case "phone":{
-			Check.clickPoint($("result-phone"),"请输入手机号");
-			$("phone").onblur=function(){Check.Phone($('phone').value);}
-			break;
-		}
-	}
+    var e=event||window.event;
+    var id=e.target.id||e.srcElement.id;
+    switch(id){
+        case "nameLabel":case "name":{
+            Check.clickRules($("result-name"),"必填，长度为4~16字符");
+            $("name").onblur=function(){Check.Name();}
+            break;
+        }
+        case "pw1Label":case "pw1":{
+            Check.clickRules($("result-pw1"),"必填，长度为8~16字符，只能为数字、大小写字母");
+            $("pw1").onblur=function(){Check.Pw1();}
+            break;
+        }
+        case "pw2Label":case "pw2":{
+            Check.clickRules($("result-pw2"),"再次输入相同密码");
+            $("pw2").onblur=function(){Check.Pw2();}
+            break;
+        }
+        case "emailLabel":case "email":{
+            Check.clickRules($("result-email"),"请输入有效邮箱地址");
+            $("email").onblur=function(){Check.Email();}
+            break;
+        }
+        case "phoneLabel":case "phone":{
+            Check.clickRules($("result-phone"),"请输入手机号");
+            $("phone").onblur=function(){Check.Phone();}
+            break;
+        }
+    }
 });
 //点击提交按钮
 addEvent($("submit"),"click",function(event){
-	var event=event||window.event;
-	if(Check.Name($('name').value)&&
-		Check.Pw1($('pw1').value)&&
-		Check.Pw2($('pw1').value,$('pw2').value)&&
-		Check.Email($('email').value)&&
-		Check.Phone($('phone').value)){
-	   alert("提交成功!");
-	}
-	else alert("输入有误！");
-	event.preventDefault();
-	return false;
+    var event=event||window.event;
+    if(Check.Name()&&Check.Pw1()&&Check.Pw2()&&Check.Email()&&Check.Phone()){
+       alert("提交成功!");
+    }
+    else alert("输入有误！");
+    event.preventDefault();
+    return false;
 });
+
 </script>
 </body>
 </html>
