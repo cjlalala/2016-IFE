@@ -65,34 +65,29 @@ function addEvent(dom,type,fn){
     }
     else dom['on'+type]=fn;
 }
-
 var position={
 	x:6,
 	y:6,
 	direc:1 //上1， 右2，后3，左4
 };
-var ObjectHandle={
+var CubeHandle={
 	go:function(){	//点击go
 		$(this.getNowId()).className='';
 		switch(position.direc){
 			case 1:{
 				position.x-=1;
-				$(this.getNowId()).className='selected top';
 				break;
 			}
 			case 2:{
 				position.y+=1;
-				$(this.getNowId()).className='selected right';
 				break;
 			}
 			case 3:{
 				position.x+=1;
-				$(this.getNowId()).className='selected back';
 				break;
 			}
 			case 4:{
 				position.y-=1;
-				$(this.getNowId()).className='selected left';
 				break;
 			}
 		}
@@ -113,11 +108,11 @@ var ObjectHandle={
 			$(idc).className='selected left';
 		}
 	},
-	getNowId:function(){	//得到当前方块的id		
+	getNowId:function(){
 		var a=position.x*10+position.y;
 		return IDa='td'+a;
 	}
-};
+}
 //点击不同按钮
 addEvent($('buttons'),"click",function(event){
 	var e=event||event.srcElement;
@@ -128,25 +123,28 @@ addEvent($('buttons'),"click",function(event){
 			var x=position.x,
 				y=position.y;
 			if(x==1&&direc==1||y==10&&direc==2||x==10&&direc==3||y==1&&direc==4) return;
-			else ObjectHandle.go(); 
+			else{
+				CubeHandle.go(); 
+				CubeHandle.direction();
+			}
 			break;
 		}
 		case'left':{
 			if(direc>1) position.direc-=1;
 			else position.direc=4;
-			ObjectHandle.direction();
+			CubeHandle.direction();
 			break;
 		}
 		case'right':{
 			if(direc<4) position.direc+=1;
 			else position.direc=1;
-			ObjectHandle.direction();
+			CubeHandle.direction();
 			break;
 		}
 		case'back':{
 			if(direc==1||direc==3) position.direc=4-direc;
 			else position.direc=6-direc;
-			ObjectHandle.direction();
+			CubeHandle.direction();
 			break;
 		}
 	}
