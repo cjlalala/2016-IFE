@@ -1,8 +1,8 @@
-##任务三十三：听指令的小方块（一）
+## 任务三十三：听指令的小方块（一）
 [查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task33/task33.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=33)
 
-###任务目的
+### 任务目的
 * 练习JavaScript在DOM、字符串处理相关知识
 * 练习对于复杂UI，如何进行数据机构建模
 
