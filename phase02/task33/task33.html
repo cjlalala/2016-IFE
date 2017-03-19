@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Task 33-听指令的小方块（一）</title>
+    <title>IFE JavaScript Task 33</title>
     <style>
     table{
     	border-spacing: 0;
@@ -50,99 +50,111 @@
 	<button id="right">right</button>
 	<button id="back">back</button>
 </form>
+
 <script type="text/javascript">
 function $(id){
 	return document.getElementById(id);
 }
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+    if(dom.addEventListener){
+        dom.addEventListener(type,fn,false);
+    }
+    else if(dom.attachEvent){
+        dom.attachEvent('on'+type,fn);
+    }
+    else dom['on'+type]=fn;
+}
+
 var position={
 	x:6,
 	y:6,
 	direc:1 //上1， 右2，后3，左4
 };
+var ObjectHandle={
+	go:function(){	//点击go
+		var a=position.x*10+position.y,
+			IDa='td'+a;
+		$(IDa).className='';
+		if(position.direc==1){
+			position.x-=1;
+			var b=position.x*10+position.y,
+		    	IDb='td'+b;
+			$(IDb).className='selected top';
+		} 
+		else if(position.direc==2){
+			position.y+=1;
+			var b=position.x*10+position.y,
+		    	IDb='td'+b;
+			$(IDb).className='selected right';
+		}
+		else if(position.direc==3){ 
+			position.x+=1;
+			var b=position.x*10+position.y,
+		   		IDb='td'+b;
+			$(IDb).className='selected back';
+		}
+		else if(position.direc==4){
+			position.y-=1;
+			var b=position.x*10+position.y,
+		    	IDb='td'+b;
+			$(IDb).className='selected left';
+		}
+	},
+	direction:function(){	//显示表明方向的蓝色边框
+		var c=position.x*10+position.y,
+			idc='td'+c;
+		$(idc).className='';
+		direc=position.direc;
+		if(direc==1){
+			$(idc).className='selected top';
+		} 
+		if(direc==2){
+			$(idc).className='selected right';
+		}
+		if(direc==3){ 
+			$(idc).className='selected back';
+		}
+		if(direc==4){
+			$(idc).className='selected left';
+		}
+	}
+}
 //点击不同按钮
-$('buttons').addEventListener("click",function(e){
+addEvent($('buttons'),"click",function(event){
+	var e=event||event.srcElement;
 	e.preventDefault();
+	var direc=position.direc;
 	switch(e.target.id){
 		case'go':{
 			var x=position.x,
-				y=position.y,
-				direc=position.direc;
+				y=position.y;
 			if(x==1&&direc==1||y==10&&direc==2||x==10&&direc==3||y==1&&direc==4) return;
-			else go(); 
+			else ObjectHandle.go(); 
 			break;
 		}
 		case'left':{
-			if(position.direc>1) position.direc-=1;
+			if(direc>1) position.direc-=1;
 			else position.direc=4;
-			direction();
+			ObjectHandle.direction();
 			break;
 		}
 		case'right':{
-			if(position.direc<4) position.direc+=1;
+			if(direc<4) position.direc+=1;
 			else position.direc=1;
-			direction();
+			ObjectHandle.direction();
 			break;
 		}
 		case'back':{
-			var direc=position.direc;
 			if(direc==1||direc==3) position.direc=4-direc;
 			else position.direc=6-direc;
-			direction();
+			ObjectHandle.direction();
 			break;
 		}
 	}
 });
-//点击go
-function go(){
-	var a=position.x*10+position.y,
-		IDa='td'+a;
-		$(IDa).className='';
-	if(position.direc==1){
-		position.x-=1;
-		var b=position.x*10+position.y,
-		    IDb='td'+b;
-		$(IDb).className='selected top';
-	} 
-	else if(position.direc==2){
-		position.y+=1;
-		var b=position.x*10+position.y,
-		    IDb='td'+b;
-		$(IDb).className='selected right';
-	}
-	else if(position.direc==3){ 
-		position.x+=1;
-		var b=position.x*10+position.y,
-		    IDb='td'+b;
-		$(IDb).className='selected back';
-	}
-	else if(position.direc==4){
-		position.y-=1;
-		var b=position.x*10+position.y,
-		    IDb='td'+b;
-		$(IDb).className='selected left';
-	}	
-} 
-//显示表明方向的蓝色边框
-function direction(c){
-	var c=position.x*10+position.y,
-		idc='td'+c,
-		IDc=$(idc);
-		IDc.className='';
-	if(position.direc==1){
-		IDc.className='selected top';
-	} 
-	if(position.direc==2){
-		IDc.className='selected right';
-	}
-	if(position.direc==3){ 
-		IDc.className='selected back';
-	}
-	if(position.direc==4){
-		IDc.className='selected left';
-	}
-}
 //生成棋盘
-function origin(){
+window.onload=function(){
 	var resultTr='';
 	for(var i=1;i<11;i++){
 		var resultTd='';
@@ -153,9 +165,10 @@ function origin(){
 		resultTr+='<tr>'+resultTd+'</tr>';
 	}
 	$('table').innerHTML=resultTr;
-	$("td66").className='selected top'; //定义格子6-6的初始样式
+	//定义格子6-6的初始样式
+	$("td66").className='selected top';
 };
-origin();
+
 </script>
 </body>
 </html>
