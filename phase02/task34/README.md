@@ -1,5 +1,5 @@
 ## 任务三十四：听指令的小方块（二）
-[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task34/task34-2.html)<br>
+[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task34/task34.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=34)
 
 ### 任务目的
