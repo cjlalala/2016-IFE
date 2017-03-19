@@ -73,53 +73,51 @@ var position={
 };
 var ObjectHandle={
 	go:function(){	//点击go
-		var a=position.x*10+position.y,
-			IDa='td'+a;
-		$(IDa).className='';
-		if(position.direc==1){
-			position.x-=1;
-			var b=position.x*10+position.y,
-		    	IDb='td'+b;
-			$(IDb).className='selected top';
-		} 
-		else if(position.direc==2){
-			position.y+=1;
-			var b=position.x*10+position.y,
-		    	IDb='td'+b;
-			$(IDb).className='selected right';
-		}
-		else if(position.direc==3){ 
-			position.x+=1;
-			var b=position.x*10+position.y,
-		   		IDb='td'+b;
-			$(IDb).className='selected back';
-		}
-		else if(position.direc==4){
-			position.y-=1;
-			var b=position.x*10+position.y,
-		    	IDb='td'+b;
-			$(IDb).className='selected left';
+		$(this.getNowId()).className='';
+		switch(position.direc){
+			case 1:{
+				position.x-=1;
+				$(this.getNowId()).className='selected top';
+				break;
+			}
+			case 2:{
+				position.y+=1;
+				$(this.getNowId()).className='selected right';
+				break;
+			}
+			case 3:{
+				position.x+=1;
+				$(this.getNowId()).className='selected back';
+				break;
+			}
+			case 4:{
+				position.y-=1;
+				$(this.getNowId()).className='selected left';
+				break;
+			}
 		}
 	},
 	direction:function(){	//显示表明方向的蓝色边框
-		var c=position.x*10+position.y,
-			idc='td'+c;
+		var idc=this.getNowId();
 		$(idc).className='';
-		direc=position.direc;
-		if(direc==1){
+		if(position.direc==1){
 			$(idc).className='selected top';
 		} 
-		if(direc==2){
+		if(position.direc==2){
 			$(idc).className='selected right';
 		}
-		if(direc==3){ 
+		if(position.direc==3){ 
 			$(idc).className='selected back';
 		}
-		if(direc==4){
+		if(position.direc==4){
 			$(idc).className='selected left';
 		}
+	},
+	getNowId:function(){	//得到当前方块的id		
+		var a=position.x*10+position.y;
+		return IDa='td'+a;
 	}
-}
+};
 //点击不同按钮
 addEvent($('buttons'),"click",function(event){
 	var e=event||event.srcElement;
