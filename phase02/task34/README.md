@@ -1,12 +1,12 @@
-##任务三十四：听指令的小方块（二）
+## 任务三十四：听指令的小方块（二）
 [查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task34/task34-2.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=34)
 
-###任务目的
+### 任务目的
 * 练习JavaScript在DOM、字符串处理相关知识
 * 练习对于复杂UI，如何进行数据机构建模
 
-###任务描述
+### 任务描述
 * 对于正方形的移动增加相应动画，包括移动和旋转
 * 每个指令的执行时间是1s（可以自己调整）
 * 增加新的指令如下：
@@ -19,6 +19,6 @@
 * MOV RIG：方向转向屏幕右侧，向屏幕的右侧移动一格
 * MOV BOT：方向转向屏幕下面，向屏幕的下面移动一格
 
-###在线学习参考资料
+### 在线学习参考资料
 * [JavaScript入门篇](http://www.imooc.com/view/36)
 * [MDN JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
