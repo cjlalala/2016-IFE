@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Task 32-表单（四）实现表单自动生成工厂</title>
+    <title>IFE JavaScript Task 32</title>
     <style>
    	form{
     	margin:auto;
@@ -75,6 +75,16 @@
 function $(id){
 	return document.getElementById(id);
 }
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+    if(dom.addEventListener){
+        dom.addEventListener(type,fn,false);
+    }
+    else if(dom.attachEvent){
+        dom.attachEvent('on'+type,fn);
+    }
+    else dom['on'+type]=fn;
+}
 //创建表单工厂
 function form(label,type,rules,success,fail,id,func){
 	this.label=label;
@@ -89,34 +99,43 @@ function form(label,type,rules,success,fail,id,func){
 var inputCheck={
 	namefunc:function(){
 		var name=$('nameid').value,
-			length=checkLength(name);
-		if(/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(name)&&length>=4&&length<=16) a=1;
-		else a=0;
+			length=inputCheck.checkLength(name);
+		if(/^[a-zA-Z0-9\u4e00-\u9fa5]+$/.test(name)&&length>=4&&length<=16) return true;
+		else return false;
 	},
 	pw1func:function (){
 		var pw1=$('pw1id').value;
-		if(/^[A-Za-z0-9]{8,16}$/.test(pw1))
-			a=1;
-		else  a=0;
+		if(/^[A-Za-z0-9]{8,16}$/.test(pw1))	return true;
+		else return false;
 	},
 	pw2func:function (){
 		var pw1=$('pw1id').value,
 			pw2=$('pw2id').value;
-		if (pw2==pw1&&/^[A-Za-z0-9]{8,16}$/.test(pw2))
-			a=1;
-		else a=0;
+		if (pw2==pw1&&/^[A-Za-z0-9]{8,16}$/.test(pw2))	return true;
+		else return false;
 	},
 	emailfunc:function (){
 		var email=$('emailid').value;
-		if(/\w+([-+.´]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(email)) a=1;
-		else a=0;
+		if(/\w+([-+.´]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(email)) return true;
+		else return false;
 	},
 	phonefunc:function (){
 		var phone=$('phoneid').value;
-		if(/^1[34578]\d{9}$/.test(phone))a=1;
-		else a=0;
-	}
-}
+		if(/^1[34578]\d{9}$/.test(phone))	return true;
+		else return false;
+	},
+	checkLength:function(str){	//检验名称有多少个字符
+    	var len =0,temp=0;
+    	for(var j=0;j<str.length;j++){
+    		temp = 1;
+    		if(/^[\u2E80-\u9FFF]+$/.test(str[j])){
+        		temp = 2;
+    		}
+    		len += temp;
+    	}
+    	return len;
+	} 
+};
 //用于生成验证表单
 var nameForm=new form('名称','text','长度为4~16字符','验证成功','名称错误','nameid',inputCheck.namefunc),
 	pw1=new form('密码','password','长度为8~16字符，只能为数字、大小写字母','密码可用','密码不可用','pw1id',inputCheck.pw1func),
@@ -125,40 +144,32 @@ var nameForm=new form('名称','text','长度为4~16字符','验证成功','名�
 	phone=new form('手机号','text','请输入手机号','手机格式正确','手机格式错误','phoneid',inputCheck.phonefunc),
 	makeForm=[nameForm,pw1,pw2,email,phone];
 //被勾选的选项存储子在newForm中
-var newForm=[],a;
-//用于生成初始表单
-var checkName=new form('名称','checkbox','nameBox'),
-	checkPw1=new form('密码','checkbox','pw1Box'),
-	checkPw2=new form('确认密码','checkbox','pw2Box'),
-	checkEamil=new form('邮箱','checkbox','emailBox'),
-	checkPhone=new form('手机号','checkbox','phoneBox'),
-	nomal=[checkName,checkPw1,checkPw2,checkEamil,checkPhone];
-
+var newForm=[];
 //点击生成表单
-$("submit").addEventListener("click",function(e){
+addEvent($("submit"),"click",function(event){
 	var result='',
 		checkBoxes=document.getElementsByClassName('checkbox');
+	newForm=[];
 	for(var i=0;i<checkBoxes.length;i++){
-		if(checkBoxes[i].checked&&i!=2){
-			newForm.push(makeForm[i]);
-			result+='<label for="'+makeForm[i].id+'">'+makeForm[i].label+'</label><input id="'+makeForm[i].id+'"type="'+makeForm[i].type+'"><br/><div class="message" id="'+makeForm[i].id+'Result">'+makeForm[i].rules+'</div>';
-		}
-		if(checkBoxes[i].checked&&i==2){
-			if(checkBoxes[1].checked){
+		if(checkBoxes[i].checked){
+			if((i==2&&checkBoxes[1].checked)||i!=2){
 				newForm.push(makeForm[i]);
-				result+='<label for="'+makeForm[i].id+'">'+makeForm[i].label+'</label><input id="'+makeForm[i].id+'"type="'+makeForm[i].type+'"><br/><div class="message"  id="'+makeForm[i].id+'Result">'+makeForm[i].rules+'</div>';
+				result+='<label for="'+makeForm[i].id+'">'+makeForm[i].label+'</label><input id="'+makeForm[i].id+'"type="'+makeForm[i].type+'"><br/><div class="message" id="'+makeForm[i].id+'Result">'+makeForm[i].rules+'</div>';
 			}
-			else continue;
+			else{
+				alert('请勾选 “ 密码 ” 选框！');
+				result='';
+				continue;
+			} 
 		}
 	}
 	$("show").innerHTML=result;
 });
 //点击验证
-$('testButton').addEventListener("click",function(e){
+addEvent($('testButton'),"click",function(e){
 	for(var i=0;i<newForm.length;i++){
-		var newid=newForm[i].id+'Result'; //输出信息的div的id
-		var x=newForm[i].validator(); //调用验证函数
-		if(a==1){
+		var newid=newForm[i].id+'Result'; //输出信息的div的id 
+		if(newForm[i].validator()){	//调用验证函数
 			$(newid).innerHTML=newForm[i].success;
 			$(newid).className="right";
 		}
@@ -166,30 +177,24 @@ $('testButton').addEventListener("click",function(e){
 			$(newid).innerHTML=newForm[i].fail;
 			$(newid).className="wrong";
 		}
-
 	}
 });
-//检验名称有多少个字符
-function checkLength(str){
-    var len =0,temp=0;
-    for(var j=0;j<str.length;j++){
-    temp = 1;
-    if(/^[\u2E80-\u9FFF]+$/.test(str[j])){
-        temp = 2;
-    }
-    len += temp;
-    }
-    return len;
-} 
+//用于生成初始表单
+var checkName=new form('名称','checkbox','nameBox'),
+	checkPw1=new form('密码','checkbox','pw1Box'),
+	checkPw2=new form('确认密码','checkbox','pw2Box'),
+	checkEamil=new form('邮箱','checkbox','emailBox'),
+	checkPhone=new form('手机号','checkbox','phoneBox'),
+	nomal=[checkName,checkPw1,checkPw2,checkEamil,checkPhone];
 //生成初始表单
-function origin(){
+window.onload=function(){
 	var content='';
 	for(var i=0;i<nomal.length;i++){
 		content+='<label for="'+nomal[i].rules+'"><input class="checkbox" type="'+nomal[i].type+'" id="'+nomal[i].rules+'"name="'+nomal[i].rules+'">'+nomal[i].label+'</label>';
 	}
 	$('factory').innerHTML=content;
 }
-origin();
+
 </script>
 </body>
 </html>
