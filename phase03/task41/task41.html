@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Task 41-UI组件之日历组件(2)</title>
+    <style>
+    body{
+      font-family: '微软雅黑';
+    }
+    .calendar{
+      display: none;
+      width: 350px;
+      height: 408px;
+      border:2px solid #ccc;
+    }
+    #title{
+      padding: 5px 10px;
+      background-color: rgb(200,27,1);
+      color:white;
+      font-size: 20px;
+      text-align: center;
+    }
+    #pre{
+      float: left;
+    }
+    #next{
+      float: right;
+    }
+    th,td{
+      width: 50px;
+      height:50px;
+      font-size: 18px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    input{
+      margin-top: 20px;
+    }
+    #inputYear,#inputMonth,#inputDate{
+      width:50px;
+    }
+    .today{
+      background-color: rgb(200,27,1);
+    }
+    .notChoose{
+      color: #ccc;
+      pointer-events: none;
+    }
+    .canChoose{
+      color:black;
+    }
+    .choose{
+      border: 1px solid rgb(200,27,1);
+    }
+    </style>
+  </head>
+<body>
+ <input type='text' id='chooseDay'>
+ <button id='select'>calender</button>
+  <div class='calendar' id='calendar'>
+    <div id='title'>
+      <span id='pre'><<</span>
+      <span id='dateTitle'></span>
+      <span id='next'>>></span>
+    </div>
+    <table id='table'>
+      <tr>
+        <th>日</th>
+        <th>一</th>
+        <th>二</th>
+        <th>三</th>
+        <th>四</th>
+        <th>五</th>
+        <th>六</th>
+      </tr>
+    </table>
+  </div><!--calendar结束-->
+
+
+
+<script type='text/javascript' >
+var chooseDate;
+var DATE=new Date();
+var select=document.getElementById('select'),
+    calender=document.getElementById('calendar'),
+    table=document.getElementById('table');
+var chooseDay=document.getElementById('chooseDay');
+var a=1;
+
+select.onclick=function(){
+  if(a==1) calendar.style.display='block';
+  else calendar.style.display='none';
+  return a=!a;
+}
+chooseDay.onclick=function(){
+  if(a==1) calendar.style.display='block';
+  else calendar.style.display='none';
+  return a=!a;
+}
+
+
+
+//显示表格
+function renderHtml(){
+    var content=table.innerHTML,
+        contentTr='';
+    for(var i=0;i<6;i++){
+      contentTr+='<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+    }
+    content+=contentTr;
+    table.innerHTML=content;
+  }
+//显示日历中的数字
+function showDate(DATE,num){
+  var _year=DATE.getFullYear(),//今天所在年份
+      _month=DATE.getMonth()+1;//今天所在月份
+  document.getElementById('dateTitle').innerHTML=_year+'年'+_month+'月';
+  var tds=document.getElementsByTagName('td'),
+      firstDay=new Date(_year,_month-1,1).getDay(),//这个月的第一天是周几0~6
+      lastDate=new Date(_year,_month,-1).getDate();//这个月的最后一天1~31
+  for(var i=0;i<tds.length;i++){
+    var thisDay=new Date(_year,_month-1,i+1-firstDay);
+    if(i<firstDay) tds[i].className='notChoose';
+    else if(getDateStr(thisDay)==getDateStr(new Date())) tds[i].className='today';
+    else if(i>lastDate+firstDay) tds[i].className='notChoose';
+    else if(i+1-firstDay==num) tds[i].className='choose';
+    else tds[i].className='canChoose';
+    tds[i].innerText=thisDay.getDate();
+  }
+}
+//选中某一天
+table.addEventListener('click',function(e){
+  if(e.target.tagName!='TD') return;
+  showDate(DATE,null);
+  e.target.className='choose';
+  var _year=DATE.getFullYear(),
+      _month=DATE.getMonth()+1;
+  chooseDay.value=_year+'年'+_month+'月'+e.target.innerText+'日';
+  calender.style.display='none';
+  a=1;
+  return chooseDate=new Date(_year,_month-1,e.target.innerText);
+});
+//上一个月
+document.getElementById('pre').onclick=function(){
+  DATE=new Date(DATE.getFullYear(),DATE.getMonth()-1,1);
+  showDate(DATE,null);
+  return DATE;
+}
+//下一个月
+document.getElementById('next').onclick=function(){
+  DATE=new Date(DATE.getFullYear(),DATE.getMonth()+1,1);
+  showDate(DATE,null);
+  return DATE;
+}
+//得到日期的字符串形式，如20160725
+function getDateStr(date){
+  var _year=date.getFullYear();
+  var _month=date.getMonth()+1;
+  var _date=date.getDate();
+  _month=(_month>9)?(''+_month):('0'+_month);
+  _date=(_date>9)?(''+_date):('0'+_date);
+  return _year+_month+_date;
+}
+function init(){
+  renderHtml();
+  showDate(DATE,null);
+}
+init();
+</script>
+</body>
+</html>
