@@ -1,13 +1,13 @@
-##任务三十七：UI组件之浮出层
+## 任务三十七：UI组件之浮出层
 [查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase03/task37/task37.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=37)
 
-###任务目的
+### 任务目的
 * 练习综合运用HTML、CSS、JavaScript实现局部功能
 * 练习对于代码的抽象与封装
 * 为第四阶段的RIA任务做准备
 
-###任务描述
+### 任务描述
 * 参考如下设计图，实现一个浮出层的UI组件实现
 * ![](https://github.com/cjlalala/2016-IFE/blob/master/phase03/task37/task37.jpg)
 * 浮出层的中心默认在屏幕正中
