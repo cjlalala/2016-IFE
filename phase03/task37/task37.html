@@ -2,8 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Task 37——UI组件之浮出层</title>
+    <title>Task 37-UI组件之浮出层</title>
     <style>
+      *{
+        margin:0;
+        padding: 0;
+      }
       #cover{
         display: none;
         width: 100%;
@@ -18,13 +22,13 @@
         display: none;
         width:500px;
         height: 250px;
-        margin:auto; 
         position:fixed; 
-        left: 0; top: 0; right: 0; bottom: 0;
+        left:50%; top:50%; 
+        transform: translate(-50%, -50%);  
         border:2px solid black;
         background-color: white;
       }
-      .title{
+      #title{
         background-color: gray;
         color:white;
         margin:0;
@@ -42,45 +46,134 @@
         font-size: 18px;
       }
       #show{
-        position: absolute; 
-        left: 0; top: 0; right: 0; bottom: 0;
-        margin:auto;
+        position:absolute; 
         width:100px;
         height:35px;
+        left: 50%; top: 50%;
+        transform: translate(-50%, -50%);  
       }
     </style>
   </head>
 <body>
-<button id='show'>展现浮出层</button>
-<div id='cover'></div>
-<div id='information'>
-    <p class="title">这是一个浮出层</p>
-    <p class="content">这是一个浮出层</p>
-    <button id='no'>取消</button>
-    <button id='yes'>确定</button>
+<div id='parent'>
+    <button id='show'>展现浮出层</button>
+    <div id='cover'></div>
+    <div id='information' >
+        <p id="title">这是一个浮出层</p>
+        <p class="content">这是一个浮出层</p>
+        <button id='no'>取消</button>
+        <button id='yes'>确定</button>
+    </div>
+
+<div class='sectionP'>i
+i<br/>
+i<br/>
+i<br/>
+i<br/>
+i<br/>
+i<br/>
+iiii<br/>
+iiiiiiiii<br/>
+iiiii<br/>
+iiiiii<br/>
+iiiiiii<br/>
+ii<br/>
+iiiii<br/>
+iiiiiii<br/>
+iiiiiiii<br/>
+iiiiiiii<br/>
+iiiiiiiiiiii<br/>
+iiiii<br/>
+iiiiii<br/>
+iiiiiiiii<br/>
+iiiiii<br/>
+iiii<br/>
+iiiiii<br/>
+iii<br/>
+i<br/>
+iiiiii<br/>iiii
+iiii<br/>
+iiiiii<br/>
+iiii<br/>
+i<br/>
+i<br/>
+i<br/>
+i<br/>
+i<br/>
+iiii<br/>
+iiiiiii<br/>
+iiii<br/>
+iiiiiiii<br/>
+iiiiiiii<br/>
+</div>
 </div>
 <script type='text/javascript'> 
-var show=document.getElementById('show');
-    cover=document.getElementById('cover');
-    infor=document.getElementById('information');
-    yes=document.getElementById('yes');
-    no=document.getElementById('no');
-    show.addEventListener('click',function(){
-        cover.style.display='block';
-        infor.style.display='block';
-    });
-    yes.addEventListener('click',function(){
-        alert('这是一个弹出层！');
-    });
-    no.addEventListener('click',function(){
-        cover.style.display='none';
-        infor.style.display='none';
-    });
-    cover.addEventListener('click',function(){
-        cover.style.display='none';
-        infor.style.display='none';
-    });
+function $(id){
+  return document.getElementById(id);
+}
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+    if(dom.addEventListener){
+        dom.addEventListener(type,fn,false);
+    }
+    else if(dom.attachEvent){
+        dom.attachEvent('on'+type,fn);
+    }
+    else dom['on'+type]=fn;
+}
+addEvent($('parent'),'click',function(event){
+        event=event||window.event;
+        var target=event.target||event.srcElement;
+        event.preventDefault();
+        switch(target.id){
+          case 'show':{   //点击出现遮罩层
+              maskHandle.showMask();
+              break;
+          }
+          case 'yes':{  //点击确认
+              alert('这是一个弹出层！');
+              break;
+          }
+          case 'no':{   //点击取消(遮罩层消失)
+              maskHandle.hideMask();
+              break;
+          }
+          case 'cover':{  //点击遮罩层外的部分(遮罩层消失)
+              maskHandle.hideMask();
+              break;
+          }
+        }
+});
+//遮罩层方法
+var maskHandle={
+    showMask:function(){
+      $('cover').style.display='block';
+      $('information').style.display='block';
+    },
+    hideMask:function(){
+      $('cover').style.display='none';
+      $('information').style.display='none';
+    }
+}
+
+//提示框移动方法
+function setDrag(event) {
+    var disX, disY;
+    var infor=$('information');
+    event = event || window.event;
+    disX = event.clientX - infor.offsetLeft;
+    disY = event.clientY - infor.offsetTop;
+    document.onmousemove = function(event) {
+        event = event || window.event;
+        infor.style.left = event.clientX - disX + "px";
+        infor.style.top = event.clientY- disY + "px";
+    };
+    document.onmouseup = function() {
+        document.onmousedown = null;
+        document.onmousemove = null;
+    }
+}
+addEvent($('title'), "mousedown", setDrag);
 </script>
 </body>
-
 </html>
