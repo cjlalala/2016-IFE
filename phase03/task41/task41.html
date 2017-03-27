@@ -7,7 +7,7 @@
     body{
       font-family: '微软雅黑';
     }
-    .calendar{
+    .calender{
       display: none;
       width: 350px;
       height: 408px;
@@ -55,9 +55,10 @@
     </style>
   </head>
 <body>
+<div id='parent'>
  <input type='text' id='chooseDay'>
  <button id='select'>calender</button>
-  <div class='calendar' id='calendar'>
+  <div class='calender' id='calender'>
     <div id='title'>
       <span id='pre'><<</span>
       <span id='dateTitle'></span>
@@ -74,98 +75,114 @@
         <th>六</th>
       </tr>
     </table>
-  </div><!--calendar结束-->
-
+  </div><!--calender结束-->
+</div>
 
 
 <script type='text/javascript' >
+function $(id){
+  return document.getElementById(id);
+}
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+    if(dom.addEventListener){
+        dom.addEventListener(type,fn,false);
+    }
+    else if(dom.attachEvent){
+        dom.attachEvent('on'+type,fn);
+    }
+    else dom['on'+type]=fn;
+}
+
 var chooseDate;
 var DATE=new Date();
-var select=document.getElementById('select'),
-    calender=document.getElementById('calendar'),
-    table=document.getElementById('table');
-var chooseDay=document.getElementById('chooseDay');
-var a=1;
+var a=1; //日历是否显示
 
-select.onclick=function(){
-  if(a==1) calendar.style.display='block';
-  else calendar.style.display='none';
-  return a=!a;
-}
-chooseDay.onclick=function(){
-  if(a==1) calendar.style.display='block';
-  else calendar.style.display='none';
-  return a=!a;
-}
-
-
-
-//显示表格
-function renderHtml(){
-    var content=table.innerHTML,
-        contentTr='';
-    for(var i=0;i<6;i++){
-      contentTr+='<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
-    }
-    content+=contentTr;
-    table.innerHTML=content;
-  }
-//显示日历中的数字
-function showDate(DATE,num){
-  var _year=DATE.getFullYear(),//今天所在年份
-      _month=DATE.getMonth()+1;//今天所在月份
-  document.getElementById('dateTitle').innerHTML=_year+'年'+_month+'月';
-  var tds=document.getElementsByTagName('td'),
-      firstDay=new Date(_year,_month-1,1).getDay(),//这个月的第一天是周几0~6
-      lastDate=new Date(_year,_month,-1).getDate();//这个月的最后一天1~31
-  for(var i=0;i<tds.length;i++){
-    var thisDay=new Date(_year,_month-1,i+1-firstDay);
-    if(i<firstDay) tds[i].className='notChoose';
-    else if(getDateStr(thisDay)==getDateStr(new Date())) tds[i].className='today';
-    else if(i>lastDate+firstDay) tds[i].className='notChoose';
-    else if(i+1-firstDay==num) tds[i].className='choose';
-    else tds[i].className='canChoose';
-    tds[i].innerText=thisDay.getDate();
+//日历操作方法
+var calHandle={
+  getDateStr:function (date){  //得到日期的字符串形式，如20160725
+      var _year=date.getFullYear(),
+          _month=date.getMonth()+1,
+          _date=date.getDate();
+      _month=(_month>9)?(''+_month):('0'+_month);
+      _date=(_date>9)?(''+_date):('0'+_date);
+      return _year+_month+_date;
+  },
+  renderHtml:function(){   //显示日历框架
+      var content=$('table').innerHTML,
+          contentTr='';
+      for(var i=0;i<6;i++){
+        contentTr+='<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+      }
+      content+=contentTr;
+      $('table').innerHTML=content;
+  }, 
+  //显示日历中的数字
+  showDate:function (DATE,num){  
+      var _year=DATE.getFullYear(),//今天所在年份
+          _month=DATE.getMonth()+1;//今天所在月份
+      $('dateTitle').innerHTML=_year+'年'+_month+'月';
+      var tds=document.getElementsByTagName('td'),
+          firstDay=new Date(_year,_month-1,1).getDay(),//这个月的第一天是周几0~6
+          lastDate=new Date(_year,_month,-1).getDate();//这个月的最后一天1~31
+      for(var i=0;i<tds.length;i++){
+          var thisDay=new Date(_year,_month-1,i+1-firstDay);
+          if(i<firstDay||i>lastDate+firstDay) tds[i].className='notChoose';
+          else if(i+1-firstDay==num) tds[i].className='choose';
+          else if(this.getDateStr(thisDay)==this.getDateStr(new Date())) tds[i].className='today';
+          else tds[i].className='canChoose';
+          tds[i].innerText=thisDay.getDate();
+      }
   }
 }
+
 //选中某一天
-table.addEventListener('click',function(e){
-  if(e.target.tagName!='TD') return;
-  showDate(DATE,null);
-  e.target.className='choose';
+addEvent($('table'),'click',function(event){
+  e=event||window.event;
+  var target=e.target||e.srcElement;
+  if(target.tagName!='TD') return;
+  calHandle.showDate(DATE,null);
+  target.className='choose';
   var _year=DATE.getFullYear(),
       _month=DATE.getMonth()+1;
-  chooseDay.value=_year+'年'+_month+'月'+e.target.innerText+'日';
-  calender.style.display='none';
+  $('chooseDay').value=_year+'年'+_month+'月'+target.innerText+'日';
+  $('calender').style.display='none';
   a=1;
-  return chooseDate=new Date(_year,_month-1,e.target.innerText);
+  return chooseDate=new Date(_year,_month-1,target.innerText);
 });
-//上一个月
-document.getElementById('pre').onclick=function(){
-  DATE=new Date(DATE.getFullYear(),DATE.getMonth()-1,1);
-  showDate(DATE,null);
-  return DATE;
-}
-//下一个月
-document.getElementById('next').onclick=function(){
-  DATE=new Date(DATE.getFullYear(),DATE.getMonth()+1,1);
-  showDate(DATE,null);
-  return DATE;
-}
-//得到日期的字符串形式，如20160725
-function getDateStr(date){
-  var _year=date.getFullYear();
-  var _month=date.getMonth()+1;
-  var _date=date.getDate();
-  _month=(_month>9)?(''+_month):('0'+_month);
-  _date=(_date>9)?(''+_date):('0'+_date);
-  return _year+_month+_date;
-}
-function init(){
-  renderHtml();
-  showDate(DATE,null);
-}
-init();
+//点击日期显示框/按钮/上一个月/下一个月
+addEvent($('parent'),'click',function(event){
+    e=event||window.event;
+    var id=e.target.id||e.srcElement.id;
+    switch(id){
+      case'select':{ //日期显示框
+        a==1? calender.style.display='block':calender.style.display='none';
+        a=!a;
+        break;
+      }
+      case 'chooseDay':{  //按钮
+        a==1?calender.style.display='block':calender.style.display='none';
+        a=!a;
+        break;
+      }
+      case'pre':{   //上一个月
+        DATE=new Date(DATE.getFullYear(),DATE.getMonth()-1,1);
+        calHandle.showDate(DATE,null);
+        break;
+      }
+      case'next':{   //下一个月
+        DATE=new Date(DATE.getFullYear(),DATE.getMonth()+1,1);
+        calHandle.showDate(DATE,null);
+        break;
+      }      
+    }
+    event.preventDefault();
+    return false;
+});
+(function init(){
+  calHandle.renderHtml();
+  calHandle.showDate(DATE,null);
+})();
 </script>
 </body>
 </html>
