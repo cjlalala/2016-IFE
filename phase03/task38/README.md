@@ -1,13 +1,13 @@
-##任务三十八：UI组件之排序表格
+## 任务三十八：UI组件之排序表格
 [查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase03/task38/task38.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=38)
 
-###任务目的
+### 任务目的
 * 练习综合运用HTML、CSS、JavaScript实现局部功能
 * 练习对于代码的抽象与封装
 * 为第四阶段的RIA任务做准备
 
-###任务描述
+### 任务描述
 * 参考下方设计图，实现一个支持列排序的表格组件
 * ![](https://github.com/cjlalala/2016-IFE/blob/master/phase03/task38/task38.jpg)
 * 提供生成表格的接口，表格中的数据，表格样式尽量低耦合
