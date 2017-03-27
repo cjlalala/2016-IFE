@@ -43,6 +43,19 @@
 <table id='table'>
 </table>
 <script type='text/javascript'> 
+function $(id){
+  return document.getElementById(id);
+}
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+    if(dom.addEventListener){
+        dom.addEventListener(type,fn,false);
+    }
+    else if(dom.attachEvent){
+        dom.attachEvent('on'+type,fn);
+    }
+    else dom['on'+type]=fn;
+}
 var data=[
     ['小红',85,93,78],
     ['小花',94,68,87],
@@ -55,44 +68,47 @@ var data=[
     ['小知',92,89,69],
     ['小道',64,82,90]
 ];
-var table=document.getElementById('table');
-table.addEventListener('click',function(event){
-      event = event || window.event;
+//点击排序按钮，事件委托
+addEvent($('table'),'click',function(event){
+      var event = event || window.event;
       var id = event.target.id || event.srcElement.id;
       var num=id.slice(-1);
-      if(id.length=3) up(data,num);
-      else down(data,num);
-      show();
+      if(id.length==3) tableHandle.up(data,num);  //从小到大
+      else tableHandle.down(data,num);  //从大到小
+      tableHandle.show();
     });
-//从小到大排序
-function up(array,num){
-  array.sort(function(a,b){
-    return a[num]-b[num];
-  });
-}
-//从大到小排序
-function down(array,num){
-  array.sort(function(a,b){
-    return b[num]-a[num];
-  });
-}
-function show(){
-  var content="<tr><th>姓名</th><th>语文<span id='up1' class='up'></span><span id='down1' class='down'></span></th><th>数学<span id='up2' class='up'></span><span id='down2' class='down'></span></th><th>英语<span id='up3' class='up'></span><span id='down3' class='down'></span></th><th>总分<span id='up4' class='up'></span><span id='down4' class='down'></span></th></tr>";
-  for(var i=0;i<10;i++){
-    var contentTd='<td>'+data[i][0]+'</td>',
-        contentTr='',
-        sum=0;
-    for(var j=1;j<4;j++){
-      sum+=data[i][j];
-      contentTd+='<td>'+data[i][j]+'</td>';
-    }
-    data[i].push(sum);
-    contentTr+='<tr>'+contentTd+'<td>'+sum+'</td>'+'</tr>';
-    content+=contentTr;
+
+var tableHandle={
+  up:function(array,num){  //从小到大排序
+      array.sort(function(a,b){
+        return a[num]-b[num];
+      });
+  },
+  down:function(array,num){    //从大到小排序
+      array.sort(function(a,b){
+        return b[num]-a[num];
+      });
+  },
+  show:function(){  //生成表格
+      var content="<tr><th>姓名</th><th>语文<span id='up1' class='up'></span><span id='down1' class='down'></span></th><th>数学<span id='up2' class='up'></span><span id='down2' class='down'></span></th><th>英语<span id='up3' class='up'></span><span id='down3' class='down'></span></th><th>总分<span id='up4' class='up'></span><span id='down4' class='down'></span></th></tr>";
+      for(var i=0;i<10;i++){
+          var contentTd='<td>'+data[i][0]+'</td>',
+              contentTr='',
+              sum=0;
+          for(var j=1;j<4;j++){
+            sum+=data[i][j];
+            contentTd+='<td>'+data[i][j]+'</td>';
+          }
+          data[i].push(sum);
+          contentTr+='<tr>'+contentTd+'<td>'+sum+'</td>'+'</tr>';
+          content+=contentTr;
+      }
+      table.innerHTML=content;
   }
-  table.innerHTML=content;
-}
-show();
+};
+
+tableHandle.show();
+
 </script>
 </body>
 </html>
