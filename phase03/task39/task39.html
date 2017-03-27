@@ -75,6 +75,19 @@
 <table id='table'>
 </table>
 <script type='text/javascript'> 
+function $(id){
+  return document.getElementById(id);
+}
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+    if(dom.addEventListener){
+        dom.addEventListener(type,fn,false);
+    }
+    else if(dom.attachEvent){
+        dom.attachEvent('on'+type,fn);
+    }
+    else dom['on'+type]=fn;
+}
 var data=[
     ['小红',85,93,78],
     ['小花',94,68,87],
@@ -97,47 +110,46 @@ var data=[
     ['小道',64,82,90],
     ['小红',85,93,78]
 ];
-var table=document.getElementById('table');
-var thead=document.getElementById('thead');
+var table=$('table'),
+    thead=$('thead');
 //点击排序按钮，事件委托
-thead.addEventListener('click',function(event){
-      event = event || window.event;
+addEvent(thead,'click',function(event){
+      var event = event || window.event;
       var id = event.target.id || event.srcElement.id;
       var num=id.slice(-1);
-      if(id.length==3) up(data,num);
-      else down(data,num);
-      show();
-    });
-//从小到大排序
-function up(array,num){
-  array.sort(function(a,b){
-    return a[num]-b[num];
-  });
-}
-//从大到小排序
-function down(array,num){
-  array.sort(function(a,b){
-    return b[num]-a[num];
-  });
-}
-//呈现表格
-function show(){
-  var content='';
-  for(var i=0;i<20;i++){
-    var contentTd='<td>'+data[i][0]+'</td>',
-        contentTr='',
-        sum=0;
-    for(var j=1;j<4;j++){
-      sum+=data[i][j];
-      contentTd+='<td>'+data[i][j]+'</td>';
+      if(id.length==3) tableHandle.up(data,num);  //从小到大排序
+      else tableHandle.down(data,num);  //从大到小排序
+      tableHandle.show();
+});
+
+var tableHandle={
+    up:function(array,num){ //从小到大排序
+      array.sort(function(a,b){
+        return a[num]-b[num];
+      });
+    },
+    down:function(array,num){   //从大到小排序
+      array.sort(function(a,b){
+        return b[num]-a[num];
+      });
+    },
+    show:function(){    //呈现表格
+      var content='';
+      for(var i=0;i<20;i++){
+          var contentTd='<td>'+data[i][0]+'</td>',
+          contentTr='',
+          sum=0;
+          for(var j=1;j<4;j++){
+            sum+=data[i][j];
+            contentTd+='<td>'+data[i][j]+'</td>';
+          }
+          data[i].push(sum);
+          contentTr+='<tr>'+contentTd+'<td>'+sum+'</td>'+'</tr>';
+          content+=contentTr;
+      }
+      table.innerHTML=content;
     }
-    data[i].push(sum);
-    contentTr+='<tr>'+contentTd+'<td>'+sum+'</td>'+'</tr>';
-    content+=contentTr;
-  }
-  table.innerHTML=content;
 }
-show();
 //首行冻结
 window.onscroll=function(){
   var top=document.body.scrollTop||document.documentElement.scrollTop;
@@ -151,6 +163,8 @@ window.onscroll=function(){
   }
   top>=1050?thead.style.display='none':thead.style.display='';
 }
+tableHandle.show();  //显示表格
+
 </script>
 </body>
 </html>
