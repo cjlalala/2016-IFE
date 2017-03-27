@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Task 40-UI组件之日历组件（一）</title>
+    <title>Task 40-UI组件之日历组件(1)</title>
     <style>
     body{
       font-family: '微软雅黑';
@@ -54,6 +54,7 @@
     </style>
   </head>
 <body>
+<div id='parent'>
   <div class='calendar' id='calendar'>
     <div id='title'>
       <span id='pre'><<</span>
@@ -72,94 +73,111 @@
       </tr>
     </table>
   </div><!--calendar结束-->
-<form>
-  选中日期为：<input type='text' id='chooseDay'><br>
-  请输入日期：<input type='text' id='inputYear'>年
-  <input type='text' id='inputMonth'>月
-  <input type='text' id='inputDate'>日
-  <button id='choose'>选中</button>
-</form>
-
+  <form>
+    选中日期为：<input type='text' id='chooseDay'><br>
+    请输入日期：<input type='text' id='inputYear'>年
+    <input type='text' id='inputMonth'>月
+    <input type='text' id='inputDate'>日
+    <button id='choose'>选中</button>
+  </form>
+</div>
 <script type='text/javascript' >
-var chooseDate;
-var DATE=new Date();
-var table=document.getElementById('table');
-var chooseDay=document.getElementById('chooseDay');
-var inputDay=document.getElementById('inputDay');
-//显示表格
-function renderHtml(){
-    var content=table.innerHTML,
-        contentTr='';
-    for(var i=0;i<6;i++){
-      contentTr+='<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+function $(id){
+  return document.getElementById(id);
+}
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+    if(dom.addEventListener){
+        dom.addEventListener(type,fn,false);
     }
-    content+=contentTr;
-    table.innerHTML=content;
-  }
-//显示日历中的数字
-function showDate(DATE,num){
-  var _year=DATE.getFullYear(),//今天所在年份
-      _month=DATE.getMonth()+1;//今天所在月份
-  document.getElementById('dateTitle').innerHTML=_year+'年'+_month+'月';
-  var tds=document.getElementsByTagName('td'),
-      firstDay=new Date(_year,_month-1,1).getDay(),//这个月的第一天是周几0~6
-      lastDate=new Date(_year,_month,-1).getDate();//这个月的最后一天1~31
-  for(var i=0;i<tds.length;i++){
-    var thisDay=new Date(_year,_month-1,i+1-firstDay);
-    if(i<firstDay) tds[i].className='notChoose';
-    else if(getDateStr(thisDay)==getDateStr(new Date())) tds[i].className='today';
-    else if(i>lastDate+firstDay) tds[i].className='notChoose';
-    else if(i+1-firstDay==num) tds[i].className='choose';
-    else tds[i].className='canChoose';
-    tds[i].innerText=thisDay.getDate();
-  }
+    else if(dom.attachEvent){
+        dom.attachEvent('on'+type,fn);
+    }
+    else dom['on'+type]=fn;
 }
-//上一个月
-document.getElementById('pre').onclick=function(){
-  DATE=new Date(DATE.getFullYear(),DATE.getMonth()-1,1);
-  showDate(DATE,null);
-  return DATE;
-}
-//下一个月
-document.getElementById('next').onclick=function(){
-  DATE=new Date(DATE.getFullYear(),DATE.getMonth()+1,1);
-  showDate(DATE,null);
-  return DATE;
-}
-//选中某一天
-table.addEventListener('click',function(e){
-  if(e.target.tagName!='TD') return;
-  showDate(DATE,null);
-  e.target.className='choose';
-  var _year=DATE.getFullYear(),
-      _month=DATE.getMonth()+1;
-  chooseDay.value=_year+'年'+_month+'月'+e.target.innerText+'日';
-  return chooseDate=new Date(_year,_month-1,e.target.innerText);
+var DATE=new Date();
+var chooseDate; //选中的日期
+//日历操作方法
+var calHandle={
+    getDateStr:function(date){  //得到日期的字符串形式，如20160725
+      var _year=date.getFullYear(),
+          _month=date.getMonth()+1,
+          _date=date.getDate();
+      _month=(_month>9)?(''+_month):('0'+_month);
+      _date=(_date>9)?(''+_date):('0'+_date);
+      return _year+_month+_date;
+    },
+    renderHtml:function(){   //显示日历框架
+      var content=$('table').innerHTML,
+          contentTr='';
+      for(var i=0;i<6;i++){
+        contentTr+='<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+      }
+      content+=contentTr;
+      $('table').innerHTML=content;
+    },  
+    //显示日历中的数字
+    showDate:function (DATE,num){  
+      var _year=DATE.getFullYear(),//今天所在年份
+          _month=DATE.getMonth()+1;//今天所在月份
+      $('dateTitle').innerHTML=_year+'年'+_month+'月';
+      var tds=document.getElementsByTagName('td'),
+          firstDay=new Date(_year,_month-1,1).getDay(),//这个月的第一天是周几0~6
+          lastDate=new Date(_year,_month,-1).getDate();//这个月的最后一天1~31
+      for(var i=0;i<tds.length;i++){
+          var thisDay=new Date(_year,_month-1,i+1-firstDay);
+          if(i<firstDay||i>lastDate+firstDay) tds[i].className='notChoose';
+          else if(i+1-firstDay==num) tds[i].className='choose';
+          else if(this.getDateStr(thisDay)==this.getDateStr(new Date())) tds[i].className='today';
+          else tds[i].className='canChoose';
+          tds[i].innerText=thisDay.getDate();
+      }
+    }
+};
+//点击选中某一天
+addEvent($('table'),'click',function(event){
+    e=event||window.event;
+    var target=e.target||e.srcElement;
+    if(target.tagName!='TD') return;
+    calHandle.showDate(DATE,null);
+    target.className='choose';
+    var _year=DATE.getFullYear(),
+        _month=DATE.getMonth()+1;
+    $('chooseDay').value=_year+'年'+_month+'月'+e.target.innerText+'日';
+    return chooseDate=new Date(_year,_month-1,e.target.innerText);
 });
-//输入日期选中某一天
-document.getElementById('choose').onclick=function(e){
-  var Inyear=document.getElementById('inputYear').value,
-      Inmonth=document.getElementById('inputMonth').value-1,
-      Indate=document.getElementById('inputDate').value;
-  DATE=new Date(Inyear,Inmonth,Indate);
-  showDate(DATE,Indate);
-  e.preventDefault;
-  return false;
-}
-//得到日期的字符串形式，如20160725
-function getDateStr(date){
-  var _year=date.getFullYear();
-  var _month=date.getMonth()+1;
-  var _date=date.getDate();
-  _month=(_month>9)?(''+_month):('0'+_month);
-  _date=(_date>9)?(''+_date):('0'+_date);
-  return _year+_month+_date;
-}
-function init(){
-  renderHtml();
-  showDate(DATE,null);
-}
-init();
+//点击上一个月/下一个月/输入日期选中某一天
+addEvent($('parent'),'click',function(event){
+    e=event||window.event;
+    var id=e.target.id||e.srcElement.id;
+    switch(id){
+      case'pre':{   //上一个月
+        DATE=new Date(DATE.getFullYear(),DATE.getMonth()-1,1);
+        calHandle.showDate(DATE,null);
+        break;
+      }
+      case'next':{   //下一个月
+        DATE=new Date(DATE.getFullYear(),DATE.getMonth()+1,1);
+        calHandle.showDate(DATE,null);
+        break;
+      }
+      case'choose':{   //输入日期选中某一天
+        var Inyear=$('inputYear').value,
+            Inmonth=$('inputMonth').value-1,
+            Indate=$('inputDate').value;
+        DATE=new Date(Inyear,Inmonth,Indate);
+        calHandle.showDate(DATE,Indate);
+        break;
+      }
+    }
+    event.preventDefault();
+    return false;
+});
+//初始化日历
+(function(){
+  calHandle.renderHtml();
+  calHandle.showDate(DATE,null);
+})();
 </script>
 </body>
 </html>
