@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Task 42-UI组件之日历组件(3)</title>
+    <style>
+    body{
+      font-family: '微软雅黑';
+    }
+    .calender{
+      display: none;
+      width: 350px;
+      height: 408px;
+      border:2px solid #ccc;
+    }
+    #title{
+      padding: 5px 10px;
+      background-color: rgb(200,27,1);
+      color:white;
+      font-size: 20px;
+      text-align: center;
+    }
+    #pre{
+      float: left;
+    }
+    #next{
+      float: right;
+    }
+    th,td{
+      width: 50px;
+      height:50px;
+      font-size: 18px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    input{
+      margin-top: 20px;
+    }
+    #inputYear,#inputMonth,#inputDate{
+      width:50px;
+    }
+    .today{
+      background-color: rgb(200,27,1);
+    }
+    .notChoose{
+      color: #ccc;
+      pointer-events: none;
+    }
+    .canChoose{
+      color:black;
+      background-color: white;
+    }
+    .choose{
+      border: 1px solid rgb(200,27,1);
+    }
+    .backColor{
+      background-color: #FFFFCC;
+    }
+    </style>
+  </head>
+<body>
+
+<form>
+  日期：
+  <input type='radio' checked='checked' name='day' id='day'>
+  时间段:
+  <input type='radio' name='day' id='days'>
+</form>
+<div id='parent'>
+  <button id='button'>calender</button>
+  <div class='calender' id='calender'>
+    <div id='title'>
+      <span id='pre'><<</span>
+      <span id='dateTitle'></span>
+      <span id='next'>>></span>
+    </div>
+    <table id='table'>
+      <tr>
+        <th>日</th>
+        <th>一</th>
+        <th>二</th>
+        <th>三</th>
+        <th>四</th>
+        <th>五</th>
+        <th>六</th>
+      </tr>
+    </table>
+  </div><!--calender结束-->
+</div>
+
+
+<script type='text/javascript' >
+function $(id){
+  return document.getElementById(id);
+}
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+    if(dom.addEventListener){
+        dom.addEventListener(type,fn,false);
+    }
+    else if(dom.attachEvent){
+        dom.attachEvent('on'+type,fn);
+    }
+    else dom['on'+type]=fn;
+}
+
+var chooseDate1,chooseDate2;//时间段的首尾日期
+var DATE=new Date();
+var a=1; //日历是否显示
+
+//日历操作方法
+var calHandle={
+  renderHtml:function(){   //显示日历框架
+      var content="<tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>",
+          contentTr='';
+      for(var i=0;i<6;i++){
+        contentTr+='<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+      }
+      content+=contentTr;
+      $('table').innerHTML=content;
+  }, 
+  //显示日历中的数字
+  showDate:function (DATE,num1,num2,b,c){  
+      var _year=DATE.getFullYear(),//今天所在年份
+          _month=DATE.getMonth()+1;//今天所在月份
+      $('dateTitle').innerHTML=_year+'年'+_month+'月';
+      var tds=document.getElementsByTagName('td'),
+          firstDay=new Date(_year,_month-1,1).getDay(),//这个月的第一天是周几0~6
+          lastDate=new Date(_year,_month,-1).getDate();//这个月的最后一天1~31
+      for(var i=0;i<tds.length;i++){
+          var thisDay=new Date(_year,_month-1,i+1-firstDay);
+          if(i<firstDay||i>lastDate+firstDay) tds[i].className='notChoose'; 
+          else tds[i].className='canChoose';
+          if(i+1-firstDay<=c&&i+1-firstDay>=b&&b!=0) 
+            //tds[i].style.backgroundColor= '#FFFFCC';
+            tds[i].className= 'canChoose backColor';
+          if(i+1-firstDay==num1||i+1-firstDay==num2) tds[i].className='choose';
+          if(this.getDateStr(thisDay)==this.getDateStr(new Date())) tds[i].className='today';
+          tds[i].innerText=thisDay.getDate();
+      }
+  },
+  getDateStr:function (date){  //得到日期的字符串形式，如20160725
+      var _year=date.getFullYear(),
+          _month=date.getMonth()+1,
+          _date=date.getDate();
+      _month=(_month>9)?(''+_month):('0'+_month);
+      _date=(_date>9)?(''+_date):('0'+_date);
+      return _year+_month+_date;
+  }
+}
+//选中某一天或一个时间段
+addEvent($('table'),'click',function(event){
+  e=event||window.event;
+  var target=e.target||e.srcElement;
+  if(target.tagName!='TD') return;
+  var _year=DATE.getFullYear(),
+      _month=DATE.getMonth()+1,
+      dateStr1=_year+'年'+_month+'月'+target.innerText+'日',
+      chooseDateNow=new Date(_year,_month-1,target.innerText); //点击的日期
+  if(day.checked){    //选择日期
+      calHandle.showDate(DATE,target.innerText,null,0,0);
+      alert(dateStr1);
+  }
+  else if(days.checked){    //选择时间段
+      if(chooseDate1==undefined)chooseDate1=chooseDateNow;
+      if(chooseDate2==undefined)chooseDate2=chooseDateNow;
+      else if(chooseDate1!=undefined&&chooseDate2!=undefined){
+          chooseDate1=chooseDate2;
+          chooseDate2=chooseDateNow;
+      } 
+      var year=chooseDate1.getFullYear(),
+          month=chooseDate1.getMonth()+1,
+          date=chooseDate1.getDate();
+      if(target.innerText<=date){
+          dateStr2=dateStr1+' 至 '+year+'年'+month+'月'+date+'日';
+          calHandle.showDate(DATE,date,target.innerText,target.innerText,date);
+      } 
+      else {
+          dateStr2=year+'年'+month+'月'+date+'日 至 '+dateStr1;
+          calHandle.showDate(DATE,date,target.innerText,date,target.innerText);
+      }        
+  }
+});
+//点击按钮/上一个月/下一个月
+addEvent($('parent'),'click',function(event){
+    e=event||window.event;
+    var id=e.target.id||e.srcElement.id;
+    switch(id){
+      case 'button':{  //按钮
+        origin();
+        a==1?$('calender').style.display='block':$('calender').style.display='none';
+        a=!a;
+        break;
+      }
+      case'pre':{   //上一个月
+        DATE=new Date(DATE.getFullYear(),DATE.getMonth()-1,1);
+        origin();
+        break;
+      }
+      case'next':{   //下一个月
+        DATE=new Date(DATE.getFullYear(),DATE.getMonth()+1,1);
+        origin();
+        break;
+      }      
+    }
+    event.preventDefault();
+    return false;
+});
+//日历初始状态
+function origin(){
+  chooseDate1=chooseDate2=undefined;
+  calHandle.renderHtml();
+  calHandle.showDate(DATE,null,null,0,0);
+}
+origin();
+</script>
+</body>
+</html>
