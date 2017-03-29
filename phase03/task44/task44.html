@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset="utf-8">
+    <title>Task 44-多功能相册之瀑布布局</title>
+    <style>
+    *{
+      margin:0;
+      padding:0;
+    }
+    #container{
+      position: relative;
+      margin: 8px;
+    }
+    .box{
+      float: left;
+    }
+    img{
+      display:block;
+      width: 180px;
+      margin: 8px;
+    }
+    #cover{
+        display: none;
+        height:100%;
+        position:fixed;
+        z-index: 999;
+        top:0;
+        left:0;
+        opacity: 0.8;
+        background-color: black;
+        animation:showCover 0.8s 1;
+      }
+    #BigImg{
+        position: absolute;
+        z-index: 1000;
+        animation:showImg 1.2s 1;
+    }
+    #BigImg img{
+        width: 400px;
+        height: 550px;
+        margin:0 auto;
+    }
+    @keyframes showCover{
+      from {opacity: 0;}
+      to {opacity: 0.8;}
+    }
+    @keyframes showImg{
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    </style>
+  </head>
+<body>
+<div id='container'>
+  <div id="ImgBoxs">
+    <div class="box">
+      <img src="img/1.jpg">
+    </div>
+    <div class="box">
+      <img src="img/2.jpg">
+    </div>
+    <div class="box">
+      <img src="img/3.jpg">
+    </div>
+    <div class="box">
+      <img src="img/4.jpg">
+    </div>
+    <div class="box">
+      <img src="img/5.jpg">
+    </div>
+    <div class="box">
+      <img src="img/6.jpg">
+    </div>
+    <div class="box">
+      <img src="img/7.jpg">
+    </div>
+    <div class="box">
+      <img src="img/8.jpg">
+    </div>
+    <div class="box">
+      <img src="img/1.jpg">
+    </div>
+    <div class="box">
+      <img src="img/2.jpg">
+    </div>
+    <div class="box">
+      <img src="img/3.jpg">
+    </div>
+    <div class="box">
+      <img src="img/4.jpg">
+    </div>
+    <div class="box">
+      <img src="img/5.jpg">
+    </div>
+    <div class="box">
+      <img src="img/6.jpg">
+    </div>
+    <div class="box">
+      <img src="img/7.jpg">
+    </div>
+    <div class="box">
+      <img src="img/8.jpg">
+    </div>
+  </div>
+  <div id='cover'></div>
+  <div id='BigImg'></div>
+</div>
+<script> 
+function $(id){
+  return document.getElementById(id); 
+}
+//事件绑定函数，兼容浏览器
+function addEvent(dom,type,fn){
+    if(dom.addEventListener){
+        dom.addEventListener(type,fn,false);
+    }
+    else if(dom.attachEvent){
+        dom.attachEvent('on'+type,fn);
+    }
+    else dom['on'+type]=fn;
+}
+var num=4;  //一行默认的图片数量
+var boxs=$('ImgBoxs').getElementsByClassName('box');
+//图片数据
+var imgData={'data':[{'src':'1.jpg'},{'src':'2.jpg'},{'src':'3.jpg'},{'src':'4.jpg'},{'src':'5.jpg'},{'src':'6.jpg'},{'src':'7.jpg'},{'src':'8.jpg'}]};
+//瀑布流显示方法
+var waterFall={
+  //显示图片
+  showImg:function(){  
+      var BoxHeightArr=[]; //存储第一排所有图片高度
+      for(var i=0;i<boxs.length;i++){
+        if(i<num){
+            BoxHeightArr[i]=boxs[i].offsetHeight;
+        }
+        else{
+            $('ImgBoxs').style.width=
+            $('cover').style.width=
+            $('BigImg').style.width=196*num+16+'px';
+            var minHeight=Math.min.apply(null,BoxHeightArr); //第一排中图片最小高度
+            var minIndex=this.getMinHeight(BoxHeightArr,minHeight);
+            boxs[i].style.position='absolute';
+            boxs[i].style.top=minHeight+'px';
+            boxs[i].style.left=boxs[minIndex].offsetLeft+'px';
+            BoxHeightArr[minIndex]+=boxs[i].offsetHeight;
+        }
+      }
+  },
+  //得到最小高度图片的索引
+  getMinHeight:function(BoxHeightArr,minHeight){
+      for(var i in BoxHeightArr){
+          if(BoxHeightArr[i]==minHeight) return i;
+      }
+  },
+  //瀑布流滚动到底部自动加载
+  load:function(){
+    if(this.checkFlag()){
+      for(var i=0;i<imgData.data.length;i++){
+        var ccontent=document.createElement('div');
+        ccontent.className='box';
+        $('ImgBoxs').appendChild(ccontent);
+        var img=document.createElement('img');
+        img.src='img/'+imgData.data[i].src;
+        ccontent.appendChild(img);
+      }
+    }
+  },
+  //瀑布流是否滑到底部（是否该加载）
+  checkFlag:function(){
+    //最后一张图片距顶部的距离
+    var lastHeight=boxs[boxs.length-1].offsetTop;
+    var scrollTop=document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;//页面滚动距离
+    var pageHeight=document.documentElement.clientHeight||document.body.clientHeight;//页面高度
+    if(lastHeight<scrollTop+pageHeight)return true;
+  }
+}
+
+window.onload=function(){
+  waterFall.showImg();
+  window.onscroll=function(){
+    waterFall.load();
+    waterFall.showImg();
+  }
+}
+//图片点击全屏显示
+addEvent($('container'),'click',function(event){
+    event=event||window.event;
+    var target=event.target||event.srcElement;
+    if(target.tagName!='IMG'&&target.id!='cover'&&target.id!='BigImg')return;
+    if(target.tagName=='IMG'){
+        //点击出现遮罩层
+        maskHandle.showMask();
+        var src=target.src;
+        //页面滚动距离
+        var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+        $('BigImg').style.top=scrollTop+20+'px';
+        $('BigImg').innerHTML='<img src="'+src+'">';
+    }
+    else if(target.id=='cover'||target.id=='BigImg'){
+       //点击图片外的部分(遮罩层消失)
+        maskHandle.hideMask();
+    }
+});
+//遮罩层方法
+var maskHandle={
+    showMask:function(){
+      $('cover').style.display='block';
+      $('cover').animationPlayState='running';
+      $('BigImg').style.display='block';
+      $('BigImg').animationPlayState='running';
+
+    },
+    hideMask:function(){
+      $('cover').style.display='none';
+      $('cover').animationPlayState='paused';
+      $('BigImg').style.display='none';
+      $('BigImg').animationPlayState='paused';
+    }
+}
+</script>
+</body>
+</html>
