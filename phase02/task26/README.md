@@ -1,12 +1,12 @@
-##任务二十六：行星与飞船（一）
+## 任务二十六：行星与飞船（一）
 [查看DEMO]()<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=26)
 
-###任务目的
+### 任务目的
 * 练习JavaScript面向对象设计
 * 实践一些基础的设计模式
 
-###任务描述
+### 任务描述
 * 如图（[打开查看](http://7xrp04.com1.z0.glb.clouddn.com/task_2_26_1.jpg)），创建一个虚拟宇宙，包括一个行星和飞船
 * 每个飞船由以下部分组成
 * 动力系统，可以完成飞行和停止飞行两个行为，暂定所有飞船的动力系统飞行速度是一致的，比如每秒20px，飞行过程中会按照一定速率消耗能源（比如每秒减5%）
@@ -34,7 +34,7 @@
 * 指挥官并不知道自己的指令是不是真的传给了飞船，飞船的状态他是不知道的，他只能通过自己之前的操作来假设飞船当前的状态
 * 每个飞船通过信号接收器，接受到通过Mediator传达过来的指挥官的广播信号，但因为是广播信号，所以每个飞船能接受到指挥官发出给所有飞船的所有指令，因此需要通过读取信息判断这个指令是不是发给自己的
 
-###在线学习参考资料
+### 在线学习参考资料
 * [JavaScript Design Patterns](http://www.dofactory.com/javascript/design-patterns)
 * [4 JavaScript Design Patterns You Should Know](https://scotch.io/bar-talk/4-javascript-design-patterns-you-should-know)
 * [JavaScript Design Patterns](https://carldanley.com/javascript-design-patterns/)
