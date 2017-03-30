@@ -1,18 +1,18 @@
-##任务十九：基础JavaScript练习（二）
+## 任务十九：基础JavaScript练习（二）
 [查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task19/task19.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=19)
-###任务目的
+### 任务目的
 * 学习与实践JavaScript的基本语法、语言特性
 * 练习使用JavaScript实现简单的排序算法
 
-###任务描述
+### 任务描述
 * 基于任务18
 * 限制输入的数字在10-100
 * 队列元素数量最多限制为60个，当超过60个时，添加元素时alert出提示
 * 队列展现方式变化[如图](http://7xrp04.com1.z0.glb.clouddn.com/task_2_19_1.jpg)，直接用高度表示数字大小
 * 实现一个简单的排序功能，如冒泡排序（不限制具体算法），用可视化的方法表达出来，参考见下方参考资料
 
-###遇到的问题
+### 遇到的问题
 　　这一问相比较17、18问，主要添加的任务就是要把数据的排序过程一步一步的展现出来<br>
   
 　　这里采用的排序方法是先将第一个数和第二个数比较，如果第一个数大于第二个数就交换两个数的位置（将小的数排在前<br>
@@ -26,7 +26,7 @@
 　　注意：setInterval() 方法会不停地调用函数，直到 clearInterval() 被调用或窗口被关闭。由 setInterval() 返回的 ID 值<br>
 可用作 clearInterval() 方法的参数。<br>
 
-###在线学习参考资料
+### 在线学习参考资料
 [JavaScript入门篇](http://www.imooc.com/learn/36)<br>
 [MDN JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)<br>
 [归并排序算法可视化](http://v.youku.com/v_show/id_XNTM1NTQxMDMy.html)<br>
