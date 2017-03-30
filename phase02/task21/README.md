@@ -1,12 +1,12 @@
-##任务二十一：基础JavaScript练习（四）
+## 任务二十一：基础JavaScript练习（四）
 [查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task21/task21.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=21)
 
-###任务目的
+### 任务目的
 * 学习与实践JavaScript的基本语法、语言特性
 * 练习使用JavaScript实现拖拽功能
 
-###任务描述
+### 任务描述
 * 基于任务20，将任务20的代码进行抽象、封装，然后在此基础上实现[如图](http://7xrp04.com1.z0.glb.clouddn.com/task_2_21_1.jpg)中的两个需求：Tag输入和兴趣爱好输入
 * 如示例图上方，实现一个tag输入框
 * 要求遇到用户输入空格，逗号，回车时，都自动把当前输入的内容作为一个tag放在输入框下面。
