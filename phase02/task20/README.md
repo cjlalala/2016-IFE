@@ -1,11 +1,11 @@
-##任务二十：基础JavaScript练习（三）
+## 任务二十：基础JavaScript练习（三）
 [查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase02/task20/task20.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=20)
 
-###任务目的
+### 任务目的
 实践JavaScript数组、字符串相关操作
 
-###任务描述
+### 任务描述
 * 基于任务18进行升级
 * 将新元素输入框从input改为textarea
 * 允许一次批量输入多个内容，格式可以为数字、中文、英文等，可以通过用回车，逗号（全角半角均可），顿号，
@@ -13,7 +13,7 @@
 * 增加一个查询文本输入框，和一个查询按钮，当点击查询时，将查询词在各个元素内容中做模糊匹配，将匹配到的内容进行特殊标识，
   如文字颜色等。举例，内容中有abcd，查询词为ab或bc，则该内容需要标识
   
-###在线学习参考资料
+### 在线学习参考资料
 [JavaScript入门篇](http://www.imooc.com/learn/36)<br>
 [MDN JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)<br>
 [归并排序算法可视化](http://v.youku.com/v_show/id_XNTM1NTQxMDMy.html)<br>
