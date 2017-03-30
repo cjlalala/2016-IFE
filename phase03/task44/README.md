@@ -1,6 +1,6 @@
 ## 任务四十四：多功能相册之瀑布布局
-[查看DEMO]()<br>
-[查看题目]()
+[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase03/task44/task44.html)<br>
+[查看题目](http://ife.baidu.com/2016/task/detail?taskId=44)
 
 ### 任务目的
 * 练习综合运用HTML、CSS、JavaScript实现局部功能
@@ -15,4 +15,4 @@
 * 每次添加新的图片时，都将其放在高度最小的一栏，以保证每一栏的高度尽可能相近。
 * 点击一张图片后，全屏显示该图（有能力的同学可以适当增加动画效果）。黑色遮罩的不透明度是 80%，点击黑色部分退出全屏浏览。
 * ![](https://github.com/cjlalala/2016-IFE/master/phase03/task44/task44_2.jpg)
-*有能力的同学可以实现，当页面滚动到瀑布图最下方后，通过Ajax动态加载下一批图片
+* 有能力的同学可以实现，当页面滚动到瀑布图最下方后，通过Ajax动态加载下一批图片
