@@ -1,8 +1,8 @@
-##任务二：零基础HTML及CSS编码（一）
+## 任务二：零基础HTML及CSS编码（一）
 [查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase01/task02/task02.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=2)
 
-###任务目的
+### 任务目的
 * 针对设计稿样式进行合理的HTML架构，包括以下但不限于：
 * 掌握常用HTML标签的含义、用法
 * 能够基于设计稿来合理规划HTML文档结构
@@ -12,5 +12,5 @@
 * 掌握CSS选择器的含义和用法
 * 实践并掌握CSS的颜色、字体、背景、边框、盒模型、简单布局等样式的定义方式
 
-###任务描述
+### 任务描述
 * 基于第一个任务“零基础HTML编码”的代码，参考 示例图（[点击查看](http://7xrp04.com1.z0.glb.clouddn.com/task_1_2_1.jpg)），在步骤一的代码基础上增加CSS样式代码的编写
