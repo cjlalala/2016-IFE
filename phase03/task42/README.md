@@ -1,5 +1,5 @@
 ## 任务四十二：UI组件之日历组件（三）
-[查看DEMO]()<br>
+[查看DEMO](https://rawgit.com/cjlalala/2016-IFE/master/phase03/task42/task42.html)<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=42)
 
 ### 任务目的
