@@ -1,12 +1,12 @@
-##任务二十八：行星与飞船（三）
+## 任务二十八：行星与飞船（三）
 [查看DEMO]()<br>
 [查看题目](http://ife.baidu.com/2016/task/detail?taskId=28)
 
-###任务目的
+### 任务目的
 * 练习JavaScript面向对象设计
 * 实践一些基础的设计模式
 
-###任务描述
+### 任务描述
 * 基于任务二十七，我们继续改善
 * 第二代宇宙飞船系统进步了很多，但是我们依然无法知道飞船的能源消耗情况，可能有的时候我们发出开始飞行的指令，但飞船早就没有能量了，所以我们再次进行升级，这次我们需要增加一个飞船状态的监视系统
 * 我们为每个飞船增加一个信号发射器，飞船会通过BUS系统定时（比如每秒）广播自己的飞行状态。发送的时候，我们通过已经安装在飞船上的Adapter把状态数据翻译成二进制码形式，把飞船自身标示，飞行状态，能量编码成一个16位的二进制串，前四位用于飞船自身标示，接下来4位表示飞行状态，0010为停止，0001为飞行，1100表示即将销毁，后八位用于记录飞船剩余能源百分比
@@ -15,7 +15,7 @@
 * 实现一个行星上的监视大屏幕（[如图](http://7xrp04.com1.z0.glb.clouddn.com/task_2_28_1.jpg)），用来显示所有飞船的飞行状态及能源情况，当数据处理中心飞船数据发生变化时，它会相应在监视器上做出变化
 * 可以按以下模块切分:飞船发射器、 Adapter调整、 数据处理中心、 监视大屏幕
 
-###在线学习参考资料
+### 在线学习参考资料
 * [JavaScript Design Patterns](http://www.dofactory.com/javascript/design-patterns)
 * [4 JavaScript Design Patterns You Should Know](https://scotch.io/bar-talk/4-javascript-design-patterns-you-should-know)
 * [JavaScript Design Patterns](https://carldanley.com/javascript-design-patterns/)
