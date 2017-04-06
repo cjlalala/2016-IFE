@@ -9,7 +9,7 @@
 
 ### 任务描述
 * 基于任务40，进行如下图中的升级
-* ![](https://github.com/cjlalala/2016-IFE/master/phase03/task41/task41.jpg)
+* ![](https://github.com/cjlalala/2016-IFE/blob/master/phase03/task41/task41.jpg)
 * 日期选择面板默认隐藏，会显示一个日期显示框和一个按钮，点击这两个部分，会浮出日历面板。再点击则隐藏。
 * 点击选择具体日期后，面板隐藏，日期显示框中显示选取的日期
 * 增加一个接口，用于当用户选择日期后的回调处理
