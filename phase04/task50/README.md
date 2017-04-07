@@ -1,12 +1,13 @@
 ## 任务五十：微型调查问卷平台
 [查看DEMO]()<br>
-[查看题目]()
+[查看题目](http://ife.baidu.com/2016/task/detail?taskId=50)
 
 ### 任务目的
 * 基于阶段三的各个组件，学习模块化、前端工程等内容，综合运用HTML，CSS，JavaScript完成一个小型完整网站的实现
 
 ### 任务描述
 * 参考设计图
+* ![](https://github.com/cjlalala/2016-IFE/blob/master/phase04/task50/task50.png)
 * 实现一个简易版的问卷管理系统，有如下功能：
 
 #### 问卷管理列表
