@@ -3,6 +3,7 @@ var operType;//'update'发布 ‘delete’ 删除单个问卷  ‘deletes’ 批
 var _quesNaire;
 $(document).ready(function(){
    initHandle.initData();
+   listHandle.localStory();
    initHandle.showList();
 });
 var initHandle={
