@@ -4,7 +4,7 @@ var DataQ = [{
        "timePub":"2017-06-06 11:30",
        "timeStop":"2017年07月12日",
        "state":"未发布",
-       "about":"感谢您填写该问卷~",
+       "about":"感谢您能抽出时间填写该问卷~",
        "problem":[{
            "type":"radio",
            "title":"下面哪个选项是错误的？",
@@ -15,11 +15,16 @@ var DataQ = [{
             }
          },{
              "type":"checkbox",
-             "title":"请选出喜欢的颜色",
+             "title":"请选出你最讨厌的颜色",
              "answer":{
                "answer1":"黑色",
                "answer2":"红色"
-             }
+             },{
+                "type":"textarea",
+                "title":"请说明什么是置信区间和置信水平？",
+                "answer":"",
+                "isMust":false
+            }
          }]
     },{
           "id":"page2",
@@ -27,29 +32,24 @@ var DataQ = [{
           "timePub":"2017-06-07 13:30",
           "timeStop":"2017-08-06 12:12",
           "state":"已发布",
-          'about':"关于问卷的前情提要：1.问卷日历选择有问题，可以选择已经过去的时间；2.该问卷没有后台。",
+          'about':"关于该问卷的前情提要：......",
           "problem":[{
               "type":"radio",
               "title":"下面哪个选项是错误的？",
               "answer":{
                 "answer1":"选项一",
                 "answer2":"选项二",
-                "answer3":"选项二",
-                "answer4":"选项二",
-                "answer5":"选项二"
+                "answer3":"选项三",
+                "answer4":"选项四",
+                "answer5":"选项五"
                }
             },{
                 "type":"checkbox",
-                "title":"请选出喜欢的颜色",
+                "title":"请选出你最喜欢的颜色",
                 "answer":{
-                  "answer1":"黑色",
+                  "answer1":"绿色",
                   "answer2":"红色"
                 }
-            },{
-                "type":"textarea",
-                "title":"请说明你是如何理解这个问题的？",
-                "answer":"",
-                "isMust":false
             },{
                 "type":"radio",
                 "title":"下面哪个选项是正确的？",
@@ -57,6 +57,11 @@ var DataQ = [{
                   "answer1":"选项一",
                   "answer2":"选项二"
                  }
-              }
+              }{
+                "type":"textarea",
+                "title":"请说明你是如何理解这个问题的？",
+                "answer":"",
+                "isMust":false
+            },
           ]
         }];
