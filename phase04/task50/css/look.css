@@ -1,0 +1,65 @@
+#questionLook{
+  padding: 30px 50px;
+}
+#lookTitle{
+  text-align: center;
+  font-size: 22px;
+	border-bottom: 2px solid #b2b2b2;
+  padding-bottom:30px;
+	margin-bottom: 30px;
+}
+#lookAbout{
+  margin: 0 25px 25px;
+  box-sizing: content-box;
+  font-size: 18px;
+  text-indent: 36px;
+}
+#lookProb div{
+	margin:0 25px;
+	padding:20px 40px;
+  border-bottom: 1px dashed #b2b2b2;
+}
+#lookProb div:last-child{
+  border: none;
+}
+#lookProb input{
+	font-size: 16px;
+	line-height: 30px;
+	border:none;
+	outline: none;
+	background-color: inherit;
+}
+#lookProb input[type='radio'],
+input[type='checkbox'],
+input[type='textarea']{
+	margin:0 5px 0 44px;
+}
+#lookProb textarea{
+	width: 60%;
+	height: 100px;
+	margin-top: 20px;
+	border:1px solid #ccc;
+}
+.whether{
+	float:right;
+}
+.must,.infoMust{
+  color:red;
+}
+.infoMust{
+  font-size: 16px;
+  margin-left: 61px;
+}
+#submit{
+  border-top: 2px solid #b2b2b2;
+  padding: 25px;
+}
+#submitBtn{
+  float: right;
+  width: 80px;
+	height: 30px;
+  margin-left: 20px;
+	background-color: #ee7419;
+	border: 1px solid #ee7419;
+	color: #fff;
+}

@@ -1,0 +1,249 @@
+/*标题区域*/
+#questionEdit{
+  padding: 30px 50px;
+}
+.titleArea{
+	border-bottom: 2px solid #b2b2b2;
+  padding-bottom:30px;
+	margin-bottom: 30px;
+}
+.aboutArea{
+  display: none;
+  border-bottom: 1px dashed #b2b2b2;
+  margin: 0 25px;
+  box-sizing: content-box;
+}
+input[name='title']{
+  height: 70px;
+  font-size: 22px;
+  font-weight: 700;
+}
+textarea[name='about']{
+  height: 100px;
+  font-size: 18px;
+  line-height: 100px;
+}
+input[name='title'],
+textarea[name='about']{
+  width: 100%;
+	text-align: center;
+	border:none;
+	outline: none;
+}
+input[name='title']:hover,
+textarea[name='about']:hover,
+#areaQ div:hover{
+	background-color: #fcf0e5;
+}
+
+/*问题区域*/
+#areaQ div{
+	margin:0 25px;
+	padding:20px 40px 40px;
+  border-bottom: 1px dashed #b2b2b2;
+}
+#areaQ input{
+	font-size: 16px;
+	line-height: 30px;
+	border:none;
+	outline: none;
+	background-color: inherit;
+}
+#areaQ input[type='radio'],
+input[type='checkbox'],
+input[type='textarea']{
+	margin:0 10px 0 40px;
+}
+#areaQ textarea{
+	width: 60%;
+	height: 100px;
+	margin-top: 20px;
+	border:1px solid #ccc;
+}
+.whether{
+	float:right;
+}
+#areaQ button{
+	background-color:inherit;
+	outline: none;
+	border:none;
+	cursor: pointer;
+}
+.addSelect{
+	margin:5px 0  0 40px;
+	line-height: 26px;
+	padding:0 5px;
+  border: 1px solid #ccc;
+}
+.buttons{
+	float:right;
+}
+.buttons button{
+  width: 60px;
+	line-height: 50px;
+	margin-left: 10px;
+  color: black;
+  background-color:inherit;
+  border:none;
+}
+/*添加问题区域*/
+.appendArea{
+  width:100%;
+	border-bottom:2px solid #b2b2b2;
+	padding-bottom: 30px;
+}
+#appendQ{
+	margin:25px;
+  box-sizing: content-box;
+	border:1px solid #b2b2b2;
+}
+#typeQ{
+	height: 30px;
+	margin:20px 0 20px;
+	text-align: center;
+}
+#typeQ button{
+	height:30px;
+	width: 90px;
+	font-size: 18px;
+	background-color: #eee;
+	border:1px solid #bfbebe;
+	color:#525252;
+	margin:0 10px;
+	cursor:pointer;
+}
+#addQ{
+	height: 60px;
+	text-align: center;
+	font-size: 20px;
+	line-height: 60px;
+	background-color: #eee;
+	color:#626262;
+}
+/*问卷截止日期+日历*/
+.bottomArea{
+	height: 40px;
+	padding:25px 25px 0 40px;
+}
+/*保存还是发布问卷*/
+#saveOrPub{
+	float: right;
+}
+#save,#publish{
+  width: 80px;
+	height: 30px;
+  margin-left: 20px;
+	background-color: #ee7419;
+	border: 1px solid #ee7419;
+	color: #fff;
+}
+/*日历*/
+#calendar{
+  position: absolute;
+	float: left;
+  display: none;
+  width: 261px;
+  height: 298px;
+  border:2px solid #ccc;
+}
+.calenderArea input{
+	padding-left: 20px;
+  background-color: #fff;
+}
+#title{
+  padding: 5px 10px;
+  background-color: #ee7419;
+  box-sizing: content-box;
+  color:white;
+  font-size: 20px;
+  text-align: center;
+}
+#pre{
+  float: left;
+}
+#next{
+  float: right;
+}
+#table{
+  background-color: #fff;
+}
+#calendar th,
+#calendar td{
+  width: 35px;
+  height:35px;
+  font-size: 18px;
+  text-align: center;
+  box-sizing: border-box;
+}
+#inputYear,#inputMonth,#inputDate{
+  width:35px;
+}
+.today{
+  background-color: #ee7419;
+}
+.notChoose{
+  color: #ccc;
+  pointer-events: none;
+}
+.canChoose{
+  color:black;
+}
+.choose{
+  border: 1px solid #ee7419;
+}
+/*弹出框*/
+#cover{
+        display: none;
+        width: 100%;
+        height:100%;
+        position:fixed;
+        top:0;
+        left:0;
+        opacity: 0.3;
+        background-color: black;
+      }
+      #saveCover{
+        display: none;
+        width:25%;
+        min-width: 220px;
+        height: 180px;
+        position:fixed;
+        left:50%; top:50%;
+        transform: translate(-50%, -50%);
+        border:1px solid #fff;
+        border-radius: 10px;
+        background-color: white;
+      }
+      #alertTitle{
+        background-color: #f7f7f7;
+        border-radius: 10px 10px 0 0;
+        color:#ee7419;
+        margin:0;
+        padding:10px 10px 10px 20px;
+      }
+       #close{
+        float: right;
+        font-size: 24px;
+        line-height: 20px;
+        cursor: pointer;
+      }
+      .alertCont{
+        height: 50px;
+        padding:20px;
+      }
+      #yes,#no{
+        float: right;
+        margin:10px 10px 0 0;
+        width:80px;
+        height:25px;
+        font-size: 18px;
+      }
+      #yes{
+        background-color: #ee7419;
+        color:#fff;
+        border: none;
+      }
+      #no{
+        background-color: #fff;
+        border:1px solid black;
+      }
