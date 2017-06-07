@@ -19,13 +19,13 @@ var DataQ = [{
              "answer":{
                "answer1":"黑色",
                "answer2":"红色"
-             },{
+             }
+         },{
                 "type":"textarea",
                 "title":"请说明什么是置信区间和置信水平？",
                 "answer":"",
                 "isMust":false
-            }
-         }]
+            }]
     },{
           "id":"page2",
           "name":"这是我的第2份问卷",
@@ -57,11 +57,10 @@ var DataQ = [{
                   "answer1":"选项一",
                   "answer2":"选项二"
                  }
-              }{
+              },{
                 "type":"textarea",
                 "title":"请说明你是如何理解这个问题的？",
                 "answer":"",
                 "isMust":false
-            },
-          ]
+            }]
         }];
