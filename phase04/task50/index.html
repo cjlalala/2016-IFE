@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name='viewport' content='width=device-width,initial-scale=1,user-scalable=no'>
+    <title>问卷列表页</title>
+    <link href='css/common.css' rel='stylesheet'>
+    <link href='css/index.css' rel='stylesheet'>
+  </head>
+<body>
+  <nav>
+    <ul>
+      <li><span class='question'>?</span></li>
+      <li>我的问卷</li>
+      <li id='btnNew'><a href='edit.html'><button class='newBtn' >+ 新建问卷</button></a></li>
+    </ul>
+  </nav>
+  <section id='new_list'>
+    <a href='edit.html'><button>＋&nbsp;&nbsp; 新建问卷</button></a>
+  </section>
+  <section id='table_list'>
+  <table id='table'>
+    <thead>
+      <tr>
+        <th></th>
+        <th>标题</th>
+        <th>时间</th>
+        <th>状态</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <td>
+          <input type='checkbox' id='selectAll' class='selectAll'>
+        </td>
+        <td class='tdAll' colspan="4" ><label for="selectAll">全选</label><button class='deleteList'>删除</button></td>
+      </tr>
+    </tfoot>
+    <tbody id='tBody'>
+
+    </tbody>
+  </table>
+</section>
+<div id='parent'>
+  <div id='cover'></div>
+  <div id='deleteCover' >
+      <p id="title">提示<span id='close'>×</span></p>
+      <p class="content" id='alertCont'></p>
+      <button id='no'>取消</button>
+      <button id='yes'>确定</button>
+  </div>
+</div>
+<script src='js/libs/jquery.min.js'></script>
+<script src='js/common.js'></script>
+<script src='js/index.js'></script>
+</body>
+</html>

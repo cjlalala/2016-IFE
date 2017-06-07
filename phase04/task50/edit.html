@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!--<meta name='viewport' content='width=device-width,initial-scale=1,user-scalable=no'>-->
+    <title>问卷编辑页</title>
+    <link href='css/common.css' rel='stylesheet'>
+    <link href='css/edit.css' rel='stylesheet'>
+  </head>
+<body>
+	<nav>
+   	<ul>
+      <li><span class='question'>?</span></li>
+      <li>问卷编辑<span class='myQues'><a href="index.html">我的问卷</a></span></li>
+   	</ul>
+ 	</nav>
+ 	<section id='questionEdit'>
+ 		<div class='titleArea' id='titleArea'>
+ 			<input type='text' maxlength="25" name='title' id='titleQ'>
+ 		</div>
+    <div class='aboutArea' id='aboutArea'>
+      <textarea  type='text' name='about' placeholder='此处可填入问卷的介绍信息' id='about'></textarea>
+    </div>
+    <!--问题区域-->
+ 		<div id='areaQ'></div>
+    <!--添加问题-->
+ 		<div class='appendArea'>
+ 			<div id='appendQ'>
+        <div id='addQ'><p>请选择问题类型 ···</p></div>
+ 				<div id='typeQ'>
+ 					<button id='radio'>单选</button>
+ 					<button id='checkbox'>多选</button>
+ 					<button id='textarea'>文本题</button>
+ 				</div>
+ 			</div>
+ 		</div>
+    <!--问卷截止日期+日历-->
+    <div class='bottomArea'>
+      <div class='calenderArea'>
+ 			  <label for='chooseDay'>问卷截止日期</label>
+ 			  <input type='text' id='chooseDay'>
+        <div class='calendar' id='calendar'>
+          <div id='title'>
+            <span id='pre'><<</span>
+            <span id='dateTitle'></span>
+            <span id='next'>>></span>
+          </div>
+        <table id='table'></table>
+ 		  </div><!--calendar结束-->
+
+    <!--保存还是发布问卷-->
+ 		  <div id='saveOrPub'>
+ 			  <button id='save'>保存问卷</button>
+ 			  <button id='publish'>发布问卷</button>
+        <div id='parent'>
+          <div id='cover'></div>
+          <div id='saveCover' >
+              <p id="alertTitle">提示<span id='close'>×</span></p>
+              <p class="alertCont" id='alertCont'></p>
+              <div id="noOryes">
+                <button id='no'>取消</button>
+                <button id='yes'>确定</button>
+              </div>
+          </div>
+        </div>
+ 		  </div>
+ 	  </div>
+  </section>
+
+<script src='js/libs/jquery.min.js'></script>
+<script src='js/common.js'></script>
+<script src='js/edit.js'></script>
+</body>
+</html>
