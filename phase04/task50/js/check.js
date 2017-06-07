@@ -5,7 +5,6 @@ var _quesNaire = JSON.parse(window.localStorage.getItem('_quesNaire'));
 $(document).ready(function(){
   pageIndex = dataHandle.getHash();
   List = _quesNaire[pageIndex].problem;
-  console.log(pageIndex);
   dataHandle.addCanvas();
   dataHandle.showChart();
 });
